@@ -1,4 +1,3 @@
-
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <Adafruit_NeoPixel.h>
@@ -9,41 +8,33 @@
 #include "DebugManager.h"
 
 const int pinLed = 39;
-const int PINO_LED_RGB = 48;
-const int QUANTIDADE_LEDS = 1;
 
 const char TOPICO_COMANDO[] =  "senai134/freire/esp32/comando";
 
 const uint32_t BAUD_NEXTION = 9600;
-const int8_t PINO_RX_NEXTION = 10;
-const int8_t PINO_TX_NEXTION = 2;
-
-Adafruit_NeoPixel ledRGB(
-    QUANTIDADE_LEDS,
-    PINO_LED_RGB,
-    NEO_GRB + NEO_KHZ800);
+const int8_t PINO_RX_NEXTION = 18;
+const int8_t PINO_TX_NEXTION = 17;
 
 //barra de progresso
-NexProgressBar barraj0(0, 2, "j0"); //*trocar o nome da barra, para nao confundir com funcao matematica
+//*trocar o nome da barra, para nao confundir com funcao matematica
 
 //componentes que recebem toque
-NexButton botaoB0(0, 1, "b0"); //*Controla a lampada    
-NexSlider sliderH0(0, 4, "h0");
+NexButton botaoB0(0, 1, "b0");
+
+    
+//NexSlider sliderH0(0, 4, "h0");
 NexDSButton botaoDualBt0(1, 3, "bt0");
 
 //Textos usados para mostrar o estado dos componentes
-NexText textoT1(0, 6, "t1");
-NexText textoT2(0, 7, "t2");  //TODO: ALTERAR A PAGE, ID,0 PINOS DO IHM, E NOME
-NexText textoT3(0, 8, "t3");
-NexText textoT4(0, 0, "t4");
+//NexText textoT1(0, 6, "t1");
+//NexText textoT2(0, 7, "t2");  //TODO: ALTERAR A PAGE, ID,0 PINOS DO IHM, E NOME
+//NexText textoT3(0, 8, "t3");
+//NexText textoT4(0, 0, "t4");
 
 //*======================================
 //* VARIÁVEIS DE CONTROLE DA PLICAÇÃO
 //*======================================
 
-uint32_t valorBarra = 0;
-uint32_t contadorBotao = 0;
-uint32_t valorSlider = 0;
 uint32_t estadoBotaoDual = 0;
 
 char texto[50];
@@ -58,27 +49,32 @@ void configurarTelaInicial();
 void configurarEventosNextion();
 
 void botaoB0Soltou();
+
 void sliderH0Soltou();
-void botaoDualBt0Soltou();
+void botaoDualBt0Pressionado();
 
 void atualizarTextoBarra();
 void atualizarTextoBotao();
 void atualizarTextoSlider();
 void atualizarTextoBotaoDual();
 
+void atualizarEstadoLampada();
+
 void setup()
 {
  
   pinMode(pinLed, OUTPUT);
-
+ digitalWrite(pinLed, LOW);
   configurarDebug();
-
-  configurarLedRGB();
 
   conectarWiFi();
   configurarMQTT();
   registrarCallbackMensagem(tratarMensagemRecebida);
   conectarMQTT();
+
+  configurarNextion();
+  configurarTelaInicial();
+  configurarEventosNextion();
 }
 
 void loop()
@@ -86,6 +82,7 @@ void loop()
   garantirWiFiConectado();
   garantirMQTTConectado();
   loopMQTT();
+
   nexLoop();
 }
 
@@ -115,31 +112,6 @@ void tratarMensagemRecebida(const char *topico, const String &mensagem)
 
 }
 
-void configurarLedRGB()
-{
-  ledRGB.begin();
-  ledRGB.setBrightness(80); // TODO: colocar a qtd de brilho para o led de 0 a 255
-  ledRGB.clear();
-  ledRGB.show(); //* Atualiza o estado do LED
-
-  debugInfo("LED RGB configurado no GPIO " + String(PINO_LED_RGB));
-}
-
-void alterarCorLedRGB(int vermelho, int verde, int azul)
-{
-  vermelho = constrain(vermelho, 0, 255);
-  verde = constrain(verde, 0, 255);
-  azul = constrain(azul, 0, 255);
-
-  ledRGB.setPixelColor(0, ledRGB.Color(vermelho, verde, azul));
-  ledRGB.show();
-
-  debugInfo("Cor aplicada no LED RGB");
-  debugInfo("R: " + String(vermelho));
-  debugInfo("G: " + String(verde));
-  debugInfo("B: " + String(azul));
-}
-
 void tratarJsonComando(const String &mensagem)
 {
   JsonDocument doc;
@@ -153,8 +125,8 @@ void tratarJsonComando(const String &mensagem)
     return;
   }
  
+ 
 }
-
 
 void configurarNextion()
 {
@@ -166,7 +138,7 @@ void configurarNextion()
   debugInfo("Nextion inicializado");
 }
 
-void configurarTelaIncial()
+void configurarTelaInicial()
 {
   //*Garante que o disp;ay esteja na página principal
   sendCommand("page page0");
@@ -174,21 +146,21 @@ void configurarTelaIncial()
   delay(500);
 
   //*define os valores iniciais da aplicação
-  valorBarra = 0;
-  contadorBotao = 0;
-  valorSlider = 0;
+  
   estadoBotaoDual = 0;
 
  //*Atualiza os componentes visuais do display
+ /*
   barraj0.setValue(valorBarra);
   sliderH0.setValue(valorSlider);
-  botaoDualBt0.setValue(estadoBotaoDual);
+  //botaoDualBt0.setValue(estadoBotaoDual);
 
   //*Atualiza os textos inicias
   textoT1.setText("j0 = 0%");
   textoT2.setText("b0 aguardando");
   textoT3.setText("h0 = 0");
   textoT4.setText("bt0 = Desligado"); 
+  */
 }
 
 void configurarEventosNextion()
@@ -197,43 +169,40 @@ void configurarEventosNextion()
  //*No Nextion Editor, "use Send Component ID" em Touch Release Event
  
  botaoB0.attachPop(botaoB0Soltou);
- sliderH0.attachPop(sliderH0Soltou);
- botaoDualBt0.attachPop(botaoDualBt0Soltou);
+
+
+ //sliderH0.attachPop(sliderH0Soltou);
+
+ botaoDualBt0.attachPush(botaoDualBt0Pressionado);
 
  //*limpa a lista interna de componentes monitorados
  nexClearListenList();
 
  //*Registra quais componentes devem ser ouvidos pelo ESP32
  nexListen(botaoB0);
- nexListen(sliderH0);
+ 
+
+ //nexListen(sliderH0);
+
  nexListen(botaoDualBt0);
+
 }
+
+//*MENU PRINCIPAL
 
 void botaoB0Soltou()
 {
+  sendCommand("page page1");
+  
   debugInfo("Botao b0 solto");
-
-  //* Conta quantas vezes o botão foi clicado.
-  contadorBotao++;
-
-  valorBarra += 10;
-
-  if(valorBarra > 100)
-   valorBarra = 0;
-
-   //*atualiza a barra do display
-   barraj0.setValue(valorBarra);
-
-   //* componentes que recebem toque
-   //* Atualiza os textos relacionado ao botao e a barra
-
-   atualizarTextoBarra();
-   atualizarTextoBotao();
+  debugInfo("Página 1");
 }
 
-void botaoDualBt0Soltou()
+//*botao liga / desliga lampada
+
+void botaoDualBt0Pressionado()
 {
-  debugInfo("Botao dual bt0 solto.");
+  debugInfo("Botao dual bt0 Pressionado.");
 
   //* lê o valor atual do Dual State Button
   //* 0 = desligado
@@ -241,20 +210,29 @@ void botaoDualBt0Soltou()
 
   botaoDualBt0.getValue(&estadoBotaoDual);
 
-  atualizarTextoBotao();
+  atualizarEstadoLampada();
+  atualizarTextoBotaoDual();
   debugInfo("Estado do bt0 = ");
+}
+
+void atualizarEstadoLampada()
+{
+ if(estadoBotaoDual == 1)
+  digitalWrite(pinLed, HIGH);
+ else 
+  digitalWrite(pinLed, LOW);
 }
 
 void atualizarTextoBotaoDual()
 {
   if(estadoBotaoDual == 1)
   {
-   textoT4.setText("bt0 = ligado");
+   //textoT4.setText("bt0 = ligado");
    digitalWrite(pinLed, HIGH);
   }
   else
   {
-   textoT4.setText("bt0 = desligado"); 
+   //textoT4.setText("bt0 = desligado"); 
    digitalWrite(pinLed, LOW);
   }
   
