@@ -3,6 +3,65 @@
 #include "DebugManager.h"
 #include <ArduinoJson.h>
 #include <Nextion.h>
+#include "ComponentesSoltou.h"
+
+// PÁGINA 0 — MENU PRINCIPAL
+NexButton botaoB0(0, 1, "b0");
+NexButton botaoB1(0, 3, "b1");
+NexButton botaoB2(0, 4, "b2");
+NexButton botaoB3(0, 2, "b3");
+NexButton botaoB4(0, 5, "b4");
+NexButton botaoB5(0, 6, "b5");
+
+// PÁGINA 1 — LÂMPADA
+NexDSButton botaoDualBt0(1, 3, "bt0");
+NexDSButton botaoDualBt1(1, 4, "bt1");
+NexDSButton botaoDualBt2(1, 5, "bt2");
+NexDSButton botaoDualBt3(1, 6, "bt3");
+NexButton botaoBackLampada(1, 1, "b2");
+
+
+// PÁGINA 2 — PROJETOR
+NexDSButton botaoDualPower(2, 1, "bt0");
+NexDSButton botaoDualFreeze(2, 2, "bt1");
+NexButton botaoBackProjetor(2, 3, "b0");
+
+
+// PÁGINA 3 — TELA RETRÁTIL
+NexDSButton botaoDualUp(3, 1, "bt0");
+NexDSButton botaoDualDown(3, 2, "bt1");
+NexDSButton botaoDualSelect(3, 3, "bt2");
+NexButton botaoBackTela(3, 4, "b0");
+
+
+// PÁGINA 4 - AR CONDICIONADO
+NexDSButton botaoPowerAr(4, 1, "bt0");
+NexButton botaoBackAr(4, 2, "b0");
+
+
+//======================================
+// VARIÁVEIS DE ESTADO
+//======================================
+
+uint8_t paginaAtual = 0;
+
+// Lâmpada
+uint32_t estadoBotaoDualBt0 = 0;
+uint32_t estadoBotaoDualBt1 = 0;
+uint32_t estadoBotaoDualBt2 = 0;
+uint32_t estadoBotaoDualBt3 = 0;
+
+// Projetor
+uint32_t estadoBotaoDualPower = 0;
+uint32_t estadoBotaoDualFreeze = 0;
+
+// Tela Retrátil
+uint32_t estadoBotaoDualUp = 0;
+uint32_t estadoBotaoDualDown = 0;
+uint32_t estadoBotaoDualSelect = 0;
+
+// Ar condicionado
+uint32_t estadoBotaoPowerAr = 0;
 
 void configurarNextion()
 {
@@ -106,7 +165,7 @@ void configurarEventosNextion()
   botaoDualSelect.attachPop(botaoDualSelectSoltou);
 
   // Ar-condicionado - //TODO
-  botaoPowerAr.attachPop(botaoPowerArSoutou);
+  botaoPowerAr.attachPop(botaoPowerArSoltou);
 
   // TV - //TODO
 

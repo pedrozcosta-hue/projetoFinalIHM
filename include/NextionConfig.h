@@ -24,4 +24,7 @@ void configurarTelaInicial();
 // Registra callbacks e chama nexListen para cada componente
 void configurarEventosNextion();
 
+void publicarEstado();
+void sincronizarPaginaAtual();
+
 #endif
