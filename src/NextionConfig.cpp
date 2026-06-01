@@ -150,7 +150,6 @@ static void sincronizarPaginaAtual()
      botaoDualMenuSensor1.setValue(estadoBotaoDualMenuSensor1);
      botaoDualMenuSensor2.setValue(estadoBotaoDualMenuSensor2); 
      botaoDualSensorEco.setValue(estadoBotaoDualSensorEco);
-    // TODO: COMPONENTED PAGINA 5
   }
 }
 
@@ -385,10 +384,6 @@ void configurarTelaInicial()
  sendCommand("page page0");
  paginaAtual = 0;
  delay(500);
-  // Página 0
-  sendCommand("page page0");
-  paginaAtual = 0;
-  delay(500);
 
   // Página 1 — Lâmpada
   sendCommand("page page1");
@@ -437,12 +432,8 @@ void configurarTelaInicial()
  sendCommand("page page0");
  paginaAtual = 0;
  delay(500);
-  // Retorna ao menu principal
-  sendCommand("page page0");
-  paginaAtual = 0;
-  delay(500);
 
-  // TODO: PAGINA 4, 5 E 6
+  // TODO: PAGINA 4, 5
 }
 
 void configurarEventosNextion()
@@ -485,12 +476,11 @@ void configurarEventosNextion()
 
   // TV - //TODO
 
-  // Sensor análise - //TODO
-
  //Sensor análise
  botaoDualMenuSensor1.attachPop(botaoDualMenuSensor1Soltou);
  botaoDualMenuSensor2.attachPop(botaoDualMenuSensor2Soltou);
  botaoDualSensorEco.attachPop(botaoDualSensorEcoSoltou);
+ 
   // Registra listeners
 
   nexListen(botaoB0);
@@ -500,18 +490,13 @@ void configurarEventosNextion()
   nexListen(botaoB4);
   nexListen(botaoB5);
 
-  //------------BÕTOES BACK------------
-  nexListen(botaoBackLampada);
-  nexListen(botaoBackAr);
-  nexListen(botaoBackProjetor);
-  nexListen(botaoBackTela);
-
  //------------BÕTOES BACK------------
  nexListen(botaoBackLampada);
  nexListen(botaoBackAr);
  nexListen(botaoBackProjetor);
  nexListen(botaoBackTela);
  nexListen(botaoBackSensor);
+ 
   // lampada
   nexListen(botaoDualBt0);
   nexListen(botaoDualBt1);
@@ -527,18 +512,11 @@ void configurarEventosNextion()
   nexListen(botaoDualDown);
   nexListen(botaoDualSelect);
 
- //tela retratil
- nexListen(botaoDualUp);
- nexListen(botaoDualDown);
- nexListen(botaoDualSelect);
-
- //ar condicionado
- nexListen(botaoPowerAr);
-
- //sensor
- nexListen(botaoDualMenuSensor1);
- nexListen(botaoDualMenuSensor2);
- nexListen(botaoDualSensorEco);
-  // ar condicionado
+  //ar condicionado
   nexListen(botaoPowerAr);
+
+  //sensor
+  nexListen(botaoDualMenuSensor1);
+  nexListen(botaoDualMenuSensor2);
+  nexListen(botaoDualSensorEco);
 }
