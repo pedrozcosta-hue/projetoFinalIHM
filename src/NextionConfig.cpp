@@ -78,21 +78,29 @@ static const char TOPICO_COMANDO[] = "senai134/freire/esp32/comando";
 static void publicarEstado()
 {
  JsonDocument doc;
-
+if(paginaAtual == 1)
+{
  // Lâmpada
  doc["lampadaSala09"]["lampadaFrente"] = (estadoBotaoDualBt0 == 1) ? 1 : 0;
  doc["lampadaSala09"]["lampadaTras"] = (estadoBotaoDualBt1 == 1) ? 1 : 0;
  doc["lampadaSala10"]["lampadaFrente"] = (estadoBotaoDualBt2 == 1) ? 1 : 0;
  doc["lampadaSala10"]["lampadaTras"] = (estadoBotaoDualBt3 == 1) ? 1 : 0;
+}
 
+if(paginaAtual == 2)
+{
  // Projetor
  doc["projetor"]["estadoPower"] = (estadoBotaoDualPower == 1) ? 1 : 0;
  doc["projetor"]["estadoCongelamento"] = (estadoBotaoDualFreeze == 1) ? 1 : 0;
+}
 
+if(paginaAtual == 3)
+{
  // Tela Retrátil
  doc["tela"]["Up"] = (estadoBotaoDualUp == 1) ? 1 : 0;
  doc["tela"]["Down"] = (estadoBotaoDualDown == 1) ? 1 : 0;
  doc["tela"]["Select"] = (estadoBotaoDualSelect == 1) ? 1 : 0;
+}
 
  //TODO: JSON AR, TV E SENSOR
 
@@ -425,7 +433,7 @@ void configurarEventosNextion()
  nexListen(botaoB4);
  nexListen(botaoB5);
 
- //------------BÕTOES BACK------------
+ //------------BOTÕES BACK------------
  nexListen(botaoBackLampada);
  nexListen(botaoBackAr);
  nexListen(botaoBackProjetor);
