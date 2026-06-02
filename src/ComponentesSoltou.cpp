@@ -1,0 +1,217 @@
+#include <Nextion.h>
+#include "ComponentesSoltou.h"
+#include "IniciarNextion.h"
+#include "DebugManager.h"
+#include "NextionConfig.h"
+
+// MENU
+void botaoB0Soltou()
+{
+    sendCommand("page page1");
+    paginaAtual = 1;
+    debugInfo("b0 solto - Página 1 (Lâmpada)");
+}
+void botaoB1Soltou()
+{
+    sendCommand("page page2");
+    paginaAtual = 2;
+    debugInfo("b1 solto - Página 2 (Projetor)");
+}
+void botaoB2Soltou()
+{
+    sendCommand("page page3");
+    paginaAtual = 3;
+    debugInfo("b2 solto - Página 3 (Tela Retrátil)");
+}
+void botaoB3Soltou()
+{
+    sendCommand("page page4");
+    paginaAtual = 4;
+    debugInfo("b3 solto - Página 4 (Ar Condicionado)");
+}
+void botaoB4Soltou()
+{
+    sendCommand("page page5");
+    paginaAtual = 5;
+    debugInfo("b4 solto - Página 5 (TV)");
+}
+void botaoB5Soltou()
+{
+    sendCommand("page page6");
+    paginaAtual = 6;
+    debugInfo("b5 solto - Página 6 (Sensor)");
+}
+//////////////////////
+
+// LÂMPADA
+// TODO: melhorar nome dos botões da lâmpada
+void botaoDualBt0Soltou()
+{
+    botaoDualBt0.getValue(&estadoBotaoDualBt0);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Bt0 solto. Estado = " + String(estadoBotaoDualBt0));
+}
+void botaoDualBt1Soltou()
+{
+    botaoDualBt1.getValue(&estadoBotaoDualBt1);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Bt1 solto. Estado = " + String(estadoBotaoDualBt1));
+}
+void botaoDualBt2Soltou()
+{
+    botaoDualBt2.getValue(&estadoBotaoDualBt2);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Bt2 solto. Estado = " + String(estadoBotaoDualBt2));
+}
+void botaoDualBt3Soltou()
+{
+    botaoDualBt3.getValue(&estadoBotaoDualBt3);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Bt3 solto. Estado = " + String(estadoBotaoDualBt3));
+}
+void botaoBackLampadaSoltou()
+{
+    sendCommand("page page0");
+    paginaAtual = 0;
+    debugInfo("B0 Back - Página 0 (Menu)");
+}
+////////////////////////////
+
+// PROJETOR
+void botaoBackProjetorSoltou()
+{
+    sendCommand("page page0");
+    paginaAtual = 0;
+    debugInfo("B0 Back - Página 0 (Menu)");
+}
+void botaoDualPowerSoltou()
+{
+    botaoDualPower.getValue(&estadoBotaoDualPower);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Power solto. Estado = " + String(estadoBotaoDualPower));
+}
+void botaoDualFreezeSoltou()
+{
+    botaoDualFreeze.getValue(&estadoBotaoDualFreeze);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Freeze solto. Estado = " + String(estadoBotaoDualFreeze));
+}
+/////////////////////////////////
+
+// TELA RETRÁTIL
+void botaoBackTelaSoltou()
+{
+    sendCommand("page page0");
+    paginaAtual = 0;
+    debugInfo("B0 Back - Página 0 (Menu)");
+}
+void botaoDualUpSoltou()
+{
+    botaoDualUp.getValue(&estadoBotaoDualUp);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Up solto. Estado = " + String(estadoBotaoDualUp));
+}
+void botaoDualDownSoltou()
+{
+    botaoDualDown.getValue(&estadoBotaoDualDown);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Down solto. Estado = " + String(estadoBotaoDualDown));
+}
+void botaoDualSelectSoltou()
+{
+    botaoDualSelect.getValue(&estadoBotaoDualSelect);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Select solto. Estado = " + String(estadoBotaoDualSelect));
+}
+////////////////////////////////
+
+// AR CONDICIONADO
+void botaoBackArSoltou()
+{
+    sendCommand("page page0");
+    paginaAtual = 0;
+    debugInfo("B0 Back - Página 0 (Menu)");
+}
+void botaoDualPowerArSoltou()
+{
+    botaoDualPowerAr.getValue(&estadoBotaoDualPowerAr);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Power solto. Estado = " + String(estadoBotaoDualPowerAr));
+}
+void botaoModoArSoltou()
+{
+    estadoBotaoModoAr = (estadoBotaoModoAr + 1) % 4;
+    publicarEstado();
+    debugInfo("Modo solto. Estado = " + String(estadoBotaoModoAr));
+}
+void botaoVentoSoltou()
+{
+    estadoBotaoVento++;
+    if (estadoBotaoVento > 4)
+    {
+        estadoBotaoVento = 0;
+    }
+    publicarEstado();
+    debugInfo("Vento solto. Estado = " + String(estadoBotaoVento));
+}
+void sliderTemperaturaSoltou()
+{
+    sliderTemperatura.getValue(&valorSliderTemperatura);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Temperatura solta. Valor = " + String(valorSliderTemperatura));
+}
+// TODO: ESP
+//////////////////////////////////
+
+//TODO: FAZER A LÓGICA PARA OS BOTÕES DA TV E DO SENSOR
+// TV
+void botaoBackTvSoltou()
+{
+    sendCommand("page page0");
+    paginaAtual = 0;
+    debugInfo("B0 Back - Página 0 (Menu)");
+}
+void botaoPowerTvSoltou()
+{
+}
+void botaoVolumeUpTvSoltou()
+{
+}
+void botaoVolumeDownTvSoltou()
+{
+}
+void botaoSelectTvSoltou()
+{
+}
+void botaoSetaEsquerdaTvSoltou()
+{
+}
+void botaoSetaDireitaTvSoltou()
+{
+}
+void botaoSetaCimaTvSoltou()
+{
+}
+void botaoSetaBaixoTvSoltou()
+{
+}
+////////////////////////
+
+// SENSOR
+void botaoBackSensorSoltou()
+{
+    sendCommand("page page0");
+    paginaAtual = 0;
+    debugInfo("B0 Back - Página 0 (Menu)");
+}

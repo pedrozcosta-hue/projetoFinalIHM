@@ -1,128 +1,117 @@
-
 #include "NextionConfig.h"
 #include "MqttManager.h"
 #include "DebugManager.h"
+#include "IniciarNextion.h"
 #include <ArduinoJson.h>
 
-// PÁGINA 0 — MENU PRINCIPAL
-static NexButton botaoB0(0, 1, "b0");
-static NexButton botaoB1(0, 3, "b1");
-static NexButton botaoB2(0, 4, "b2");
-static NexButton botaoB3(0, 2, "b3");
-static NexButton botaoB4(0, 5, "b4");
-static NexButton botaoB5(0, 6, "b5");
-
-// PÁGINA 1 — LÂMPADA
-static NexDSButton botaoDualBt0(1, 3, "bt0");
-static NexDSButton botaoDualBt1(1, 4, "bt1");
-static NexDSButton botaoDualBt2(1, 5, "bt2");
-static NexDSButton botaoDualBt3(1, 6, "bt3");
-
-static NexButton botaoBackLampada(1, 1, "b2");
-
-// PÁGINA 2 — PROJETOR
-static NexDSButton botaoDualPower(2, 1, "bt0");
-static NexDSButton botaoDualFreeze(2, 2, "bt1");
-
-static NexButton botaoBackProjetor(2, 3, "b0");
-
-// PÁGINA 3 — TELA RETRÁTIL
-static NexDSButton botaoDualUp(3, 1, "bt0");
-static NexDSButton botaoDualDown(3, 2, "bt1");
-static NexDSButton botaoDualSelect(3, 3, "bt2");
-
-static NexButton botaoBackTela(3, 4, "b0");
-
-// PÁGINA 4 - AR CONDICIONADO
-static NexDSButton botaoPowerAr(4, 1, "bt0");
-
-static NexButton botaoBackAr(4, 2, "b0");
-
-// PÁGINA 5 - TELEVISÃO
-
-//PÁGINA 6 - SENSOR
-static NexDSButton botaoDualMenuSensor1(0, 0, "xxx");
-static NexDSButton botaoDualMenuSensor2(0, 0, "xxx");
-static NexDSButton botaoDualSensorEco(0, 0, "xxx");
-
-static NexButton botaoBackSensor(0, 0, "xxx");
-
-//======================================
-// VARIÁVEIS DE ESTADO
-//======================================
-
-static uint8_t paginaAtual = 0;
-
-// Lâmpada
-static uint32_t estadoBotaoDualBt0 = 0;
-static uint32_t estadoBotaoDualBt1 = 0;
-static uint32_t estadoBotaoDualBt2 = 0;
-static uint32_t estadoBotaoDualBt3 = 0;
-
-// Projetor
-static uint32_t estadoBotaoDualPower = 0;
-static uint32_t estadoBotaoDualFreeze = 0;
-
-// Tela Retrátil
-static uint32_t estadoBotaoDualUp = 0;
-static uint32_t estadoBotaoDualDown = 0;
-static uint32_t estadoBotaoDualSelect = 0;
-
-// Ar condicionado
-static uint32_t estadoBotaoPowerAr = 0;
-
-//Sensor
-static uint32_t estadoBotaoDualMenuSensor1 = 0;
-static uint32_t estadoBotaoDualMenuSensor2 = 0;
-static uint32_t estadoBotaoDualSensorEco = 0;
-
-//*======================================
-//* TÓPICO MQTT (usado ao publicar)
-//*======================================
-
-static const char TOPICO_COMANDO[] = "senai134/freire/esp32/comando";
-
-// TODO TOPICOS PARA CADA COMPONENTE
-
-//*======================================
-//* PUBLICAÇÃO JSON — estado completo
-//*======================================
+const char TOPICO_COMANDO[] = "senai134/freire/esp32/comando";
 
 static void publicarEstado()
 {
- JsonDocument doc;
-if(paginaAtual == 1)
-{
- // Lâmpada
- doc["lampadaSala09"]["interruptor2"] = (estadoBotaoDualBt0 == 1) ? 1 : 0;
- doc["lampadaSala09"]["interruptor1"] = (estadoBotaoDualBt1 == 1) ? 1 : 0;
- doc["lampadaSala10"]["interruptor4"] = (estadoBotaoDualBt2 == 1) ? 1 : 0;
- doc["lampadaSala10"]["interruptor3"] = (estadoBotaoDualBt3 == 1) ? 1 : 0;
- debugInfo("Interruptor 1: " + String(estadoBotaoDualBt1));
- debugInfo("Interruptor 2: " + String(estadoBotaoDualBt0));
- debugInfo("Interruptor 3: " + String(estadoBotaoDualBt3));
- debugInfo("Interruptor 4: " + String(estadoBotaoDualBt2));
-}
+  //TODO: TRATAR DEBUGINFO, REFATORAR OS JSONS 
+  JsonDocument doc;
+  if (paginaAtual == 1)
+  {
+    // Lâmpada
+    doc["lampadaSala09"]["interruptor2"] = (estadoBotaoDualBt0 == 1) ? 1 : 0;
+    doc["lampadaSala09"]["interruptor1"] = (estadoBotaoDualBt1 == 1) ? 1 : 0;
+    doc["lampadaSala10"]["interruptor4"] = (estadoBotaoDualBt2 == 1) ? 1 : 0;
+    doc["lampadaSala10"]["interruptor3"] = (estadoBotaoDualBt3 == 1) ? 1 : 0;
+    debugInfo("Interruptor 1: " + String(estadoBotaoDualBt1));
+    debugInfo("Interruptor 2: " + String(estadoBotaoDualBt0));
+    debugInfo("Interruptor 3: " + String(estadoBotaoDualBt3));
+    debugInfo("Interruptor 4: " + String(estadoBotaoDualBt2));
+  }
+  if (paginaAtual == 2)
+  {
+    // Projetor
+    doc["projetor"]["estadoPower"] = (estadoBotaoDualPower == 1) ? 1 : 0;
+    doc["projetor"]["estadoCongelamento"] = (estadoBotaoDualFreeze == 1) ? 1 : 0;
+    debugInfo("Estado Power: " + String(estadoBotaoDualPower));
+    debugInfo("Estado Congelamento: " + String(estadoBotaoDualFreeze));
+  }
+  if (paginaAtual == 3)
+  {
+    // Tela Retrátil
+    doc["tela"]["Up"] = (estadoBotaoDualUp == 1) ? 1 : 0;
+    doc["tela"]["Down"] = (estadoBotaoDualDown == 1) ? 1 : 0;
+    doc["tela"]["Select"] = (estadoBotaoDualSelect == 1) ? 1 : 0;
+    debugInfo("Botão Up: " + String(estadoBotaoDualUp));
+    debugInfo("Botão Down: " + String(estadoBotaoDualDown));
+    debugInfo("Botão Select: " + String(estadoBotaoDualSelect));
+  }
 
-if(paginaAtual == 2)
-{
- // Projetor
- doc["projetor"]["estadoPower"] = (estadoBotaoDualPower == 1) ? 1 : 0;
- doc["projetor"]["estadoCongelamento"] = (estadoBotaoDualFreeze == 1) ? 1 : 0;
- debugInfo("Estado Power: " + String(estadoBotaoDualPower));
- debugInfo("Estado Congelamento: " + String(estadoBotaoDualFreeze));
-}
+  if (paginaAtual == 4)
+  {
+    //* Ar-condicionado - Temperatura
+    doc["arCondicionado"]["temperatura"] = valorSliderTemperatura;
 
-if(paginaAtual == 3)
-{
- // Tela Retrátil
- doc["tela"]["Up"] = (estadoBotaoDualUp == 1) ? 1 : 0;
- doc["tela"]["Down"] = (estadoBotaoDualDown == 1) ? 1 : 0;
- doc["tela"]["Select"] = (estadoBotaoDualSelect == 1) ? 1 : 0;
-  debugInfo("Botao Up: " + String(estadoBotaoDualUp));
-  debugInfo("Botao Down: " + String(estadoBotaoDualDown));
-  debugInfo("Botao Select: " + String(estadoBotaoDualSelect));
-}
+    //* Ar-condicionado - Power
+    doc["arCondicionado"]["power"] = (estadoBotaoDualPowerAr == 1) ? 1 : 0;
+
+    //* Ar-condicionado - Modo
+    if (estadoBotaoModoAr == 0) // modo 0 = cool
+    {
+      doc["arCondicionado"]["modo"] = estadoBotaoModoAr;
+    }
+
+    else if (estadoBotaoModoAr == 1) // modo 1 = dry
+    {
+      doc["arCondicionado"]["modo"] = estadoBotaoModoAr;
+    }
+
+    else if (estadoBotaoModoAr == 2) // modo 2 = fan
+    {
+      doc["arCondicionado"]["modo"] = estadoBotaoModoAr;
+    }
+
+    else if (estadoBotaoModoAr == 3) // modo 3 = heat
+    {
+      doc["arCondicionado"]["modo"] = estadoBotaoModoAr;
+    }
+
+    //* Ar-Condicionado - Estado do Vento
+    if (estadoBotaoVento == 0) // velocidade do vento 0 = auto
+    {
+      doc["arCondicionado"]["vento"] = estadoBotaoVento;
+    }
+
+    else if (estadoBotaoVento == 1) // velocidade do vento 1 = quiet
+    {
+      doc["arCondicionado"]["vento"] = estadoBotaoVento;
+    }
+
+    else if (estadoBotaoVento == 2) // velocidade do vento 2 = low
+    {
+      doc["arCondicionado"]["vento"] = estadoBotaoVento;
+    }
+    else if (estadoBotaoVento == 3) // velocidade do vento 3 = med
+    {
+      doc["arCondicionado"]["vento"] = estadoBotaoVento;
+    }
+    else if (estadoBotaoVento == 4) // velocidade do vento 4 = high
+    {
+      doc["arCondicionado"]["vento"] = estadoBotaoVento;
+    }
+  }
+
+  if (paginaAtual == 5)
+  {
+    //TODO: JSON DA TV
+    // doc["televisao"]["comando"] =
+  }
+
+  if (paginaAtual == 6)
+  {
+    // Sensor de análise
+    doc["analise"]["timeStamp"] = // TODO: TIMESTAMP
+    doc["analise"]["temperatura"] = valorTemperatura;
+    doc["analise"]["umidade"] = valorUmidade;
+    doc["analise"]["ruido"] = valorRuido;
+    doc["analise"]["comandoAr"] = comandoAr;
+    doc["analise"]["alertaSom"] = alertaSom;
+    doc["analise"]["eco"] = eco;
+  }
 
  //TODO: JSON AR, TV E SENSOR
 
@@ -137,426 +126,47 @@ if(paginaAtual == 3)
 
 static void sincronizarPaginaAtual()
 {
+  // Lâmpada
   if (paginaAtual == 1)
   {
+    //TODO: MELHORAR O NOME DAS VARIÁVEIS
     botaoDualBt0.setValue(estadoBotaoDualBt0);
     botaoDualBt1.setValue(estadoBotaoDualBt1);
     botaoDualBt2.setValue(estadoBotaoDualBt2);
     botaoDualBt3.setValue(estadoBotaoDualBt3);
   }
+
+  // Projetor
   else if (paginaAtual == 2)
   {
     botaoDualPower.setValue(estadoBotaoDualPower);
     botaoDualFreeze.setValue(estadoBotaoDualFreeze);
   }
+
+  // Tela Retrátil
   else if (paginaAtual == 3)
   {
     botaoDualUp.setValue(estadoBotaoDualUp);
     botaoDualDown.setValue(estadoBotaoDualDown);
     botaoDualSelect.setValue(estadoBotaoDualSelect);
   }
+
+  // Ar-condicionado
   else if (paginaAtual == 4)
   {
-    // TODO: COMPONENTEDPAGINA 4
+    botaoDualPowerAr.setValue(estadoBotaoDualPowerAr);
+    sliderTemperatura.setValue(valorSliderTemperatura);
   }
+
+  // TV
   else if (paginaAtual == 5)
   {
+    botaoDualPowerTv.setValue(estadoBotaoDualPowerTv);
   }
-  else
+
+  // Sensor
+  else if (paginaAtual == 6)
   {
-     botaoDualMenuSensor1.setValue(estadoBotaoDualMenuSensor1);
-     botaoDualMenuSensor2.setValue(estadoBotaoDualMenuSensor2); 
-     botaoDualSensorEco.setValue(estadoBotaoDualSensorEco);
-    // TODO: COMPONENTED PAGINA 5
+    // TODO: COMPONENTES PAGINA 6
   }
-}
-
-//=======================================
-// CALLBACKS — MENU PRINCIPAL - PÁGINA 0
-//=======================================
-
-static void botaoB0Soltou()
-{
-  sendCommand("page page1");
-  paginaAtual = 1;
-  Serial.print("b0 solto - Página 1 (Lâmpada)");
-}
-
-static void botaoB1Soltou()
-{
-  sendCommand("page page2");
-  paginaAtual = 2;
-  Serial.print("b1 solto - Página 2 (Projetor)");
-}
-static void botaoB2Soltou()
-{
-  sendCommand("page page3");
-  paginaAtual = 3;
-  debugInfo("b2 solto - Página 3 (Tela Retratil)");
-}
-static void botaoB3Soltou()
-{
-  sendCommand("page page4");
-  paginaAtual = 4;
-  debugInfo("b3 solto - Página 4 (Ar-condicionado)");
-}
-static void botaoB4Soltou()
-{
-  sendCommand("page page5");
-  paginaAtual = 5;
-  debugInfo("B4 solto - Página 5 (Televisão)");
-}
-static void botaoB5Soltou()
-{
-  sendCommand("page page6");
-  paginaAtual = 6;
-  debugInfo("B5 solto - Página 6 (Sensor de análise)");
-}
-
-//======================================
-// CALLBACKS — LÂMPADA (PÁGINA 1)
-//======================================
-static void botaoBackLampadaSoltou()
-{
-  sendCommand("page page0");
-  paginaAtual = 0;
-  debugInfo("B0 Back - Página 0 (Menu)");
-}
-
-static void botaoDualBt0Soltou()
-{
-  botaoDualBt0.getValue(&estadoBotaoDualBt0);
-  sincronizarPaginaAtual();
-  publicarEstado();
-  debugInfo("Bt0 solto. Estado = " + String(estadoBotaoDualBt0));
-}
-
-static void botaoDualBt1Soltou()
-{
-  botaoDualBt1.getValue(&estadoBotaoDualBt1);
-  sincronizarPaginaAtual();
-  publicarEstado();
-  debugInfo("Bt1 solto. Estado = " + String(estadoBotaoDualBt1));
-}
-
-static void botaoDualBt2Soltou()
-{
-  botaoDualBt2.getValue(&estadoBotaoDualBt2);
-  sincronizarPaginaAtual();
-  publicarEstado();
-  debugInfo("Bt2 solto. Estado = " + String(estadoBotaoDualBt2));
-}
-
-static void botaoDualBt3Soltou()
-{
-  botaoDualBt3.getValue(&estadoBotaoDualBt3);
-  sincronizarPaginaAtual();
-  publicarEstado();
-  debugInfo("Bt3 solto. Estado = " + String(estadoBotaoDualBt3));
-}
-
-//======================================
-// CALLBACKS — PROJETOR (PÁGINA 2)
-//======================================
-static void botaoBackProjetorSoltou()
-{
-  sendCommand("page page0");
-  paginaAtual = 0;
-  debugInfo("B0 Back - Página 0 (Menu)");
-}
-
-static void botaoDualPowerSoltou()
-{
-  botaoDualPower.getValue(&estadoBotaoDualPower);
-  sincronizarPaginaAtual();
-  publicarEstado();
-  debugInfo("Power solto. Estado = " + String(estadoBotaoDualPower));
-}
-
-static void botaoDualFreezeSoltou()
-{
-  botaoDualFreeze.getValue(&estadoBotaoDualFreeze);
-  sincronizarPaginaAtual();
-  publicarEstado();
-  debugInfo("Freeze solto. Estado = " + String(estadoBotaoDualFreeze));
-}
-
-//======================================
-// CALLBACKS — TELA RETRÁTIL (PÁGINA 3)
-//======================================
-static void botaoBackTelaSoltou()
-{
-  sendCommand("page page0");
-  paginaAtual = 0;
-  debugInfo("B0 Back - Página 0 (Menu)");
-}
-
-static void botaoDualUpSoltou()
-{
-  botaoDualUp.getValue(&estadoBotaoDualUp);
-  sincronizarPaginaAtual();
-  publicarEstado();
-  debugInfo("Up solto. Estado = " + String(estadoBotaoDualUp));
-}
-
-static void botaoDualDownSoltou()
-{
-  botaoDualDown.getValue(&estadoBotaoDualDown);
-  sincronizarPaginaAtual();
-  publicarEstado();
-  debugInfo("Down solto. Estado = " + String(estadoBotaoDualDown));
-}
-
-static void botaoDualSelectSoltou()
-{
-  botaoDualSelect.getValue(&estadoBotaoDualSelect);
-  sincronizarPaginaAtual();
-  publicarEstado();
-  debugInfo("Select solto. Estado = " + String(estadoBotaoDualSelect));
-}
-
-//======================================
-// CALLBACKS — AR CONDICIONADO (PÁGINA 4)
-//======================================
-
-static void botaoBackArSoltou()
-{
-  sendCommand("page page0");
-  paginaAtual = 0;
-  debugInfo("B0 Back - Página 0 (Menu)");
-}
-
-static void botaoPowerArSoutou()
-{
-}
-
-//======================================
-// CALLBACKS - SENSOR (PÁGINA 6)
-//======================================
-
-static void botaoBackSensorSoltou()
-{
-  sendCommand("page pagea0");
-  paginaAtual = 0;
-  debugInfo("Back - Página 0 (Menu)");
-}
-
-static void botaoDualMenuSensor1Soltou()
-{
-  botaoDualMenuSensor1.getValue(&estadoBotaoDualMenuSensor1);
-  sincronizarPaginaAtual();
-  publicarEstado();
-  debugInfo("Menu sensor 1. Estado = " + String(estadoBotaoDualMenuSensor1));
-}
-
-static void botaoDualMenuSensor2Soltou()
-{
-  botaoDualMenuSensor2.getValue(&estadoBotaoDualMenuSensor2);
-  sincronizarPaginaAtual();
-  publicarEstado();
-  debugInfo("Menu sensor 2. Estado = " + String(estadoBotaoDualMenuSensor2));
-}
-
-static void botaoDualSensorEcoSoltou()
-{
-  botaoDualSensorEco.getValue(&estadoBotaoDualSensorEco);
-  sincronizarPaginaAtual();
-  publicarEstado();
-  debugInfo("Modo economico. Estado = " + String(estadoBotaoDualSensorEco));
-}
-
-//======================================
-// FUNÇÕES PÚBLICAS
-//======================================
-
-void configurarNextion()
-{
-  bool nextionOk = nexInit(BAUD_NEXTION, PINO_RX_NEXTION, PINO_TX_NEXTION);
-  (nextionOk) ? debugInfo("Nextion inicializado") : debugErro("Aviso: Não foi possível inicializar o nextion");
-}
-
-void configurarTelaInicial()
-{
-  // Zera todas as variáveis de estado
-  estadoBotaoDualBt0 = 0;
-  estadoBotaoDualBt1 = 0;
-  estadoBotaoDualBt2 = 0;
-  estadoBotaoDualBt3 = 0;
-
-  estadoBotaoDualPower = 0;
-  estadoBotaoDualFreeze = 0;
-
-  estadoBotaoDualUp = 0;
-  estadoBotaoDualDown = 0;
-  estadoBotaoDualSelect = 0;
-
-  // ar
-  estadoBotaoPowerAr = 0;
-
- //sensor
- estadoBotaoDualMenuSensor1 = 0;
- estadoBotaoDualMenuSensor2 = 0;
- estadoBotaoDualSensorEco = 0;
-
- // Página 0
- sendCommand("page page0");
- paginaAtual = 0;
- delay(500);
-  // Página 0
-  sendCommand("page page0");
-  paginaAtual = 0;
-  delay(500);
-
-  // Página 1 — Lâmpada
-  sendCommand("page page1");
-  paginaAtual = 1;
-  delay(500);
-
-  botaoDualBt0.setValue(estadoBotaoDualBt0);
-  botaoDualBt1.setValue(estadoBotaoDualBt1);
-  botaoDualBt2.setValue(estadoBotaoDualBt2);
-  botaoDualBt3.setValue(estadoBotaoDualBt3);
-
-  // Página 2 — Projetor
-  sendCommand("page page2");
-  paginaAtual = 2;
-  delay(500);
-
-  botaoDualPower.setValue(estadoBotaoDualPower);
-  botaoDualFreeze.setValue(estadoBotaoDualFreeze);
-
-  // Página 3 — Tela Retrátil
-  sendCommand("page page3");
-  paginaAtual = 3;
-  delay(500);
-
-  botaoDualUp.setValue(estadoBotaoDualUp);
-  botaoDualDown.setValue(estadoBotaoDualDown);
-  botaoDualSelect.setValue(estadoBotaoDualSelect);
-
-  // Página 4
-  sendCommand("page page4");
-  paginaAtual = 4;
-  delay(500);
-
-  botaoPowerAr.setValue(estadoBotaoPowerAr);
-
- // Página 6
- sendCommand("page page6");
- paginaAtual = 6;
- delay(500);
-
- botaoDualMenuSensor1.setValue(estadoBotaoDualMenuSensor1);
- botaoDualMenuSensor2.setValue(estadoBotaoDualMenuSensor2);
- botaoDualSensorEco.setValue(estadoBotaoDualSensorEco);
-
-// Retorna ao menu principal
- sendCommand("page page0");
- paginaAtual = 0;
- delay(500);
-  // Retorna ao menu principal
-  sendCommand("page page0");
-  paginaAtual = 0;
-  delay(500);
-
-  // TODO: PAGINA 4, 5 E 6
-}
-
-void configurarEventosNextion()
-{
-  // Menu principal
-  botaoB0.attachPop(botaoB0Soltou);
-  botaoB1.attachPop(botaoB1Soltou);
-  botaoB2.attachPop(botaoB2Soltou);
-  botaoB3.attachPop(botaoB3Soltou);
-  botaoB4.attachPop(botaoB4Soltou);
-  botaoB5.attachPop(botaoB5Soltou);
-
- botaoBackLampada.attachPop(botaoBackLampadaSoltou);
- botaoBackAr.attachPop(botaoBackArSoltou);
- botaoBackProjetor.attachPop(botaoBackProjetorSoltou);
- botaoBackTela.attachPop(botaoBackTelaSoltou);
- botaoBackSensor.attachPop(botaoBackSensorSoltou);
-  botaoBackLampada.attachPop(botaoBackLampadaSoltou);
-  botaoBackAr.attachPop(botaoBackArSoltou);
-  botaoBackProjetor.attachPop(botaoBackProjetorSoltou);
-  botaoBackTela.attachPop(botaoBackTelaSoltou);
-
-  // Lâmpada
-  botaoDualBt0.attachPop(botaoDualBt0Soltou);
-  botaoDualBt1.attachPop(botaoDualBt1Soltou);
-  botaoDualBt2.attachPop(botaoDualBt2Soltou);
-  botaoDualBt3.attachPop(botaoDualBt3Soltou);
-
-  // Projetor
-  botaoDualPower.attachPop(botaoDualPowerSoltou);
-  botaoDualFreeze.attachPop(botaoDualFreezeSoltou);
-
-  // Tela Retrátil
-  botaoDualUp.attachPop(botaoDualUpSoltou);
-  botaoDualDown.attachPop(botaoDualDownSoltou);
-  botaoDualSelect.attachPop(botaoDualSelectSoltou);
-
-  // Ar-condicionado - //TODO
-  botaoPowerAr.attachPop(botaoPowerArSoutou);
-
-  // TV - //TODO
-
-  // Sensor análise - //TODO
-
- //Sensor análise
- botaoDualMenuSensor1.attachPop(botaoDualMenuSensor1Soltou);
- botaoDualMenuSensor2.attachPop(botaoDualMenuSensor2Soltou);
- botaoDualSensorEco.attachPop(botaoDualSensorEcoSoltou);
-  // Registra listeners
-
-  nexListen(botaoB0);
-  nexListen(botaoB1);
-  nexListen(botaoB2);
-  nexListen(botaoB3);
-  nexListen(botaoB4);
-  nexListen(botaoB5);
-
-  //------------BÕTOES BACK------------
-  nexListen(botaoBackLampada);
-  nexListen(botaoBackAr);
-  nexListen(botaoBackProjetor);
-  nexListen(botaoBackTela);
-
- //------------BOTÕES BACK------------
- //------------BÕTOES BACK------------
- nexListen(botaoBackLampada);
- nexListen(botaoBackAr);
- nexListen(botaoBackProjetor);
- nexListen(botaoBackTela);
- nexListen(botaoBackSensor);
-  // lampada
-  nexListen(botaoDualBt0);
-  nexListen(botaoDualBt1);
-  nexListen(botaoDualBt2);
-  nexListen(botaoDualBt3);
-
-  // projetor
-  nexListen(botaoDualPower);
-  nexListen(botaoDualFreeze);
-
-  // tela retratil
-  nexListen(botaoDualUp);
-  nexListen(botaoDualDown);
-  nexListen(botaoDualSelect);
-
- //tela retratil
- nexListen(botaoDualUp);
- nexListen(botaoDualDown);
- nexListen(botaoDualSelect);
-
- //ar condicionado
- nexListen(botaoPowerAr);
-
- //sensor
- nexListen(botaoDualMenuSensor1);
- nexListen(botaoDualMenuSensor2);
- nexListen(botaoDualSensorEco);
-  // ar condicionado
-  nexListen(botaoPowerAr);
 }
