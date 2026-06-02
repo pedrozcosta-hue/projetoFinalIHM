@@ -13,16 +13,22 @@ static void publicarEstado()
   if (paginaAtual == 1)
   {
     // Lâmpada
-    doc["lampadaSala09"]["lampadaFrente"] = (estadoBotaoDualBt0 == 1) ? 1 : 0;
-    doc["lampadaSala09"]["lampadaTras"] = (estadoBotaoDualBt1 == 1) ? 1 : 0;
-    doc["lampadaSala10"]["lampadaFrente"] = (estadoBotaoDualBt2 == 1) ? 1 : 0;
-    doc["lampadaSala10"]["lampadaTras"] = (estadoBotaoDualBt3 == 1) ? 1 : 0;
+    doc["lampadaSala09"]["interruptor2"] = (estadoBotaoDualBt0 == 1) ? 1 : 0;
+    doc["lampadaSala09"]["interruptor1"] = (estadoBotaoDualBt1 == 1) ? 1 : 0;
+    doc["lampadaSala10"]["interruptor4"] = (estadoBotaoDualBt2 == 1) ? 1 : 0;
+    doc["lampadaSala10"]["interruptor3"] = (estadoBotaoDualBt3 == 1) ? 1 : 0;
+    debugInfo("Interruptor 1: " + String(estadoBotaoDualBt1));
+    debugInfo("Interruptor 2: " + String(estadoBotaoDualBt0));
+    debugInfo("Interruptor 3: " + String(estadoBotaoDualBt3));
+    debugInfo("Interruptor 4: " + String(estadoBotaoDualBt2));
   }
   if (paginaAtual == 2)
   {
     // Projetor
     doc["projetor"]["estadoPower"] = (estadoBotaoDualPower == 1) ? 1 : 0;
     doc["projetor"]["estadoCongelamento"] = (estadoBotaoDualFreeze == 1) ? 1 : 0;
+    debugInfo("Estado Power: " + String(estadoBotaoDualPower));
+    debugInfo("Estado Congelamento: " + String(estadoBotaoDualFreeze));
   }
   if (paginaAtual == 3)
   {
@@ -30,6 +36,9 @@ static void publicarEstado()
     doc["tela"]["Up"] = (estadoBotaoDualUp == 1) ? 1 : 0;
     doc["tela"]["Down"] = (estadoBotaoDualDown == 1) ? 1 : 0;
     doc["tela"]["Select"] = (estadoBotaoDualSelect == 1) ? 1 : 0;
+    debugInfo("Botão Up: " + String(estadoBotaoDualUp));
+    debugInfo("Botão Down: " + String(estadoBotaoDualDown));
+    debugInfo("Botão Select: " + String(estadoBotaoDualSelect));
   }
 
   if (paginaAtual == 4)
@@ -104,9 +113,11 @@ static void publicarEstado()
     doc["analise"]["eco"] = eco;
   }
 
-  String mensagem;
-  serializeJson(doc, mensagem);
-  publicarMensagem(TOPICO_COMANDO, mensagem.c_str());
+ //TODO: JSON AR, TV E SENSOR
+
+ String mensagem;
+ serializeJson(doc, mensagem);
+ publicarMensagem(TOPICO_COMANDO, mensagem.c_str());
 }
 
 //======================================
