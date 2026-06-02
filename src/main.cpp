@@ -8,7 +8,7 @@
 #include "IniciarNextion.h"
 #include "secrets.h"
 
-const char TOPICO_COMANDO[] = "senai134/equipe/boo/devices/status";
+const char TOPICO_COMANDO[] = "senai134/equipe/boo/devices/comando"; // <- corrigido
 
 // Protótipos
 void tratarMensagemRecebida(const char *topico, const String &mensagem);
