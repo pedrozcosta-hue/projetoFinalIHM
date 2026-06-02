@@ -40,6 +40,12 @@ static NexButton botaoBackAr(4, 2, "b0");
 
 // PÁGINA 5 - TELEVISÃO
 
+//PÁGINA 6 - SENSOR
+static NexDSButton botaoDualMenuSensor1(0, 0, "xxx");
+static NexDSButton botaoDualMenuSensor2(0, 0, "xxx");
+static NexDSButton botaoDualSensorEco(0, 0, "xxx");
+
+static NexButton botaoBackSensor(0, 0, "xxx");
 
 //======================================
 // VARIÁVEIS DE ESTADO
@@ -64,6 +70,11 @@ static uint32_t estadoBotaoDualSelect = 0;
 
 // Ar condicionado
 static uint32_t estadoBotaoPowerAr = 0;
+
+//Sensor
+static uint32_t estadoBotaoDualMenuSensor1 = 0;
+static uint32_t estadoBotaoDualMenuSensor2 = 0;
+static uint32_t estadoBotaoDualSensorEco = 0;
 
 //*======================================
 //* TÓPICO MQTT (usado ao publicar)
@@ -148,8 +159,14 @@ static void sincronizarPaginaAtual()
   {
     // TODO: COMPONENTEDPAGINA 4
   }
+  else if (paginaAtual == 5)
+  {
+  }
   else
   {
+     botaoDualMenuSensor1.setValue(estadoBotaoDualMenuSensor1);
+     botaoDualMenuSensor2.setValue(estadoBotaoDualMenuSensor2); 
+     botaoDualSensorEco.setValue(estadoBotaoDualSensorEco);
     // TODO: COMPONENTED PAGINA 5
   }
 }
@@ -314,6 +331,41 @@ static void botaoPowerArSoutou()
 }
 
 //======================================
+// CALLBACKS - SENSOR (PÁGINA 6)
+//======================================
+
+static void botaoBackSensorSoltou()
+{
+  sendCommand("page pagea0");
+  paginaAtual = 0;
+  debugInfo("Back - Página 0 (Menu)");
+}
+
+static void botaoDualMenuSensor1Soltou()
+{
+  botaoDualMenuSensor1.getValue(&estadoBotaoDualMenuSensor1);
+  sincronizarPaginaAtual();
+  publicarEstado();
+  debugInfo("Menu sensor 1. Estado = " + String(estadoBotaoDualMenuSensor1));
+}
+
+static void botaoDualMenuSensor2Soltou()
+{
+  botaoDualMenuSensor2.getValue(&estadoBotaoDualMenuSensor2);
+  sincronizarPaginaAtual();
+  publicarEstado();
+  debugInfo("Menu sensor 2. Estado = " + String(estadoBotaoDualMenuSensor2));
+}
+
+static void botaoDualSensorEcoSoltou()
+{
+  botaoDualSensorEco.getValue(&estadoBotaoDualSensorEco);
+  sincronizarPaginaAtual();
+  publicarEstado();
+  debugInfo("Modo economico. Estado = " + String(estadoBotaoDualSensorEco));
+}
+
+//======================================
 // FUNÇÕES PÚBLICAS
 //======================================
 
@@ -341,6 +393,15 @@ void configurarTelaInicial()
   // ar
   estadoBotaoPowerAr = 0;
 
+ //sensor
+ estadoBotaoDualMenuSensor1 = 0;
+ estadoBotaoDualMenuSensor2 = 0;
+ estadoBotaoDualSensorEco = 0;
+
+ // Página 0
+ sendCommand("page page0");
+ paginaAtual = 0;
+ delay(500);
   // Página 0
   sendCommand("page page0");
   paginaAtual = 0;
@@ -380,6 +441,19 @@ void configurarTelaInicial()
 
   botaoPowerAr.setValue(estadoBotaoPowerAr);
 
+ // Página 6
+ sendCommand("page page6");
+ paginaAtual = 6;
+ delay(500);
+
+ botaoDualMenuSensor1.setValue(estadoBotaoDualMenuSensor1);
+ botaoDualMenuSensor2.setValue(estadoBotaoDualMenuSensor2);
+ botaoDualSensorEco.setValue(estadoBotaoDualSensorEco);
+
+// Retorna ao menu principal
+ sendCommand("page page0");
+ paginaAtual = 0;
+ delay(500);
   // Retorna ao menu principal
   sendCommand("page page0");
   paginaAtual = 0;
@@ -398,6 +472,11 @@ void configurarEventosNextion()
   botaoB4.attachPop(botaoB4Soltou);
   botaoB5.attachPop(botaoB5Soltou);
 
+ botaoBackLampada.attachPop(botaoBackLampadaSoltou);
+ botaoBackAr.attachPop(botaoBackArSoltou);
+ botaoBackProjetor.attachPop(botaoBackProjetorSoltou);
+ botaoBackTela.attachPop(botaoBackTelaSoltou);
+ botaoBackSensor.attachPop(botaoBackSensorSoltou);
   botaoBackLampada.attachPop(botaoBackLampadaSoltou);
   botaoBackAr.attachPop(botaoBackArSoltou);
   botaoBackProjetor.attachPop(botaoBackProjetorSoltou);
@@ -425,6 +504,10 @@ void configurarEventosNextion()
 
   // Sensor análise - //TODO
 
+ //Sensor análise
+ botaoDualMenuSensor1.attachPop(botaoDualMenuSensor1Soltou);
+ botaoDualMenuSensor2.attachPop(botaoDualMenuSensor2Soltou);
+ botaoDualSensorEco.attachPop(botaoDualSensorEcoSoltou);
   // Registra listeners
 
   nexListen(botaoB0);
@@ -441,10 +524,12 @@ void configurarEventosNextion()
   nexListen(botaoBackTela);
 
  //------------BOTÕES BACK------------
+ //------------BÕTOES BACK------------
  nexListen(botaoBackLampada);
  nexListen(botaoBackAr);
  nexListen(botaoBackProjetor);
  nexListen(botaoBackTela);
+ nexListen(botaoBackSensor);
   // lampada
   nexListen(botaoDualBt0);
   nexListen(botaoDualBt1);
@@ -460,6 +545,18 @@ void configurarEventosNextion()
   nexListen(botaoDualDown);
   nexListen(botaoDualSelect);
 
+ //tela retratil
+ nexListen(botaoDualUp);
+ nexListen(botaoDualDown);
+ nexListen(botaoDualSelect);
+
+ //ar condicionado
+ nexListen(botaoPowerAr);
+
+ //sensor
+ nexListen(botaoDualMenuSensor1);
+ nexListen(botaoDualMenuSensor2);
+ nexListen(botaoDualSensorEco);
   // ar condicionado
   nexListen(botaoPowerAr);
 }
