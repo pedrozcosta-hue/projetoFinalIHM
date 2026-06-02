@@ -1,15 +1,18 @@
 #include <Nextion.h>
-
 #include "IniciarNextion.h"
 #include "DebugManager.h"
 #include "ComponentesSoltou.h"
 
+//======================================
+// DEFINIÇÕES DAS CONSTANTES E OBJETOS
+// (declarados como extern no .h)
+//======================================
 
-const uint32_t BAUD_NEXTION = 9600; //9600
-const int8_t PINO_RX_NEXTION = 18; //18
-const int8_t PINO_TX_NEXTION = 17; //17
+const uint32_t BAUD_NEXTION = 9600;
+const int8_t PINO_RX_NEXTION = 18;
+const int8_t PINO_TX_NEXTION = 17;
 
-
+// PÁGINA 0 — MENU PRINCIPAL
 NexButton botaoB0(0, 1, "b0");
 NexButton botaoB1(0, 3, "b1");
 NexButton botaoB2(0, 4, "b2");
@@ -58,12 +61,15 @@ NexButton botaoSetaBaixoTv(5, 9, "b7");
 // TODO: COMPONENTES DA PÁGINA 6
 NexButton botaoBackSensor(6, 2, "b0");
 
+//======================================
+// VARIÁVEIS DE ESTADO
+//======================================
 
-uint8_t paginaAtual = 0 ;
+uint8_t paginaAtual = 0;
 
 // Lâmpada
 //TODO: melhorar nome das variáveis de estado
-uint32_t estadoBotaoDualBt0 = 0 ;
+uint32_t estadoBotaoDualBt0 = 0;
 uint32_t estadoBotaoDualBt1 = 0;
 uint32_t estadoBotaoDualBt2 = 0;
 uint32_t estadoBotaoDualBt3 = 0;
@@ -92,7 +98,7 @@ uint32_t estadoBotaoVolumeDownTv = 0;
 uint32_t estadoBotaoSetaEsquerdaTv = 0;
 uint32_t estadoBotaoSetaDireitaTv = 0;
 uint32_t estadoBotaoSetaCimaTv = 0;
-uint32_t estadoBotaoSetaBaixoTv = 0 ;
+uint32_t estadoBotaoSetaBaixoTv = 0;
 
 // Sensor
 uint32_t valorTemperatura = 0;
@@ -102,6 +108,9 @@ uint32_t comandoAr = 0;
 uint32_t alertaSom = 0;
 uint32_t eco = 0;
 
+//======================================
+// FUNÇÕES
+//======================================
 
 void configurarNextion()
 {
@@ -242,10 +251,10 @@ void configurarEventosNextion()
   botaoDualSelect.attachPop(botaoDualSelectSoltou);
   botaoBackTela.attachPop(botaoBackTelaSoltou);
 
-  // Ar-condicionado 
+  // Ar-condicionado
   botaoDualPowerAr.attachPop(botaoDualPowerArSoltou);
   botaoModoAr.attachPop(botaoModoArSoltou);
-  botaoVento.attachPop(botaoVentoArSoltou);
+  botaoVento.attachPop(botaoVentoArSoltou);  // nome correto do callback
   botaoBackAr.attachPop(botaoBackArSoltou);
   sliderTemperatura.attachPop(sliderTemperaturaSoltou);
   //TODO: ESP
@@ -265,7 +274,6 @@ void configurarEventosNextion()
   botaoBackSensor.attachPop(botaoBackSensorSoltou);
 
   // Registra listeners
-
   nexListen(botaoB0);
   nexListen(botaoB1);
   nexListen(botaoB2);
@@ -314,5 +322,4 @@ void configurarEventosNextion()
   nexListen(botaoSetaBaixoTv);
 
   //TODO: SENSOR
-  
 }

@@ -1,9 +1,9 @@
 #include <Nextion.h>
+
 #include "ComponentesSoltou.h"
 #include "IniciarNextion.h"
 #include "DebugManager.h"
 #include "NextionConfig.h"
-
 
 // MENU
 void botaoB0Soltou()
@@ -183,38 +183,33 @@ void botaoBackTvSoltou()
     paginaAtual = 0;
     debugInfo("B0 Back - Página 0 (Menu)");
 }
-// ComponentesSoltou.cpp — adicione essas 8 funções
-
-void botaoDualPowerTvSoltou() {
-  
+void botaoDualPowerTvSoltou()
+{
+    botaoDualPowerTv.getValue(&estadoBotaoDualPowerTv);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Power TV solto. Estado = " + String(estadoBotaoDualPowerTv));
 }
-
-void botaoVolumeUpTvSoltou() {
-    
+void botaoVolumeUpTvSoltou()
+{
 }
-
-void botaoVolumeDownTvSoltou() {
-
+void botaoVolumeDownTvSoltou()
+{
 }
-
-void botaoSelectTvSoltou() {
-    
+void botaoSelectTvSoltou()
+{
 }
-
-void botaoSetaEsquerdaTvSoltou() {
-    
+void botaoSetaEsquerdaTvSoltou()
+{
 }
-
-void botaoSetaDireitaTvSoltou() {
-    
+void botaoSetaDireitaTvSoltou()
+{
 }
-
-void botaoSetaCimaTvSoltou() {
-    
+void botaoSetaCimaTvSoltou()
+{
 }
-
-void botaoSetaBaixoTvSoltou() {
-   
+void botaoSetaBaixoTvSoltou()
+{
 }
 ////////////////////////
 

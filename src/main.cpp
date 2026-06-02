@@ -1,14 +1,14 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 
-#include "WiFiManager.h"
+#include "WIFIManager.h"
 #include "MqttManager.h"
 #include "DebugManager.h"
 #include "NextionConfig.h"
 #include "IniciarNextion.h"
 #include "secrets.h"
 
-const char TOPICO_COMANDO[] = "senai/freire/esp32/comando";
+const char TOPICO_COMANDO[] = "senai134/equipe/boo/devices/status";
 
 // Protótipos
 void tratarMensagemRecebida(const char *topico, const String &mensagem);

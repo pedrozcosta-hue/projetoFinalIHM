@@ -73,3 +73,7 @@ void configurarDebug()
 }
 
 //TODO: criar a função obterNivelDebugAtual
+int obterNivelDebugAtual()
+{
+    return nivelDebugAtual;
+}

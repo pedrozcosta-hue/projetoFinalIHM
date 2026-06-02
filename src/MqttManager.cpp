@@ -5,9 +5,8 @@
 
 //TODO: Talvez precise cpp do secrets
 #include "secrets.h"
-#include "WiFiManager.h"
+#include "WIFIManager.h"
 #include "MqttManager.h"
-
 #include "DebugManager.h"
 
 //==========Instâncias==========
