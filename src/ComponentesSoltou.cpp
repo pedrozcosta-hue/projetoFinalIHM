@@ -1,6 +1,6 @@
+#include <Nextion.h>
 #include "ComponentesSoltou.h"
 #include "IniciarNextion.h"
-#include <Nextion.h>
 #include "DebugManager.h"
 #include "NextionConfig.h"
 

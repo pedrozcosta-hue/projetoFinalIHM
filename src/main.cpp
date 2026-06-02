@@ -5,9 +5,8 @@
 #include "MqttManager.h"
 #include "DebugManager.h"
 #include "NextionConfig.h"
+#include "IniciarNextion.h"
 #include "secrets.h"
-
-const int pinLed = 39;
 
 const char TOPICO_COMANDO[] = "senai/freire/esp32/comando";
 
@@ -17,9 +16,6 @@ void tratarJsonComando(const String &mensagem);
 
 void setup()
 {
-    pinMode(pinLed, OUTPUT);
-    digitalWrite(pinLed, LOW);
-
     configurarDebug();
 
     conectarWiFi();
@@ -77,5 +73,5 @@ void tratarJsonComando(const String &mensagem)
         debugErro(erro.c_str());
         return;
     }
-   // TODO: reagir aos comandos recebidos via MQTT
+    // TODO: reagir aos comandos recebidos via MQTT
 }

@@ -1,7 +1,6 @@
 #include "NextionConfig.h"
 #include "MqttManager.h"
 #include "DebugManager.h"
-#include "ComponentesSoltou.h"
 #include "IniciarNextion.h"
 #include <ArduinoJson.h>
 
@@ -121,7 +120,7 @@ static void sincronizarPaginaAtual()
   {
     // TODO: COMPONENTEDPAGINA 4
   }
-  else
+  else if (paginaAtual == 5)
   {
     // TODO: COMPONENTED PAGINA 5
   }

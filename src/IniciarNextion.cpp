@@ -1,8 +1,7 @@
+#include <Nextion.h>
 #include "IniciarNextion.h"
-#include "NextionConfig.h"
 #include "DebugManager.h"
 #include "ComponentesSoltou.h"
-#include <Nextion.h>
 
 void configurarNextion()
 {
@@ -72,7 +71,7 @@ void configurarTelaInicial()
   paginaAtual = 0;
   delay(500);
 
-  // TODO: PAGINA 4, 5 E 6
+  // TODO: PAGINA 5 E 6
 }
 
 void configurarEventosNextion()
