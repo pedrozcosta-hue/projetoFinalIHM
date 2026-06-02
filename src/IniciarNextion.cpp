@@ -1,7 +1,107 @@
 #include <Nextion.h>
+
 #include "IniciarNextion.h"
 #include "DebugManager.h"
 #include "ComponentesSoltou.h"
+
+
+const uint32_t BAUD_NEXTION = 9600; //9600
+const int8_t PINO_RX_NEXTION = 18; //18
+const int8_t PINO_TX_NEXTION = 17; //17
+
+
+NexButton botaoB0(0, 1, "b0");
+NexButton botaoB1(0, 3, "b1");
+NexButton botaoB2(0, 4, "b2");
+NexButton botaoB3(0, 2, "b3");
+NexButton botaoB4(0, 5, "b4");
+NexButton botaoB5(0, 6, "b5");
+
+// PÁGINA 1 — LÂMPADA
+// TODO: melhorar nome dos botões da lâmpada
+NexDSButton botaoDualBt0(1, 3, "bt0");
+NexDSButton botaoDualBt1(1, 4, "bt1");
+NexDSButton botaoDualBt2(1, 5, "bt2");
+NexDSButton botaoDualBt3(1, 6, "bt3");
+NexButton botaoBackLampada(1, 1, "b2");
+
+// PÁGINA 2 — PROJETOR
+NexDSButton botaoDualPower(2, 1, "bt0");
+NexDSButton botaoDualFreeze(2, 2, "bt1");
+NexButton botaoBackProjetor(2, 3, "b0");
+
+// PÁGINA 3 — TELA RETRÁTIL
+NexDSButton botaoDualUp(3, 1, "bt0");
+NexDSButton botaoDualDown(3, 2, "bt1");
+NexDSButton botaoDualSelect(3, 3, "bt2");
+NexButton botaoBackTela(3, 4, "b0");
+
+// PÁGINA 4 - AR CONDICIONADO
+NexDSButton botaoDualPowerAr(4, 1, "bt0");
+NexButton botaoBackAr(4, 2, "b0");
+NexButton botaoModoAr(4, 3, "b1");
+NexButton botaoVento(4, 4, "b2");
+NexSlider sliderTemperatura(4, 5, "h0");
+
+// PÁGINA 5 - TV
+NexDSButton botaoDualPowerTv(5, 1, "bt0");
+NexButton botaoBackTv(5, 2, "b0");
+NexButton botaoVolumeUpTv(5, 3, "b1");
+NexButton botaoVolumeDownTv(5, 4, "b2");
+NexButton botaoSelectTv(5, 5, "b3");
+NexButton botaoSetaEsquerdaTv(5, 6, "b4");
+NexButton botaoSetaDireitaTv(5, 7, "b5");
+NexButton botaoSetaCimaTv(5, 8, "b6");
+NexButton botaoSetaBaixoTv(5, 9, "b7");
+
+// PÁGINA 6 - SENSOR
+// TODO: COMPONENTES DA PÁGINA 6
+NexButton botaoBackSensor(6, 2, "b0");
+
+
+uint8_t paginaAtual = 0 ;
+
+// Lâmpada
+//TODO: melhorar nome das variáveis de estado
+uint32_t estadoBotaoDualBt0 = 0 ;
+uint32_t estadoBotaoDualBt1 = 0;
+uint32_t estadoBotaoDualBt2 = 0;
+uint32_t estadoBotaoDualBt3 = 0;
+
+// Projetor
+uint32_t estadoBotaoDualPower = 0;
+uint32_t estadoBotaoDualFreeze = 0;
+
+// Tela Retrátil
+uint32_t estadoBotaoDualUp = 0;
+uint32_t estadoBotaoDualDown = 0;
+uint32_t estadoBotaoDualSelect = 0;
+
+// Ar condicionado
+uint32_t estadoBotaoDualPowerAr = 0;
+uint32_t estadoBotaoModoAr = 0;
+uint32_t estadoBotaoVento = 0;
+uint32_t valorSliderTemperatura = 0;
+//TODO: ESP
+
+// TV
+uint32_t estadoBotaoDualPowerTv = 0;
+uint32_t estadoBotaoSelectTv = 0;
+uint32_t estadoBotaoVolumeUpTv = 0;
+uint32_t estadoBotaoVolumeDownTv = 0;
+uint32_t estadoBotaoSetaEsquerdaTv = 0;
+uint32_t estadoBotaoSetaDireitaTv = 0;
+uint32_t estadoBotaoSetaCimaTv = 0;
+uint32_t estadoBotaoSetaBaixoTv = 0 ;
+
+// Sensor
+uint32_t valorTemperatura = 0;
+uint32_t valorUmidade = 0;
+uint32_t valorRuido = 0;
+uint32_t comandoAr = 0;
+uint32_t alertaSom = 0;
+uint32_t eco = 0;
+
 
 void configurarNextion()
 {
