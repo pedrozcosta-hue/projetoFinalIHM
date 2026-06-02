@@ -4,20 +4,11 @@
 #include "IniciarNextion.h"
 #include <ArduinoJson.h>
 
-//*======================================
-//* TÓPICO MQTT (usado ao publicar)
-//*======================================
-
-static const char TOPICO_COMANDO[] = "senai134/freire/esp32/comando";
-
-// TODO TOPICOS PARA CADA COMPONENTE
-
-//*======================================
-//* PUBLICAÇÃO JSON — estado completo
-//*======================================
+const char TOPICO_COMANDO[] = "senai134/freire/esp32/comando";
 
 static void publicarEstado()
 {
+  //TODO: TRATAR DEBUGINFO, REFATORAR OS JSONS 
   JsonDocument doc;
   if (paginaAtual == 1)
   {
@@ -32,7 +23,6 @@ static void publicarEstado()
     // Projetor
     doc["projetor"]["estadoPower"] = (estadoBotaoDualPower == 1) ? 1 : 0;
     doc["projetor"]["estadoCongelamento"] = (estadoBotaoDualFreeze == 1) ? 1 : 0;
-    debugInfo("");
   }
   if (paginaAtual == 3)
   {
@@ -40,43 +30,72 @@ static void publicarEstado()
     doc["tela"]["Up"] = (estadoBotaoDualUp == 1) ? 1 : 0;
     doc["tela"]["Down"] = (estadoBotaoDualDown == 1) ? 1 : 0;
     doc["tela"]["Select"] = (estadoBotaoDualSelect == 1) ? 1 : 0;
-    debugInfo("");
   }
 
   if (paginaAtual == 4)
   {
-    // Ar-condicionado
-    if (contadorBotao == 0)//modo 0 = cool
+    //* Ar-condicionado - Temperatura
+    doc["arCondicionado"]["temperatura"] = valorSliderTemperatura;
+
+    //* Ar-condicionado - Power
+    doc["arCondicionado"]["power"] = (estadoBotaoDualPowerAr == 1) ? 1 : 0;
+
+    //* Ar-condicionado - Modo
+    if (estadoBotaoModoAr == 0) // modo 0 = cool
     {
-      doc ["arCondicionado"]["modo"] = 0;
+      doc["arCondicionado"]["modo"] = estadoBotaoModoAr;
     }
 
-    else if (contadorBotao == 1)//modo 1 = dry
+    else if (estadoBotaoModoAr == 1) // modo 1 = dry
     {
-      doc ["arCondicionado"]["modo"] = 1;
+      doc["arCondicionado"]["modo"] = estadoBotaoModoAr;
     }
 
-    else if (contadorBotao == 2)//modo 2 = fan
+    else if (estadoBotaoModoAr == 2) // modo 2 = fan
     {
-      doc ["arCondicionado"]["modo"] = 2;
+      doc["arCondicionado"]["modo"] = estadoBotaoModoAr;
     }
 
-    else if (contadorBotao == 3)//modo 3 = heat
+    else if (estadoBotaoModoAr == 3) // modo 3 = heat
     {
-      doc ["arCondicionado"]["modo"] = 3;
+      doc["arCondicionado"]["modo"] = estadoBotaoModoAr;
+    }
+
+    //* Ar-Condicionado - Estado do Vento
+    if (estadoBotaoVento == 0) // velocidade do vento 0 = auto
+    {
+      doc["arCondicionado"]["vento"] = estadoBotaoVento;
+    }
+
+    else if (estadoBotaoVento == 1) // velocidade do vento 1 = quiet
+    {
+      doc["arCondicionado"]["vento"] = estadoBotaoVento;
+    }
+
+    else if (estadoBotaoVento == 2) // velocidade do vento 2 = low
+    {
+      doc["arCondicionado"]["vento"] = estadoBotaoVento;
+    }
+    else if (estadoBotaoVento == 3) // velocidade do vento 3 = med
+    {
+      doc["arCondicionado"]["vento"] = estadoBotaoVento;
+    }
+    else if (estadoBotaoVento == 4) // velocidade do vento 4 = high
+    {
+      doc["arCondicionado"]["vento"] = estadoBotaoVento;
     }
   }
 
   if (paginaAtual == 5)
   {
-    // TV
-    doc["televisao"]["comando"] = botaoDosComandosTv;
+    //TODO: JSON DA TV
+    // doc["televisao"]["comando"] =
   }
 
   if (paginaAtual == 6)
   {
     // Sensor de análise
-    doc["analise"]["timeStamp"] =
+    doc["analise"]["timeStamp"] = // TODO: TIMESTAMP
     doc["analise"]["temperatura"] = valorTemperatura;
     doc["analise"]["umidade"] = valorUmidade;
     doc["analise"]["ruido"] = valorRuido;
@@ -84,8 +103,6 @@ static void publicarEstado()
     doc["analise"]["alertaSom"] = alertaSom;
     doc["analise"]["eco"] = eco;
   }
-
-  // TODO: JSON AR, TV E SENSOR
 
   String mensagem;
   serializeJson(doc, mensagem);
@@ -98,30 +115,47 @@ static void publicarEstado()
 
 static void sincronizarPaginaAtual()
 {
+  // Lâmpada
   if (paginaAtual == 1)
   {
+    //TODO: MELHORAR O NOME DAS VARIÁVEIS
     botaoDualBt0.setValue(estadoBotaoDualBt0);
     botaoDualBt1.setValue(estadoBotaoDualBt1);
     botaoDualBt2.setValue(estadoBotaoDualBt2);
     botaoDualBt3.setValue(estadoBotaoDualBt3);
   }
+
+  // Projetor
   else if (paginaAtual == 2)
   {
     botaoDualPower.setValue(estadoBotaoDualPower);
     botaoDualFreeze.setValue(estadoBotaoDualFreeze);
   }
+
+  // Tela Retrátil
   else if (paginaAtual == 3)
   {
     botaoDualUp.setValue(estadoBotaoDualUp);
     botaoDualDown.setValue(estadoBotaoDualDown);
     botaoDualSelect.setValue(estadoBotaoDualSelect);
   }
+
+  // Ar-condicionado
   else if (paginaAtual == 4)
   {
-    // TODO: COMPONENTEDPAGINA 4
+    botaoDualPowerAr.setValue(estadoBotaoDualPowerAr);
+    sliderTemperatura.setValue(valorSliderTemperatura);
   }
+
+  // TV
   else if (paginaAtual == 5)
   {
-    // TODO: COMPONENTED PAGINA 5
+    botaoDualPowerTv.setValue(estadoBotaoDualPowerTv);
+  }
+
+  // Sensor
+  else if (paginaAtual == 6)
+  {
+    // TODO: COMPONENTES PAGINA 6
   }
 }

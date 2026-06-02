@@ -33,17 +33,18 @@ void botaoB4Soltou()
 {
     sendCommand("page page5");
     paginaAtual = 5;
-    debugInfo("b4 solto - Página 5 (Sistema de Som)");
+    debugInfo("b4 solto - Página 5 (TV)");
 }
 void botaoB5Soltou()
 {
     sendCommand("page page6");
     paginaAtual = 6;
-    debugInfo("b5 solto - Página 6 (Iluminação)");
+    debugInfo("b5 solto - Página 6 (Sensor)");
 }
 //////////////////////
 
 // LÂMPADA
+// TODO: melhorar nome dos botões da lâmpada
 void botaoDualBt0Soltou()
 {
     botaoDualBt0.getValue(&estadoBotaoDualBt0);
@@ -140,10 +141,77 @@ void botaoBackArSoltou()
     paginaAtual = 0;
     debugInfo("B0 Back - Página 0 (Menu)");
 }
-void botaoPowerArSoltou()
+void botaoDualPowerArSoltou()
 {
-    botaoPowerAr.getValue(&estadoBotaoPowerAr);
+    botaoDualPowerAr.getValue(&estadoBotaoDualPowerAr);
     sincronizarPaginaAtual();
     publicarEstado();
-    debugInfo("Power solto. Estado = " + String(estadoBotaoPowerAr));
+    debugInfo("Power solto. Estado = " + String(estadoBotaoDualPowerAr));
+}
+void botaoModoArSoltou()
+{
+    estadoBotaoModoAr = (estadoBotaoModoAr + 1) % 4;
+    publicarEstado();
+    debugInfo("Modo solto. Estado = " + String(estadoBotaoModoAr));
+}
+void botaoVentoSoltou()
+{
+    estadoBotaoVento++;
+    if (estadoBotaoVento > 4)
+    {
+        estadoBotaoVento = 0;
+    }
+    publicarEstado();
+    debugInfo("Vento solto. Estado = " + String(estadoBotaoVento));
+}
+void sliderTemperaturaSoltou()
+{
+    sliderTemperatura.getValue(&valorSliderTemperatura);
+    sincronizarPaginaAtual();
+    publicarEstado();
+    debugInfo("Temperatura solta. Valor = " + String(valorSliderTemperatura));
+}
+// TODO: ESP
+//////////////////////////////////
+
+//TODO: FAZER A LÓGICA PARA OS BOTÕES DA TV E DO SENSOR
+// TV
+void botaoBackTvSoltou()
+{
+    sendCommand("page page0");
+    paginaAtual = 0;
+    debugInfo("B0 Back - Página 0 (Menu)");
+}
+void botaoPowerTvSoltou()
+{
+}
+void botaoVolumeUpTvSoltou()
+{
+}
+void botaoVolumeDownTvSoltou()
+{
+}
+void botaoSelectTvSoltou()
+{
+}
+void botaoSetaEsquerdaTvSoltou()
+{
+}
+void botaoSetaDireitaTvSoltou()
+{
+}
+void botaoSetaCimaTvSoltou()
+{
+}
+void botaoSetaBaixoTvSoltou()
+{
+}
+////////////////////////
+
+// SENSOR
+void botaoBackSensorSoltou()
+{
+    sendCommand("page page0");
+    paginaAtual = 0;
+    debugInfo("B0 Back - Página 0 (Menu)");
 }
