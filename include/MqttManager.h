@@ -1,7 +1,7 @@
 #ifndef MQTTMANAGER_H
 #define MQTTMANAGER_H
 
-#include<Arduino.h>
+#include <Arduino.h>
 
 void configurarMQTT();
 void conectarMQTT();
