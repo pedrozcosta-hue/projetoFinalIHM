@@ -25,16 +25,28 @@ extern NexDSButton botaoDualBt2;
 extern NexDSButton botaoDualBt3;
 extern NexButton botaoBackLampada;
 
+extern NexText botaoBt0;
+extern NexText botaoBt1;
+extern NexText botaoBt2;
+extern NexText botaoBt3;
+
 // PÁGINA 2 — PROJETOR
 extern NexDSButton botaoDualPower;
 extern NexDSButton botaoDualFreeze;
 extern NexButton botaoBackProjetor;
+
+extern NexText botaoPowerProjetor;
+extern NexText botaoFreeze;
 
 // PÁGINA 3 — TELA RETRÁTIL
 extern NexDSButton botaoDualUp;
 extern NexDSButton botaoDualDown;
 extern NexDSButton botaoDualSelect;
 extern NexButton botaoBackTela;
+
+extern NexText botaoUpTela;
+extern NexText botaoDownTela;
+extern NexText botaoSelectTela;
 
 // PÁGINA 4 - AR CONDICIONADO
 extern NexDSButton botaoDualPowerAr;

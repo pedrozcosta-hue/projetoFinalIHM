@@ -1,14 +1,14 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 
-#include "WIFIManager.h"
+#include "WiFiManager.h"
 #include "MqttManager.h"
 #include "DebugManager.h"
 #include "NextionConfig.h"
 #include "IniciarNextion.h"
 #include "secrets.h"
 
-const char TOPICO_COMANDO[] = "senai134/equipe/boo/devices/comando"; // <- corrigido
+const char TOPICO_SENSOR[] = "senai134/equipe/boo/devices/comando"; 
 
 // Protótipos
 void tratarMensagemRecebida(const char *topico, const String &mensagem);
@@ -52,7 +52,7 @@ void tratarMensagemRecebida(const char *topico, const String &mensagem)
     debugInfo("Tópico: " + String(topico));
     debugInfo("Mensagem: " + mensagem);
 
-    if (strcmp(topico, TOPICO_COMANDO) == 0)
+    if (strcmp(topico, TOPICO_SENSOR) == 0)
     {
         tratarJsonComando(mensagem);
         return;

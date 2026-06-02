@@ -5,7 +5,7 @@
 
 //TODO: Talvez precise cpp do secrets
 #include "secrets.h"
-#include "WIFIManager.h"
+#include "WiFiManager.h"
 #include "MqttManager.h"
 #include "DebugManager.h"
 

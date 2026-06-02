@@ -1,9 +1,7 @@
 #include <Arduino.h>
 #include <WiFi.h>
-#include <WiFiClient.h>
-#include <WiFiClientSecure.h>
 
-#include "WIFIManager.h"
+#include "WiFiManager.h"
 #include "secrets.h"
 #include "DebugManager.h"
 
