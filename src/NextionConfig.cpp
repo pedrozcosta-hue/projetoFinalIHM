@@ -6,7 +6,7 @@
 
 const char TOPICO_COMANDO[] = "senai134/freire/esp32/comando";
 
-static void publicarEstado()
+void publicarEstado()
 {
   //TODO: TRATAR DEBUGINFO, REFATORAR OS JSONS 
   JsonDocument doc;
@@ -113,7 +113,7 @@ static void publicarEstado()
 // ATUALIZA BOTÕES DA PÁGINA ATIVA
 //======================================
 
-static void sincronizarPaginaAtual()
+void sincronizarPaginaAtual()
 {
   // Lâmpada
   if (paginaAtual == 1)

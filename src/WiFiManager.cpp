@@ -2,9 +2,10 @@
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <WiFiClientSecure.h>
-#include <WiFiManager.h>
-#include <secrets.h>
+
+#include "secrets.h"
 #include "DebugManager.h"
+#include "WiFiManager.h"
 
 bool wifiEstaConectado()
 {
@@ -54,13 +55,13 @@ void conectarWiFi()
 
 void garantirWiFiConectado()
 {
-  if (WiFi.status() != WL_CONNECTED)
+  if (!wifiEstaConectado())
   {
     debugErro("WiFi desconectado. Tentando reconectar...");
     conectarWiFi();
   }
 
-  if (WiFi.status() != WL_CONNECTED)
+  if (!wifiEstaConectado())
   {
     debugErro("Não foi possível reconectar ao WiFi");
   }

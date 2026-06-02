@@ -4,6 +4,7 @@
 #include "DebugManager.h"
 #include "NextionConfig.h"
 
+
 // MENU
 void botaoB0Soltou()
 {
@@ -154,7 +155,7 @@ void botaoModoArSoltou()
     publicarEstado();
     debugInfo("Modo solto. Estado = " + String(estadoBotaoModoAr));
 }
-void botaoVentoSoltou()
+void botaoVentoArSoltou()
 {
     estadoBotaoVento++;
     if (estadoBotaoVento > 4)
@@ -182,29 +183,38 @@ void botaoBackTvSoltou()
     paginaAtual = 0;
     debugInfo("B0 Back - Página 0 (Menu)");
 }
-void botaoPowerTvSoltou()
-{
+// ComponentesSoltou.cpp — adicione essas 8 funções
+
+void botaoDualPowerTvSoltou() {
+  
 }
-void botaoVolumeUpTvSoltou()
-{
+
+void botaoVolumeUpTvSoltou() {
+    
 }
-void botaoVolumeDownTvSoltou()
-{
+
+void botaoVolumeDownTvSoltou() {
+
 }
-void botaoSelectTvSoltou()
-{
+
+void botaoSelectTvSoltou() {
+    
 }
-void botaoSetaEsquerdaTvSoltou()
-{
+
+void botaoSetaEsquerdaTvSoltou() {
+    
 }
-void botaoSetaDireitaTvSoltou()
-{
+
+void botaoSetaDireitaTvSoltou() {
+    
 }
-void botaoSetaCimaTvSoltou()
-{
+
+void botaoSetaCimaTvSoltou() {
+    
 }
-void botaoSetaBaixoTvSoltou()
-{
+
+void botaoSetaBaixoTvSoltou() {
+   
 }
 ////////////////////////
 
