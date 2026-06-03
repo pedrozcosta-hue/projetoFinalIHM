@@ -69,7 +69,8 @@ extern NexButton botaoSetaCimaTv;
 extern NexButton botaoSetaBaixoTv;
 
 // PÁGINA 6 - SENSOR
-// TODO: COMPONENTES DA PÁGINA 6
+extern NexButton botaoSensorMenu0;
+extern NexDSButton botaoDualSensorEco;
 extern NexButton botaoBackSensor;
 
 //======================================
@@ -113,6 +114,8 @@ extern uint32_t estadoBotaoSetaCimaTv;
 extern uint32_t estadoBotaoSetaBaixoTv;
 
 // Sensor
+extern uint32_t estadoBotaoSensorMenu0;
+extern uint32_t estadoBotaoDualSensorEco;
 extern uint32_t valorTemperatura;
 extern uint32_t valorUmidade;
 extern uint32_t valorRuido;

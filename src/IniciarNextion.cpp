@@ -73,7 +73,8 @@ NexButton botaoSetaCimaTv(5, 8, "b6");
 NexButton botaoSetaBaixoTv(5, 9, "b7");
 
 // PÁGINA 6 - SENSOR
-// TODO: COMPONENTES DA PÁGINA 6
+NexButton botaoSensorMenu0(0, 0, "xxx");
+NexDSButton botaoDualSensorEco(0, 0, "xxx");
 NexButton botaoBackSensor(6, 2, "b0");
 
 //======================================
@@ -171,6 +172,8 @@ void configurarTelaInicial()
   estadoBotaoSetaBaixoTv = 0;
 
   // Sensor
+  estadoBotaoSensorMenu0 = 0;
+  estadoBotaoDualSensorEco = 0;
   valorTemperatura = 0;
   valorUmidade = 0;
   valorRuido = 0;
@@ -245,7 +248,7 @@ void configurarTelaInicial()
   paginaAtual = 6;
   delay(500);
 
-  // TODO: COMPONENTES DA PÁGINA 6
+  botaoDualSensorEco.setValue(estadoBotaoDualSensorEco);
 
   // Retorna ao menu principal
   sendCommand("page page0");
@@ -302,8 +305,10 @@ void configurarEventosNextion()
   botaoSetaCimaTv.attachPop(botaoSetaCimaTvSoltou);
   botaoSetaBaixoTv.attachPop(botaoSetaBaixoTvSoltou);
 
-  // Sensor análise - //TODO
+  // Sensor análise
   botaoBackSensor.attachPop(botaoBackSensorSoltou);
+  botaoSensorMenu0.attachPop(botaoSensorMenu0Soltou);
+  botaoDualSensorEco.attachPop(botaoDualSensorEcoSoltou);
 
   nexClearListenList();
 
@@ -356,5 +361,7 @@ void configurarEventosNextion()
   nexListen(botaoSetaCimaTv);
   nexListen(botaoSetaBaixoTv);
 
-  //TODO: SENSOR
+  // sensor
+  nexListen(botaoSensorMenu0);
+  nexListen(botaoDualSensorEco);
 }
