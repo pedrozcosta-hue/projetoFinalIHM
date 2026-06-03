@@ -91,17 +91,28 @@ void montarJsonArCondicionado(JsonDocument &doc)
   else
   debugErro("Json não enviado, pois paginaAtual é diferente de 1");
 }
-void montarJsonTelevisao(JsonDocument &doc)
+/*void montarJsonTelevisao(JsonDocument &doc, int comando)
 {
   if (paginaAtual == 5)
   {
     // TODO: JSON DA TV
-    //  doc["televisao"]["comando"] =
+    //  doc["televisao"]["comando"] = comando;
+
+    
+    if(comando == 1)//Botao                                      uint32_t comando = 0;
+      doc["televisao"]["comando"] = comando 
+    else if(comando == 2)//Botao Volume Up
+      doc["televisao"]["comando"] = comando
+    else if(comando == 3)//Botao Volume Down
+      doc["televisao"]["comando"] = comando
+    
+    
+   
   }
 
   else
    debugErro("Json não enviado, pois paginaAtual é diferente de 1");
-}
+}*/
 
 void publicarJsonLampada()
 {
@@ -153,10 +164,10 @@ void publicarJsonArCondicionado()
   serializeJson(doc, mensagem);
   publicarMensagem(TOPICO_AR_CONDICIONADO, mensagem.c_str());
 }
-void publicarJsonTV()
+void publicarJsonTV(int comando)
 {
   JsonDocument doc;
-  montarJsonTelevisao(doc);
+  doc["televisao"]["comando"] = comando;
 
   String mensagem;
   serializeJson(doc, mensagem);

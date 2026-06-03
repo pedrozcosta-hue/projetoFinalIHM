@@ -185,31 +185,47 @@ void botaoBackTvSoltou()
 }
 void botaoDualPowerTvSoltou()
 {
-    botaoDualPowerTv.getValue(&estadoBotaoDualPowerTv);
+    /*botaoDualPowerTv.getValue(&estadoBotaoDualPowerTv);
     sincronizarPaginaAtual();
     publicarJsonTV();
-    debugInfo("Power TV solto. Estado = " + String(estadoBotaoDualPowerTv));
+    debugInfo("Power TV solto. Estado = " + String(estadoBotaoDualPowerTv));*/
+    sincronizarPaginaAtual();
+    publicarJsonTV(1);
 }
 void botaoVolumeUpTvSoltou()
 {
+    sincronizarPaginaAtual();
+    publicarJsonTV(2);
 }
 void botaoVolumeDownTvSoltou()
 {
+    sincronizarPaginaAtual();
+    publicarJsonTV(3);
 }
 void botaoSelectTvSoltou()
 {
+    sincronizarPaginaAtual();
+    publicarJsonTV(8);
 }
 void botaoSetaEsquerdaTvSoltou()
 {
+    sincronizarPaginaAtual();
+    publicarJsonTV(5);
 }
 void botaoSetaDireitaTvSoltou()
 {
+    sincronizarPaginaAtual();
+    publicarJsonTV(4);
 }
 void botaoSetaCimaTvSoltou()
 {
+    sincronizarPaginaAtual();
+    publicarJsonTV(6);
 }
 void botaoSetaBaixoTvSoltou()
 {
+    sincronizarPaginaAtual();
+    publicarJsonTV(7);
 }
 ////////////////////////
 
