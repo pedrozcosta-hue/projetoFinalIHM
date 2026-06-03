@@ -133,6 +133,14 @@ void botaoDualSelectSoltou()
     publicarJsonTelaRetratil();
     debugInfo("Select solto. Estado = " + String(estadoBotaoDualSelect));
 }
+
+void botaoDualScreenSoltou()
+{
+    botaoDualScreen.getValue(&estadoBotaoDualScreen);
+    sincronizarPaginaAtual();
+    publicarJsonTelaRetratil();
+    debugInfo("Screen solto. Estado = " + String(estadoBotaoDualScreen));
+}
 ////////////////////////////////
 
 // AR CONDICIONADO

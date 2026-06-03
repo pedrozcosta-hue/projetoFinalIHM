@@ -43,10 +43,12 @@ extern NexDSButton botaoDualUp;
 extern NexDSButton botaoDualDown;
 extern NexDSButton botaoDualSelect;
 extern NexButton botaoBackTela;
+extern NexDSButton botaoDualScreen;
 
 extern NexText botaoUpTela;
 extern NexText botaoDownTela;
 extern NexText botaoSelectTela;
+extern NexText botaoScreenTela;
 
 // PÁGINA 4 - AR CONDICIONADO
 extern NexDSButton botaoDualPowerAr;
@@ -91,6 +93,7 @@ extern uint32_t estadoBotaoDualFreeze;
 extern uint32_t estadoBotaoDualUp;
 extern uint32_t estadoBotaoDualDown;
 extern uint32_t estadoBotaoDualSelect;
+extern uint32_t estadoBotaoDualScreen;
 
 // Ar condicionado
 extern uint32_t estadoBotaoDualPowerAr;

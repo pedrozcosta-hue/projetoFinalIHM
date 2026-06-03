@@ -47,10 +47,12 @@ NexDSButton botaoDualUp(3, 1, "bt0");
 NexDSButton botaoDualDown(3, 2, "bt1");
 NexDSButton botaoDualSelect(3, 3, "bt2");
 NexButton botaoBackTela(3, 4, "b0");
+NexDSButton botaoDualScreen(3, 5, "bt3");
 
 NexText textoUpTela(3, 1, "t0");
 NexText textoDownTela(3, 2, "t1");
 NexText textoSelectTela(3, 3, "t2");
+NexText textoScreenTela(3, 5, "t3");
 
 // PÁGINA 4 - AR CONDICIONADO
 NexDSButton botaoDualPowerAr(4, 1, "bt0");
@@ -95,6 +97,7 @@ uint32_t estadoBotaoDualFreeze = 0;
 uint32_t estadoBotaoDualUp = 0;
 uint32_t estadoBotaoDualDown = 0;
 uint32_t estadoBotaoDualSelect = 0;
+uint32_t estadoBotaoDualScreen = 0;
 
 // Ar condicionado
 uint32_t estadoBotaoDualPowerAr = 0;
@@ -149,6 +152,7 @@ void configurarTelaInicial()
   estadoBotaoDualUp = 0;
   estadoBotaoDualDown = 0;
   estadoBotaoDualSelect = 0;
+  estadoBotaoDualScreen = 0;
 
   // Ar condicionado
   estadoBotaoDualPowerAr = 0;
@@ -214,10 +218,12 @@ void configurarTelaInicial()
   botaoDualUp.setValue(estadoBotaoDualUp);
   botaoDualDown.setValue(estadoBotaoDualDown);
   botaoDualSelect.setValue(estadoBotaoDualSelect);
+  botaoDualScreen.setValue(estadoBotaoDualScreen);
 
   textoDownTela.setText("Descer tela retrátil");
   textoUpTela.setText("Subir tela retrátil");
   textoSelectTela.setText("Parar tela Retrátil");
+  textoScreenTela.setText("Trocar de tela Retrátil");
 
   // Página 4
   sendCommand("page page4");
@@ -274,6 +280,7 @@ void configurarEventosNextion()
   botaoDualUp.attachPop(botaoDualUpSoltou);
   botaoDualDown.attachPop(botaoDualDownSoltou);
   botaoDualSelect.attachPop(botaoDualSelectSoltou);
+  botaoDualScreen.attachPop(botaoDualScreenSoltou);
   botaoBackTela.attachPop(botaoBackTelaSoltou);
 
   // Ar-condicionado
@@ -308,7 +315,7 @@ void configurarEventosNextion()
   nexListen(botaoB4);
   nexListen(botaoB5);
 
-  //------------BÕTOES BACK------------
+  //------------BOTÕES BACK------------
   nexListen(botaoBackLampada);
   nexListen(botaoBackAr);
   nexListen(botaoBackProjetor);
@@ -330,6 +337,7 @@ void configurarEventosNextion()
   nexListen(botaoDualUp);
   nexListen(botaoDualDown);
   nexListen(botaoDualSelect);
+  nexListen(botaoDualScreen);
 
   // ar condicionado
   nexListen(botaoDualPowerAr);

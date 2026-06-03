@@ -28,6 +28,7 @@ void botaoBackTelaSoltou();
 void botaoDualUpSoltou();
 void botaoDualDownSoltou();
 void botaoDualSelectSoltou();
+void botaoDualScreenSoltou();
 
 // AR CONDICIONADO
 void botaoBackArSoltou();

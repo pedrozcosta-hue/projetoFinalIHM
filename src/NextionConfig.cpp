@@ -46,9 +46,10 @@ void montarJsonTelaRetratil(JsonDocument &doc)
   if (paginaAtual == 3)
   {
     // Tela Retrátil
-    doc["tela"]["Up"] = (estadoBotaoDualUp == 1) ? 1 : 0;
-    doc["tela"]["Down"] = (estadoBotaoDualDown == 1) ? 1 : 0;
-    doc["tela"]["Select"] = (estadoBotaoDualSelect == 1) ? 1 : 0;
+    doc["telaRetratil"]["UP"] = (estadoBotaoDualUp == 1) ? 1 : 0;
+    doc["telaRetratil"]["DOWN"] = (estadoBotaoDualDown == 1) ? 1 : 0;
+    doc["telaRetratil"]["PAUSE"] = (estadoBotaoDualSelect == 1) ? 1 : 0;
+    doc["telaRetratil"]["tela"] = (estadoBotaoDualScreen == 1) ? 1 : 0;
   }
   
   else
@@ -194,6 +195,7 @@ void sincronizarPaginaAtual()
     botaoDualUp.setValue(estadoBotaoDualUp);
     botaoDualDown.setValue(estadoBotaoDualDown);
     botaoDualSelect.setValue(estadoBotaoDualSelect);
+    botaoDualScreen.setValue(estadoBotaoDualScreen);
   }
 
   // Ar-condicionado
