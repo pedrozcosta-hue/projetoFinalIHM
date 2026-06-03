@@ -212,6 +212,6 @@ void sincronizarPaginaAtual()
   // Sensor
   else if (paginaAtual == 6)
   {
-    // TODO: COMPONENTES PAGINA 6
+    botaoDualSensorEco.setValue(estadoBotaoDualSensorEco);
   }
 }

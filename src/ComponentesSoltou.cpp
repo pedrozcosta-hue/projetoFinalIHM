@@ -220,3 +220,11 @@ void botaoBackSensorSoltou()
     paginaAtual = 0;
     debugInfo("B0 Back - Página 0 (Menu)");
 }
+
+void botaoSensorMenu0Soltou()
+{
+}
+
+void botaoDualSensorEco()
+{
+}
