@@ -1,9 +1,9 @@
 #include <Nextion.h>
+
 #include "ComponentesSoltou.h"
 #include "IniciarNextion.h"
 #include "DebugManager.h"
 #include "NextionConfig.h"
-
 
 // MENU
 void botaoB0Soltou()
@@ -50,28 +50,28 @@ void botaoDualBt0Soltou()
 {
     botaoDualBt0.getValue(&estadoBotaoDualBt0);
     sincronizarPaginaAtual();
-    publicarEstado();
+    publicarJsonLampada();
     debugInfo("Bt0 solto. Estado = " + String(estadoBotaoDualBt0));
 }
 void botaoDualBt1Soltou()
 {
     botaoDualBt1.getValue(&estadoBotaoDualBt1);
     sincronizarPaginaAtual();
-    publicarEstado();
+    publicarJsonLampada();
     debugInfo("Bt1 solto. Estado = " + String(estadoBotaoDualBt1));
 }
 void botaoDualBt2Soltou()
 {
     botaoDualBt2.getValue(&estadoBotaoDualBt2);
     sincronizarPaginaAtual();
-    publicarEstado();
+    publicarJsonLampada();
     debugInfo("Bt2 solto. Estado = " + String(estadoBotaoDualBt2));
 }
 void botaoDualBt3Soltou()
 {
     botaoDualBt3.getValue(&estadoBotaoDualBt3);
     sincronizarPaginaAtual();
-    publicarEstado();
+    publicarJsonLampada();
     debugInfo("Bt3 solto. Estado = " + String(estadoBotaoDualBt3));
 }
 void botaoBackLampadaSoltou()
@@ -93,14 +93,14 @@ void botaoDualPowerSoltou()
 {
     botaoDualPower.getValue(&estadoBotaoDualPower);
     sincronizarPaginaAtual();
-    publicarEstado();
+    publicarJsonProjetor();
     debugInfo("Power solto. Estado = " + String(estadoBotaoDualPower));
 }
 void botaoDualFreezeSoltou()
 {
     botaoDualFreeze.getValue(&estadoBotaoDualFreeze);
     sincronizarPaginaAtual();
-    publicarEstado();
+    publicarJsonProjetor();
     debugInfo("Freeze solto. Estado = " + String(estadoBotaoDualFreeze));
 }
 /////////////////////////////////
@@ -116,21 +116,21 @@ void botaoDualUpSoltou()
 {
     botaoDualUp.getValue(&estadoBotaoDualUp);
     sincronizarPaginaAtual();
-    publicarEstado();
+    publicarJsonTelaRetratil();
     debugInfo("Up solto. Estado = " + String(estadoBotaoDualUp));
 }
 void botaoDualDownSoltou()
 {
     botaoDualDown.getValue(&estadoBotaoDualDown);
     sincronizarPaginaAtual();
-    publicarEstado();
+    publicarJsonTelaRetratil();
     debugInfo("Down solto. Estado = " + String(estadoBotaoDualDown));
 }
 void botaoDualSelectSoltou()
 {
     botaoDualSelect.getValue(&estadoBotaoDualSelect);
     sincronizarPaginaAtual();
-    publicarEstado();
+    publicarJsonTelaRetratil();
     debugInfo("Select solto. Estado = " + String(estadoBotaoDualSelect));
 }
 ////////////////////////////////
@@ -146,13 +146,13 @@ void botaoDualPowerArSoltou()
 {
     botaoDualPowerAr.getValue(&estadoBotaoDualPowerAr);
     sincronizarPaginaAtual();
-    publicarEstado();
+    publicarJsonArCondicionado();
     debugInfo("Power solto. Estado = " + String(estadoBotaoDualPowerAr));
 }
 void botaoModoArSoltou()
 {
     estadoBotaoModoAr = (estadoBotaoModoAr + 1) % 4;
-    publicarEstado();
+    publicarJsonArCondicionado();
     debugInfo("Modo solto. Estado = " + String(estadoBotaoModoAr));
 }
 void botaoVentoArSoltou()
@@ -162,14 +162,14 @@ void botaoVentoArSoltou()
     {
         estadoBotaoVento = 0;
     }
-    publicarEstado();
+    publicarJsonArCondicionado();
     debugInfo("Vento solto. Estado = " + String(estadoBotaoVento));
 }
 void sliderTemperaturaSoltou()
 {
     sliderTemperatura.getValue(&valorSliderTemperatura);
     sincronizarPaginaAtual();
-    publicarEstado();
+    publicarJsonArCondicionado();
     debugInfo("Temperatura solta. Valor = " + String(valorSliderTemperatura));
 }
 // TODO: ESP
@@ -183,38 +183,33 @@ void botaoBackTvSoltou()
     paginaAtual = 0;
     debugInfo("B0 Back - Página 0 (Menu)");
 }
-// ComponentesSoltou.cpp — adicione essas 8 funções
-
-void botaoDualPowerTvSoltou() {
-  
+void botaoDualPowerTvSoltou()
+{
+    botaoDualPowerTv.getValue(&estadoBotaoDualPowerTv);
+    sincronizarPaginaAtual();
+    publicarJsonTV();
+    debugInfo("Power TV solto. Estado = " + String(estadoBotaoDualPowerTv));
 }
-
-void botaoVolumeUpTvSoltou() {
-    
+void botaoVolumeUpTvSoltou()
+{
 }
-
-void botaoVolumeDownTvSoltou() {
-
+void botaoVolumeDownTvSoltou()
+{
 }
-
-void botaoSelectTvSoltou() {
-    
+void botaoSelectTvSoltou()
+{
 }
-
-void botaoSetaEsquerdaTvSoltou() {
-    
+void botaoSetaEsquerdaTvSoltou()
+{
 }
-
-void botaoSetaDireitaTvSoltou() {
-    
+void botaoSetaDireitaTvSoltou()
+{
 }
-
-void botaoSetaCimaTvSoltou() {
-    
+void botaoSetaCimaTvSoltou()
+{
 }
-
-void botaoSetaBaixoTvSoltou() {
-   
+void botaoSetaBaixoTvSoltou()
+{
 }
 ////////////////////////
 

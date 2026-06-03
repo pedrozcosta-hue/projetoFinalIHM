@@ -1,4 +1,5 @@
 #include <Arduino.h>
+
 #include "DebugManager.h"
 #include "secrets.h"
 
@@ -23,7 +24,7 @@ void debugErroSemLinha(const String &mensagem)
 
 void debugInfo(const String &mensagem)
 {
-    if (nivelDebugAtual >= DEBUG_ERRO)
+    if (nivelDebugAtual >= DEBUG_TUDO)  // <- corrigido
     {
         Serial.print("[INFO] ");
         Serial.println(mensagem);
@@ -32,7 +33,7 @@ void debugInfo(const String &mensagem)
 
 void debugInfoSemLinha(const String &mensagem)
 {
-    if (nivelDebugAtual >= DEBUG_ERRO)
+    if (nivelDebugAtual >= DEBUG_TUDO)  // <- corrigido
     {
         Serial.print(mensagem);
     }
@@ -49,7 +50,6 @@ void configurarDebug()
     {
         nivelDebugAtual = DEBUG_TUDO;
     }
-
     else
     {
         nivelDebugAtual = DEBUG_NIVEL_INICIAL;
@@ -65,11 +65,14 @@ void configurarDebug()
     debugInfo(" Sistema de debug ativo");
 
     if (nivelDebugAtual == DEBUG_ERRO)
-        debugInfo(" Debug inviado em modo apenas erro");
+        debugInfo(" Debug iniciado em modo apenas erro");
     else
         debugInfo(" Debug iniciado em modo completo");
 
     debugInfo("======================");
 }
 
-//TODO: criar a função obterNivelDebugAtual
+int obterNivelDebugAtual()
+{
+    return nivelDebugAtual;
+}

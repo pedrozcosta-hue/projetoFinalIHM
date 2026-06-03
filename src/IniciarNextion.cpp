@@ -4,12 +4,16 @@
 #include "DebugManager.h"
 #include "ComponentesSoltou.h"
 
+//======================================
+// DEFINIÇÕES DAS CONSTANTES E OBJETOS
+// (declarados como extern no .h)
+//======================================
 
-const uint32_t BAUD_NEXTION = 9600; //9600
-const int8_t PINO_RX_NEXTION = 18; //18
-const int8_t PINO_TX_NEXTION = 17; //17
+const uint32_t BAUD_NEXTION = 9600;
+const int8_t PINO_RX_NEXTION = 18;
+const int8_t PINO_TX_NEXTION = 17;
 
-
+// PÁGINA 0 — MENU PRINCIPAL
 NexButton botaoB0(0, 1, "b0");
 NexButton botaoB1(0, 3, "b1");
 NexButton botaoB2(0, 4, "b2");
@@ -25,16 +29,28 @@ NexDSButton botaoDualBt2(1, 5, "bt2");
 NexDSButton botaoDualBt3(1, 6, "bt3");
 NexButton botaoBackLampada(1, 1, "b2");
 
+NexText textoBt0(1, 0, "t0");
+NexText textoBt1(1, 1, "t1");
+NexText textoBt2(1, 2, "t2");
+NexText textoBt3(1, 3, "t3");
+
 // PÁGINA 2 — PROJETOR
 NexDSButton botaoDualPower(2, 1, "bt0");
 NexDSButton botaoDualFreeze(2, 2, "bt1");
 NexButton botaoBackProjetor(2, 3, "b0");
+
+NexText textoPowerProjetor(2, 1, "t0");
+NexText textoFreeze(2, 2, "t1");
 
 // PÁGINA 3 — TELA RETRÁTIL
 NexDSButton botaoDualUp(3, 1, "bt0");
 NexDSButton botaoDualDown(3, 2, "bt1");
 NexDSButton botaoDualSelect(3, 3, "bt2");
 NexButton botaoBackTela(3, 4, "b0");
+
+NexText textoUpTela(3, 1, "t0");
+NexText textoDownTela(3, 2, "t1");
+NexText textoSelectTela(3, 3, "t2");
 
 // PÁGINA 4 - AR CONDICIONADO
 NexDSButton botaoDualPowerAr(4, 1, "bt0");
@@ -58,12 +74,15 @@ NexButton botaoSetaBaixoTv(5, 9, "b7");
 // TODO: COMPONENTES DA PÁGINA 6
 NexButton botaoBackSensor(6, 2, "b0");
 
+//======================================
+// VARIÁVEIS DE ESTADO
+//======================================
 
-uint8_t paginaAtual = 0 ;
+uint8_t paginaAtual = 0;
 
 // Lâmpada
 //TODO: melhorar nome das variáveis de estado
-uint32_t estadoBotaoDualBt0 = 0 ;
+uint32_t estadoBotaoDualBt0 = 0;
 uint32_t estadoBotaoDualBt1 = 0;
 uint32_t estadoBotaoDualBt2 = 0;
 uint32_t estadoBotaoDualBt3 = 0;
@@ -92,7 +111,7 @@ uint32_t estadoBotaoVolumeDownTv = 0;
 uint32_t estadoBotaoSetaEsquerdaTv = 0;
 uint32_t estadoBotaoSetaDireitaTv = 0;
 uint32_t estadoBotaoSetaCimaTv = 0;
-uint32_t estadoBotaoSetaBaixoTv = 0 ;
+uint32_t estadoBotaoSetaBaixoTv = 0;
 
 // Sensor
 uint32_t valorTemperatura = 0;
@@ -102,6 +121,9 @@ uint32_t comandoAr = 0;
 uint32_t alertaSom = 0;
 uint32_t eco = 0;
 
+//======================================
+// FUNÇÕES
+//======================================
 
 void configurarNextion()
 {
@@ -168,6 +190,11 @@ void configurarTelaInicial()
   botaoDualBt2.setValue(estadoBotaoDualBt2);
   botaoDualBt3.setValue(estadoBotaoDualBt3);
 
+  textoBt0.setText("Desligado");
+  textoBt1.setText("Desligado");
+  textoBt2.setText("Desligado");
+  textoBt3.setText("Desligado");
+
   // Página 2 — Projetor
   sendCommand("page page2");
   paginaAtual = 2;
@@ -175,6 +202,9 @@ void configurarTelaInicial()
 
   botaoDualPower.setValue(estadoBotaoDualPower);
   botaoDualFreeze.setValue(estadoBotaoDualFreeze);
+
+  textoPowerProjetor.setText("Desligado");
+  textoFreeze.setText("Descongelado");
 
   // Página 3 — Tela Retrátil
   sendCommand("page page3");
@@ -184,6 +214,10 @@ void configurarTelaInicial()
   botaoDualUp.setValue(estadoBotaoDualUp);
   botaoDualDown.setValue(estadoBotaoDualDown);
   botaoDualSelect.setValue(estadoBotaoDualSelect);
+
+  textoDownTela.setText("Descer tela retrátil");
+  textoUpTela.setText("Subir tela retrátil");
+  textoSelectTela.setText("Parar tela Retrátil");
 
   // Página 4
   sendCommand("page page4");
@@ -242,10 +276,10 @@ void configurarEventosNextion()
   botaoDualSelect.attachPop(botaoDualSelectSoltou);
   botaoBackTela.attachPop(botaoBackTelaSoltou);
 
-  // Ar-condicionado 
+  // Ar-condicionado
   botaoDualPowerAr.attachPop(botaoDualPowerArSoltou);
   botaoModoAr.attachPop(botaoModoArSoltou);
-  botaoVento.attachPop(botaoVentoArSoltou);
+  botaoVento.attachPop(botaoVentoArSoltou);  // nome correto do callback
   botaoBackAr.attachPop(botaoBackArSoltou);
   sliderTemperatura.attachPop(sliderTemperaturaSoltou);
   //TODO: ESP
@@ -264,8 +298,9 @@ void configurarEventosNextion()
   // Sensor análise - //TODO
   botaoBackSensor.attachPop(botaoBackSensorSoltou);
 
-  // Registra listeners
+  nexClearListenList();
 
+  // Registra listeners
   nexListen(botaoB0);
   nexListen(botaoB1);
   nexListen(botaoB2);
@@ -314,5 +349,4 @@ void configurarEventosNextion()
   nexListen(botaoSetaBaixoTv);
 
   //TODO: SENSOR
-  
 }

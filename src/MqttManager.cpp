@@ -7,7 +7,6 @@
 #include "secrets.h"
 #include "WiFiManager.h"
 #include "MqttManager.h"
-
 #include "DebugManager.h"
 
 //==========Instâncias==========
