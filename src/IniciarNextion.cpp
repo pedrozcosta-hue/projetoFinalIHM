@@ -47,10 +47,12 @@ NexDSButton botaoDualUp(3, 1, "bt0");
 NexDSButton botaoDualDown(3, 2, "bt1");
 NexDSButton botaoDualSelect(3, 3, "bt2");
 NexButton botaoBackTela(3, 4, "b0");
+NexDSButton botaoDualScreen(3, 5, "bt3");
 
 NexText textoUpTela(3, 1, "t0");
 NexText textoDownTela(3, 2, "t1");
 NexText textoSelectTela(3, 3, "t2");
+NexText textoScreenTela(3, 5, "t3");
 
 // PÁGINA 4 - AR CONDICIONADO
 NexDSButton botaoDualPowerAr(4, 1, "bt0");
@@ -71,7 +73,8 @@ NexButton botaoSetaCimaTv(5, 8, "b6");
 NexButton botaoSetaBaixoTv(5, 9, "b7");
 
 // PÁGINA 6 - SENSOR
-// TODO: COMPONENTES DA PÁGINA 6
+NexButton botaoSensorMenu0(0, 0, "xxx");
+NexDSButton botaoDualSensorEco(0, 0, "xxx");
 NexButton botaoBackSensor(6, 2, "b0");
 
 //======================================
@@ -95,6 +98,7 @@ uint32_t estadoBotaoDualFreeze = 0;
 uint32_t estadoBotaoDualUp = 0;
 uint32_t estadoBotaoDualDown = 0;
 uint32_t estadoBotaoDualSelect = 0;
+uint32_t estadoBotaoDualScreen = 0;
 
 // Ar condicionado
 uint32_t estadoBotaoDualPowerAr = 0;
@@ -149,6 +153,7 @@ void configurarTelaInicial()
   estadoBotaoDualUp = 0;
   estadoBotaoDualDown = 0;
   estadoBotaoDualSelect = 0;
+  estadoBotaoDualScreen = 0;
 
   // Ar condicionado
   estadoBotaoDualPowerAr = 0;
@@ -167,6 +172,8 @@ void configurarTelaInicial()
   estadoBotaoSetaBaixoTv = 0;
 
   // Sensor
+  estadoBotaoSensorMenu0 = 0;
+  estadoBotaoDualSensorEco = 0;
   valorTemperatura = 0;
   valorUmidade = 0;
   valorRuido = 0;
@@ -214,10 +221,12 @@ void configurarTelaInicial()
   botaoDualUp.setValue(estadoBotaoDualUp);
   botaoDualDown.setValue(estadoBotaoDualDown);
   botaoDualSelect.setValue(estadoBotaoDualSelect);
+  botaoDualScreen.setValue(estadoBotaoDualScreen);
 
   textoDownTela.setText("Descer tela retrátil");
   textoUpTela.setText("Subir tela retrátil");
   textoSelectTela.setText("Parar tela Retrátil");
+  textoScreenTela.setText("Trocar de tela Retrátil");
 
   // Página 4
   sendCommand("page page4");
@@ -239,7 +248,7 @@ void configurarTelaInicial()
   paginaAtual = 6;
   delay(500);
 
-  // TODO: COMPONENTES DA PÁGINA 6
+  botaoDualSensorEco.setValue(estadoBotaoDualSensorEco);
 
   // Retorna ao menu principal
   sendCommand("page page0");
@@ -274,6 +283,7 @@ void configurarEventosNextion()
   botaoDualUp.attachPop(botaoDualUpSoltou);
   botaoDualDown.attachPop(botaoDualDownSoltou);
   botaoDualSelect.attachPop(botaoDualSelectSoltou);
+  botaoDualScreen.attachPop(botaoDualScreenSoltou);
   botaoBackTela.attachPop(botaoBackTelaSoltou);
 
   // Ar-condicionado
@@ -295,8 +305,10 @@ void configurarEventosNextion()
   botaoSetaCimaTv.attachPop(botaoSetaCimaTvSoltou);
   botaoSetaBaixoTv.attachPop(botaoSetaBaixoTvSoltou);
 
-  // Sensor análise - //TODO
+  // Sensor análise
   botaoBackSensor.attachPop(botaoBackSensorSoltou);
+  botaoSensorMenu0.attachPop(botaoSensorMenu0Soltou);
+  botaoDualSensorEco.attachPop(botaoDualSensorEcoSoltou);
 
   nexClearListenList();
 
@@ -308,7 +320,7 @@ void configurarEventosNextion()
   nexListen(botaoB4);
   nexListen(botaoB5);
 
-  //------------BÕTOES BACK------------
+  //------------BOTÕES BACK------------
   nexListen(botaoBackLampada);
   nexListen(botaoBackAr);
   nexListen(botaoBackProjetor);
@@ -330,6 +342,7 @@ void configurarEventosNextion()
   nexListen(botaoDualUp);
   nexListen(botaoDualDown);
   nexListen(botaoDualSelect);
+  nexListen(botaoDualScreen);
 
   // ar condicionado
   nexListen(botaoDualPowerAr);
@@ -348,5 +361,7 @@ void configurarEventosNextion()
   nexListen(botaoSetaCimaTv);
   nexListen(botaoSetaBaixoTv);
 
-  //TODO: SENSOR
+  // sensor
+  nexListen(botaoSensorMenu0);
+  nexListen(botaoDualSensorEco);
 }

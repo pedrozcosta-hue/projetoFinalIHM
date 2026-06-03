@@ -28,6 +28,7 @@ void botaoBackTelaSoltou();
 void botaoDualUpSoltou();
 void botaoDualDownSoltou();
 void botaoDualSelectSoltou();
+void botaoDualScreenSoltou();
 
 // AR CONDICIONADO
 void botaoBackArSoltou();
@@ -50,6 +51,7 @@ void botaoSetaBaixoTvSoltou();
 
 // SENSOR
 void botaoBackSensorSoltou();
-//TODO: SENSOR
+void botaoSensorMenu0Soltou();
+void botaoDualSensorEcoSoltou();
 
 #endif

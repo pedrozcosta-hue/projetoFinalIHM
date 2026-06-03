@@ -43,10 +43,12 @@ extern NexDSButton botaoDualUp;
 extern NexDSButton botaoDualDown;
 extern NexDSButton botaoDualSelect;
 extern NexButton botaoBackTela;
+extern NexDSButton botaoDualScreen;
 
 extern NexText botaoUpTela;
 extern NexText botaoDownTela;
 extern NexText botaoSelectTela;
+extern NexText botaoScreenTela;
 
 // PÁGINA 4 - AR CONDICIONADO
 extern NexDSButton botaoDualPowerAr;
@@ -67,7 +69,8 @@ extern NexButton botaoSetaCimaTv;
 extern NexButton botaoSetaBaixoTv;
 
 // PÁGINA 6 - SENSOR
-// TODO: COMPONENTES DA PÁGINA 6
+extern NexButton botaoSensorMenu0;
+extern NexDSButton botaoDualSensorEco;
 extern NexButton botaoBackSensor;
 
 //======================================
@@ -91,6 +94,7 @@ extern uint32_t estadoBotaoDualFreeze;
 extern uint32_t estadoBotaoDualUp;
 extern uint32_t estadoBotaoDualDown;
 extern uint32_t estadoBotaoDualSelect;
+extern uint32_t estadoBotaoDualScreen;
 
 // Ar condicionado
 extern uint32_t estadoBotaoDualPowerAr;
@@ -110,6 +114,8 @@ extern uint32_t estadoBotaoSetaCimaTv;
 extern uint32_t estadoBotaoSetaBaixoTv;
 
 // Sensor
+extern uint32_t estadoBotaoSensorMenu0;
+extern uint32_t estadoBotaoDualSensorEco;
 extern uint32_t valorTemperatura;
 extern uint32_t valorUmidade;
 extern uint32_t valorRuido;

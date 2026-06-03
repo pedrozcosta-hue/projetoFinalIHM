@@ -133,6 +133,14 @@ void botaoDualSelectSoltou()
     publicarJsonTelaRetratil();
     debugInfo("Select solto. Estado = " + String(estadoBotaoDualSelect));
 }
+
+void botaoDualScreenSoltou()
+{
+    botaoDualScreen.getValue(&estadoBotaoDualScreen);
+    sincronizarPaginaAtual();
+    publicarJsonTelaRetratil();
+    debugInfo("Screen solto. Estado = " + String(estadoBotaoDualScreen));
+}
 ////////////////////////////////
 
 // AR CONDICIONADO
@@ -235,4 +243,12 @@ void botaoBackSensorSoltou()
     sendCommand("page page0");
     paginaAtual = 0;
     debugInfo("B0 Back - Página 0 (Menu)");
+}
+
+void botaoSensorMenu0Soltou()
+{
+}
+
+void botaoDualSensorEco()
+{
 }
