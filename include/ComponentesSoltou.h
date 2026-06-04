@@ -31,11 +31,17 @@ void botaoDualSelectSoltou();
 void botaoDualScreenSoltou();
 
 // AR CONDICIONADO
+void botaoArId1Soltou();
+void botaoArId2Soltou();
+void botaoArId3Soltou();
+void botaoArId4Soltou();
+
 void botaoBackArSoltou();
 void botaoDualPowerArSoltou();
 void botaoModoArSoltou();
 void botaoVentoArSoltou();
-void sliderTemperaturaSoltou();
+void botaoTemperaturaUpSoltou();
+void botaoTemperaturaDownSoltou();
 //TODO: ESP
 
 // TV
@@ -48,6 +54,7 @@ void botaoSetaEsquerdaTvSoltou();
 void botaoSetaDireitaTvSoltou();
 void botaoSetaCimaTvSoltou();
 void botaoSetaBaixoTvSoltou();
+void botaoReturnTvSoltou();
 
 // SENSOR
 void botaoBackSensorSoltou();

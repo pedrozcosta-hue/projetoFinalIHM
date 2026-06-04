@@ -41,8 +41,9 @@ void botaoB5Soltou()
     sendCommand("page page6");
     paginaAtual = 6;
     debugInfo("b5 solto - Página 6 (Sensor)");
+
+    
 }
-//////////////////////
 
 // LÂMPADA
 // TODO: melhorar nome dos botões da lâmpada
@@ -80,7 +81,6 @@ void botaoBackLampadaSoltou()
     paginaAtual = 0;
     debugInfo("B0 Back - Página 0 (Menu)");
 }
-////////////////////////////
 
 // PROJETOR
 void botaoBackProjetorSoltou()
@@ -150,9 +150,35 @@ void botaoBackArSoltou()
     paginaAtual = 0;
     debugInfo("B0 Back - Página 0 (Menu)");
 }
+
+void botaoArId1Soltou()
+{
+    botaoArId1.getValue(&estadoBotaoArId1);
+
+    sincronizarPaginaAtual();
+}
+void botaoArId2Soltou()
+{
+  botaoArId2.getValue(&estadoBotaoArId2);
+
+  sincronizarPaginaAtual();
+}
+void botaoArId3Soltou()
+{
+  botaoArId3.getValue(&estadoBotaoArId3);
+
+  sincronizarPaginaAtual();
+}
+void botaoArId4Soltou()
+{
+  botaoArId4.getValue(&estadoBotaoArId4);
+
+  sincronizarPaginaAtual();
+}
 void botaoDualPowerArSoltou()
 {
     botaoDualPowerAr.getValue(&estadoBotaoDualPowerAr);
+     
     sincronizarPaginaAtual();
     publicarJsonArCondicionado();
     debugInfo("Power solto. Estado = " + String(estadoBotaoDualPowerAr));
@@ -173,18 +199,36 @@ void botaoVentoArSoltou()
     publicarJsonArCondicionado();
     debugInfo("Vento solto. Estado = " + String(estadoBotaoVento));
 }
-void sliderTemperaturaSoltou()
+void botaoTemperaturaUpSoltou()
 {
-    sliderTemperatura.getValue(&valorSliderTemperatura);
-    sincronizarPaginaAtual();
-    publicarJsonArCondicionado();
-    debugInfo("Temperatura solta. Valor = " + String(valorSliderTemperatura));
+  contadorTemperatura++;
+
+  if(contadorTemperatura > 29)
+  {
+   contadorTemperatura = 30;
+  }
+
+   publicarJsonArCondicionado();
+   atualizarTextoArCondicionado();
+}
+
+void botaoTemperaturDownSoltou()
+{
+  contadorTemperatura--;
+
+  if(contadorTemperatura < 16)
+  {
+   contadorTemperatura = 15;
+  }
+
+   publicarJsonArCondicionado();
+   atualizarTextoArCondicionado();
 }
 // TODO: ESP
 //////////////////////////////////
 
-//TODO: FAZER A LÓGICA PARA OS BOTÕES DA TV E DO SENSOR
-// TV
+// TODO: FAZER A LÓGICA PARA OS BOTÕES DA TV E DO SENSOR
+//  TV
 void botaoBackTvSoltou()
 {
     sendCommand("page page0");
@@ -193,50 +237,50 @@ void botaoBackTvSoltou()
 }
 void botaoDualPowerTvSoltou()
 {
-    /*botaoDualPowerTv.getValue(&estadoBotaoDualPowerTv);
-    sincronizarPaginaAtual();
+    estadoComandoTV = 1;
     publicarJsonTV();
-    debugInfo("Power TV solto. Estado = " + String(estadoBotaoDualPowerTv));*/
-    sincronizarPaginaAtual();
-    publicarJsonTV(1);
 }
 void botaoVolumeUpTvSoltou()
-{
-    sincronizarPaginaAtual();
-    publicarJsonTV(2);
+{  
+    estadoComandoTV = 2;
+    publicarJsonTV();
 }
 void botaoVolumeDownTvSoltou()
-{
-    sincronizarPaginaAtual();
-    publicarJsonTV(3);
-}
-void botaoSelectTvSoltou()
-{
-    sincronizarPaginaAtual();
-    publicarJsonTV(8);
-}
-void botaoSetaEsquerdaTvSoltou()
-{
-    sincronizarPaginaAtual();
-    publicarJsonTV(5);
+{   
+    estadoComandoTV = 3;
+    publicarJsonTV();
 }
 void botaoSetaDireitaTvSoltou()
 {
-    sincronizarPaginaAtual();
-    publicarJsonTV(4);
+    estadoComandoTV = 4;
+    publicarJsonTV();
+}
+void botaoSetaEsquerdaTvSoltou()
+{   
+    estadoComandoTV = 5;
+    publicarJsonTV();
 }
 void botaoSetaCimaTvSoltou()
 {
-    sincronizarPaginaAtual();
-    publicarJsonTV(6);
+    estadoComandoTV = 6;
+    publicarJsonTV();
 }
 void botaoSetaBaixoTvSoltou()
 {
-    sincronizarPaginaAtual();
-    publicarJsonTV(7);
+    estadoComandoTV = 7;
+    publicarJsonTV();
 }
-////////////////////////
+void botaoSelectTvSoltou()
+{
+    estadoComandoTV = 8;
+    publicarJsonTV();
+}
 
+void botaoReturnTvSoltou()
+{
+    estadoComandoTV = 9;
+    publicarJsonTV();
+}
 // SENSOR
 void botaoBackSensorSoltou()
 {
@@ -245,10 +289,3 @@ void botaoBackSensorSoltou()
     debugInfo("B0 Back - Página 0 (Menu)");
 }
 
-void botaoSensorMenu0Soltou()
-{
-}
-
-void botaoDualSensorEco()
-{
-}

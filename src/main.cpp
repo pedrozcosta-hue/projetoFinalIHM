@@ -8,11 +8,12 @@
 #include "IniciarNextion.h"
 #include "secrets.h"
 
-const char TOPICO_SENSOR[] = "senai134/equipe/boo/devices/comando"; 
+const char TOPICO_SENSOR[] = "senai134/equipe/boo/sensor/status";
 
 // Protótipos
 void tratarMensagemRecebida(const char *topico, const String &mensagem);
 void tratarJsonComando(const String &mensagem);
+void tratarSensor(JsonDocument &doc);
 
 void setup()
 {
@@ -73,5 +74,33 @@ void tratarJsonComando(const String &mensagem)
         debugErro(erro.c_str());
         return;
     }
+
+    tratarSensor(doc);
     // TODO: reagir aos comandos recebidos via MQTT
 }
+
+void tatarSensor(JsonDocument &doc)
+{
+    if (doc["analise"].is<JsonObject>() &&
+        doc["analise"]["timestemp"].is<int>() &&
+        doc["analise"]["temperatura"].is<float>() &&
+        doc["analise"]["umidade"].is<float>() &&
+        doc["analise"]["ruido"].is<int>() &&
+        doc["analise"]["comandoAr"].is<int>() &&
+        doc["analise"]["alertaSom"].is<bool>() &&
+        doc["analise"]["eco"].is<bool>())
+
+    {
+        valorTemperatura = doc["analise"]["temperatura"].as<float>();
+        valorUmidade = doc["analise"]["umidade"].as<float>();
+        valorRuido = doc["analise"]["ruido"].as<int>();
+        comandoAr = doc["analise"]["comandoAr"].as<int>();
+        alertaSom = doc["analise"]["alertaSom"].as<bool>();
+        eco = doc["analise"]["alertaSom"].as<bool>();
+    }
+
+    else
+        debugErro("A mensagem recebida não esta no formato chave-valor ou o valor não é correspondente ao tipo");
+        return;
+}
+
