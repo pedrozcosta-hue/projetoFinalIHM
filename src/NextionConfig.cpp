@@ -35,10 +35,28 @@ void montarJsonProjetor(JsonDocument &doc)
 
 void montarJsonTelaRetratil(JsonDocument &doc)
 {
-  doc["telaRetratil"]["UP"] = (estadoBotaoDualUp == 1) ? true : false;
-  doc["telaRetratil"]["DOWN"] = (estadoBotaoDualDown == 1) ? true : false;
-  doc["telaRetratil"]["PAUSE"] = (estadoBotaoDualSelect == 1) ? true : false;
-  doc["telaRetratil"]["tela"] = (estadoBotaoDualScreen == 1) ? true : false;
+  if(estadoBotaoDualUp == 1)
+  {
+   doc["telaRetratil"]["UP"] = 1;
+   doc["telaRetratil"]["DOWN"] = 0;
+   doc["telaRetratil"]["PAUSE"] = 0;
+  }  
+
+  if(estadoBotaoDualDown == 1)
+  {
+    doc["telaRetratil"]["UP"] = 0;
+    doc["telaRetratil"]["DOWN"] = 1;
+    doc["telaRetratil"]["PAUSE"] = 0;
+  }
+
+  if(estadoBotaoDualSelect == 1)
+  {
+    doc["telaRetratil"]["UP"] = 0;
+    doc["telaRetratil"]["DOWN"] = 0;
+    doc["telaRetratil"]["PAUSE"] = 1;
+  }
+
+  doc["telaRetratil"]["tela"] = (estadoBotaoDualScreen == 1) ? 1 : 0;
   doc["timestamp"] = fusoLocal.now();
 }
 
@@ -245,7 +263,7 @@ void sincronizarPaginaAtual()
   // Sensor
   else if (paginaAtual == 6)
   {
-    botaoDualSensorEco.setValue(estadoBotaoDualSensorEco);
+
   }
 }
 
