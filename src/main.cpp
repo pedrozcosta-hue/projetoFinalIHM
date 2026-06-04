@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
+#include <ezTime.h>
 
 #include "WiFiManager.h"
 #include "MqttManager.h"
@@ -8,6 +9,8 @@
 #include "IniciarNextion.h"
 #include "secrets.h"
 
+Timezone fusoLocal;
+
 const char TOPICO_SENSOR[] = "senai134/equipe/boo/sensor/status";
 
 // Protótipos
@@ -15,11 +18,16 @@ void tratarMensagemRecebida(const char *topico, const String &mensagem);
 void tratarJsonComando(const String &mensagem);
 void tratarSensor(JsonDocument &doc);
 
+
 void setup()
 {
     configurarDebug();
 
     conectarWiFi();
+
+    waitForSync();
+    fusoLocal.setLocation("America/Sao_Paulo");
+
     configurarMQTT();
     registrarCallbackMensagem(tratarMensagemRecebida);
     conectarMQTT();
@@ -34,7 +42,7 @@ void loop()
     garantirWiFiConectado();
     garantirMQTTConectado();
     loopMQTT();
-
+    events();
     nexLoop();
 }
 

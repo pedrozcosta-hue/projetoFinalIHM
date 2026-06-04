@@ -57,8 +57,6 @@ void botaoSetaBaixoTvSoltou();
 void botaoReturnTvSoltou();
 
 // SENSOR
-void botaoBackSensorSoltou();
-void botaoSensorMenu0Soltou();
-void botaoDualSensorEcoSoltou();
+
 
 #endif

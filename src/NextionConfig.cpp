@@ -6,6 +6,9 @@
 
 #include <ArduinoJson.h>
 #include <Arduino.h>
+#include <ezTime.h>
+
+extern Timezone fusoLocal;
 
 // Tópico de publicação — definido aqui, main.cpp usa o de recebimento
 const char TOPICO_LAMPADA[] = "senai134/equipe/boo/lampada/estado";
@@ -20,12 +23,14 @@ void montarJsonLampada(JsonDocument &doc)
   doc["lampadaSala09"]["interruptor2"] = (estadoBotaoDualBt0 == 1) ? 1 : 0;
   doc["lampadaSala10"]["interruptor3"] = (estadoBotaoDualBt3 == 1) ? 1 : 0;
   doc["lampadaSala10"]["interruptor4"] = (estadoBotaoDualBt2 == 1) ? 1 : 0;
+  doc["timestamp"] = fusoLocal.now();
 }
 
 void montarJsonProjetor(JsonDocument &doc)
 {
   doc["projetor"]["estadoPower"] = (estadoBotaoDualPower == 1) ? 1 : 0;
   doc["projetor"]["estadoCongelamento"] = (estadoBotaoDualFreeze == 1) ? 1 : 0;
+  doc["timestamp"] = fusoLocal.now();
 }
 
 void montarJsonTelaRetratil(JsonDocument &doc)
@@ -34,6 +39,7 @@ void montarJsonTelaRetratil(JsonDocument &doc)
   doc["telaRetratil"]["DOWN"] = (estadoBotaoDualDown == 1) ? true : false;
   doc["telaRetratil"]["PAUSE"] = (estadoBotaoDualSelect == 1) ? true : false;
   doc["telaRetratil"]["tela"] = (estadoBotaoDualScreen == 1) ? true : false;
+  doc["timestamp"] = fusoLocal.now();
 }
 
 void montarJsonArCondicionado(JsonDocument &doc)
@@ -93,6 +99,8 @@ void montarJsonArCondicionado(JsonDocument &doc)
     doc["arcondicionado"]["vento"] = estadoBotaoVento;
   else if (estadoBotaoVento == 4) // velocidade do vento 4 = high
     doc["ar-condicionado"]["vento"] = estadoBotaoVento;
+
+  doc["timestamp"] = fusoLocal.now();
 }
 void montarJsonTelevisao(JsonDocument &doc)
 {
@@ -116,6 +124,8 @@ void montarJsonTelevisao(JsonDocument &doc)
     doc["televisao"]["comando"] = estadoComandoTV;
   else if (estadoComandoTV == 9)
     doc["televisao"]["comando"] = estadoComandoTV;
+
+  doc["timestamp"] = fusoLocal.now();
 }
 
 void publicarJsonLampada()
