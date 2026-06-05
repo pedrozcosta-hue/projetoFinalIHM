@@ -264,6 +264,7 @@ void configurarEventosNextion()
   botaoDualBt2.attachPop(botaoDualBt2Soltou);
   botaoDualBt3.attachPop(botaoDualBt3Soltou);
   botaoBackLampada.attachPop(botaoBackLampadaSoltou);
+  botaoBackSensor.attachPop(botaoBackSensorSoltou);
 
   // Projetor
   botaoDualPower.attachPop(botaoDualPowerSoltou);
@@ -308,8 +309,6 @@ void configurarEventosNextion()
 
   // Sensor análise
 
-  nexClearListenList();
-
   // Registra listeners
   nexListen(botaoB0);
   nexListen(botaoB1);
@@ -331,6 +330,7 @@ void configurarEventosNextion()
   nexListen(botaoDualBt1);
   nexListen(botaoDualBt2);
   nexListen(botaoDualBt3);
+  nexListen(botaoBackSensor);
 
   // projetor
   nexListen(botaoDualPower);
@@ -370,4 +370,6 @@ void configurarEventosNextion()
   nexListen(botaoReturnTv);
 
   // sensor
+
+
 }

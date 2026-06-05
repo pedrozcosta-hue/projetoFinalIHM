@@ -11,13 +11,12 @@
 
 Timezone fusoLocal;
 
-const char TOPICO_SENSOR[] = "senai134/equipe/boo/sensor/status";
+const char TOPICO_SENSOR[] = "senai134/shared/projeto/analise09";
 
 // Protótipos
 void tratarMensagemRecebida(const char *topico, const String &mensagem);
 void tratarJsonComando(const String &mensagem);
 void tratarSensor(JsonDocument &doc);
-
 
 void setup()
 {
@@ -90,21 +89,21 @@ void tratarJsonComando(const String &mensagem)
 void tratarSensor(JsonDocument &doc)
 {
     if (doc["analise"].is<JsonObject>() &&
-        doc["analise"]["timestemp"].is<unsigned long>() &&
+        doc["analise"]["timestamp"].is<unsigned long>() &&
         doc["analise"]["temperatura"].is<float>() &&
         doc["analise"]["umidade"].is<float>() &&
         doc["analise"]["ruido"].is<float>() &&
         doc["analise"]["comandoAr"].is<int>() &&
-        doc["analise"]["alertaSom"].is<bool>() &&
+        doc["analise"]["alertaSom"].is<int>() &&
         doc["analise"]["eco"].is<bool>())
 
     {   
-        timestemp = doc["analise"]["timestemp"].as<unsigned long>();
+        timestemp = doc["analise"]["timestamp"].as<unsigned long>();
         valorTemperatura = doc["analise"]["temperatura"].as<float>();
         valorUmidade = doc["analise"]["umidade"].as<float>();
         valorRuido = doc["analise"]["ruido"].as<float>();
         comandoAr = doc["analise"]["comandoAr"].as<int>();
-        alertaSom = doc["analise"]["alertaSom"].as<bool>();
+        alertaSom = doc["analise"]["alertaSom"].as<int>();
         eco = doc["analise"]["eco"].as<bool>();
 
         debugInfo("Timestemp: " + String(timestemp));

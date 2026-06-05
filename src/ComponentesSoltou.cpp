@@ -40,7 +40,9 @@ void botaoB5Soltou()
 {
     sendCommand("page page6");
     paginaAtual = 6;
+    atualizarTextoSensor();
     debugInfo("b5 solto - Página 6 (Sensor)");
+
 }
 
 // LÂMPADA
@@ -225,7 +227,7 @@ void botaoTemperaturaUpSoltou()
 {
     contadorTemperatura++;
 
-    if (contadorTemperatura >= 30)
+    if (contadorTemperatura > 30)
     {
         contadorTemperatura = 30;
     }
@@ -238,9 +240,9 @@ void botaoTemperaturaDownSoltou()
 {
     contadorTemperatura--;
 
-    if (contadorTemperatura <= 15)
+    if (contadorTemperatura < 18)
     {
-        contadorTemperatura = 15;
+        contadorTemperatura = 18;
     }
 
     publicarJsonArCondicionado();

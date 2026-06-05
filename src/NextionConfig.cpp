@@ -12,10 +12,10 @@ extern Timezone fusoLocal;
 
 // Tópico de publicação — definido aqui, main.cpp usa o de recebimento
 const char TOPICO_LAMPADA[] = "senai134/equipe/boo/lampada/estado";
-const char TOPICO_PROJETOR[] = "senai134/equipe/boo/projetor/estado";
-const char TOPICO_TELA_RETRATIL[] = "senai134/equipe/boo/telaretratil/estado";
-const char TOPICO_AR_CONDICIONADO[] = "senai134/equipe/boo/arcondicionado/estado";
-const char TOPICO_TELEVISAO[] = "senai134/equipe/boo/televisao/estado";
+const char TOPICO_PROJETOR[] = "senai134/shared/projeto/projetor09";
+const char TOPICO_TELA_RETRATIL[] = "senai134/equipe/mario/devices/teste";
+const char TOPICO_AR_CONDICIONADO[] = "senai134/shared/projeto/AC";
+const char TOPICO_TELEVISAO[] = "senai134/shared/projeto/yoshi";
 
 void montarJsonLampada(JsonDocument &doc)
 {
@@ -132,7 +132,7 @@ void montarJsonArCondicionado(JsonDocument &doc)
   doc["ar-condicionado"]["estado"] = (estadoBotaoDualPowerAr == 1) ? 1 : 0;
 
   // Temperatura
-  if (estadoBotaoDualPowerAr == 1)
+ // if (estadoBotaoDualPowerAr == 1)
     doc["ar-condicionado"]["temperatura"] = contadorTemperatura;
 
   // Modo
