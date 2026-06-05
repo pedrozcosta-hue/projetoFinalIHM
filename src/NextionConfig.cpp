@@ -23,41 +23,83 @@ void montarJsonLampada(JsonDocument &doc)
   doc["lampadaSala09"]["interruptor2"] = (estadoBotaoDualBt0 == 1) ? 1 : 0;
   doc["lampadaSala10"]["interruptor3"] = (estadoBotaoDualBt3 == 1) ? 1 : 0;
   doc["lampadaSala10"]["interruptor4"] = (estadoBotaoDualBt2 == 1) ? 1 : 0;
-  doc["timestamp"] = fusoLocal.now();
+
+  doc["lampadaSala10"]["timestamp"] = fusoLocal.now();
+  doc["lampadaSala09"]["timestamp"] = fusoLocal.now();
 }
 
 void montarJsonProjetor(JsonDocument &doc)
 {
   doc["projetor"]["estadoPower"] = (estadoBotaoDualPower == 1) ? 1 : 0;
   doc["projetor"]["estadoCongelamento"] = (estadoBotaoDualFreeze == 1) ? 1 : 0;
-  doc["timestamp"] = fusoLocal.now();
+
+  doc["projetor"]["timestamp"] = fusoLocal.now();
 }
 
 void montarJsonTelaRetratil(JsonDocument &doc)
 {
-  if(estadoBotaoDualUp == 1)
-  {
-   doc["telaRetratil"]["UP"] = 1;
-   doc["telaRetratil"]["DOWN"] = 0;
-   doc["telaRetratil"]["PAUSE"] = 0;
-  }  
+  doc["telaRetratil"]["UP"] = 0;
+  doc["telaRetratil"]["DOWN"] = 0;
+  doc["telaRetratil"]["PAUSE"] = 0;
 
-  if(estadoBotaoDualDown == 1)
+  if (estadoBotaoDualUp == 1 && estadoBotaoDualSelect == 0 && estadoBotaoDualDown == 0)
+  {
+    doc["telaRetratil"]["UP"] = 1;
+    doc["telaRetratil"]["DOWN"] = 0;
+    doc["telaRetratil"]["PAUSE"] = 0;
+  }
+
+  else if (estadoBotaoDualDown == 1 && estadoBotaoDualSelect == 0 && estadoBotaoDualUp == 0)
   {
     doc["telaRetratil"]["UP"] = 0;
     doc["telaRetratil"]["DOWN"] = 1;
     doc["telaRetratil"]["PAUSE"] = 0;
   }
 
-  if(estadoBotaoDualSelect == 1)
+  else if (estadoBotaoDualSelect == 1 && estadoBotaoDualUp == 0 && estadoBotaoDualDown == 0)
   {
     doc["telaRetratil"]["UP"] = 0;
     doc["telaRetratil"]["DOWN"] = 0;
     doc["telaRetratil"]["PAUSE"] = 1;
   }
 
+  else if (estadoBotaoDualUp == 1 && estadoBotaoDualSelect == 1 && estadoBotaoDualDown == 1)
+  {
+    doc["telaRetratil"]["UP"] = 0;
+    doc["telaRetratil"]["DOWN"] = 0;
+    doc["telaRetratil"]["PAUSE"] = 0;
+  }
+
+  else if (estadoBotaoDualUp == 1 && estadoBotaoDualSelect == 1)
+  {
+    doc["telaRetratil"]["UP"] = 0;
+    doc["telaRetratil"]["DOWN"] = 0;
+    doc["telaRetratil"]["PAUSE"] = 1;
+  }
+
+  else if (estadoBotaoDualDown == 1 && estadoBotaoDualSelect == 1)
+  {
+    doc["telaRetratil"]["UP"] = 0;
+    doc["telaRetratil"]["DOWN"] = 0;
+    doc["telaRetratil"]["PAUSE"] = 1;
+  }
+
+  else if (estadoBotaoDualUp == 1 && estadoBotaoDualDown == 1 && estadoBotaoDualSelect == 0)
+  {
+    doc["telaRetratil"]["UP"] = 0;
+    doc["telaRetratil"]["DOWN"] = 0;
+    doc["telaRetratil"]["PAUSE"] = 1;
+  }
+  else
+  {
+    doc["telaRetratil"]["UP"] = 0;
+    doc["telaRetratil"]["DOWN"] = 0;
+    doc["telaRetratil"]["PAUSE"] = 0;
+  }
+
   doc["telaRetratil"]["tela"] = (estadoBotaoDualScreen == 1) ? 1 : 0;
-  doc["timestamp"] = fusoLocal.now();
+
+  doc["telaRetratil"]["timestamp"] = fusoLocal.now();
 }
 
 void montarJsonArCondicionado(JsonDocument &doc)
@@ -87,63 +129,39 @@ void montarJsonArCondicionado(JsonDocument &doc)
   }
 
   // estado
-  if (estadoBotaoDualPowerAr == 1)
-    doc["ar-condicionado"]["estado"] = 1;
-  else
-    doc["ar-condicionado"]["estado"] = 0;
+  doc["ar-condicionado"]["estado"] = (estadoBotaoDualPowerAr == 1) ? 1 : 0;
 
   // Temperatura
   if (estadoBotaoDualPowerAr == 1)
     doc["ar-condicionado"]["temperatura"] = contadorTemperatura;
 
   // Modo
-  if (estadoBotaoModoAr == 0) // modo 0 = cool
+  if (estadoBotaoModoAr <= 3)
     doc["ar-condicionado"]["modo"] = estadoBotaoModoAr;
-  else if (estadoBotaoModoAr == 1) // modo 1 = dry
-    doc["ar-condicionado"]["modo"] = estadoBotaoModoAr;
-  else if (estadoBotaoModoAr == 2) // modo 2 = fan
-    doc["ar-condicionado"]["modo"] = estadoBotaoModoAr;
-  else if (estadoBotaoModoAr == 3) // modo 3 = heat
-    doc["ar-condicionado"]["modo"] = estadoBotaoModoAr;
+  // modo 0 = cool
+  // modo 1 = dry
+  // modo 2 = fan
+  // modo 3 = heat
 
   // Ar-Condicionado - Estado do Vento
-  if (estadoBotaoVento == 0) // velocidade do vento 0 = auto
+  if (estadoBotaoVento <= 4)
     doc["ar-condicionado"]["vento"] = estadoBotaoVento;
-  else if (estadoBotaoVento == 1) // velocidade do vento 1 = quiet
-    doc["ar-condicionado"]["vento"] = estadoBotaoVento;
-  else if (estadoBotaoVento == 2) // velocidade do vento 2 = low
-    doc["ar-condicionado"]["vento"] = estadoBotaoVento;
-  else if (estadoBotaoVento == 3) // velocidade do vento 3 = med
-    doc["ar-condicionado"]["vento"] = estadoBotaoVento;
-  else if (estadoBotaoVento == 4) // velocidade do vento 4 = high
-    doc["ar-condicionado"]["vento"] = estadoBotaoVento;
+  // velocidade do vento 0 = auto
+  // velocidade do vento 1 = quiet
+  // velocidade do vento 2 = low
+  // velocidade do vento 3 = med
+  // velocidade do vento 4 = high
 
-  doc["timestamp"] = fusoLocal.now();
+  doc["ar-condicionado"]["timestamp"] = fusoLocal.now();
 }
 void montarJsonTelevisao(JsonDocument &doc)
 {
-  if (estadoComandoTV == 1)
+  if (estadoComandoTV <= 9)
+  {
     doc["televisao"]["comando"] = estadoComandoTV;
-  else if (estadoComandoTV == 2)
-    doc["televisao"]["comando"] = estadoComandoTV;
-  else if (estadoComandoTV == 3)
-    doc["televisao"]["comando"] = estadoComandoTV;
-  else if (estadoComandoTV == 4)
-    doc["televisao"]["comando"] = estadoComandoTV;
-  else if (estadoComandoTV == 5)
-    doc["televisao"]["comando"] = estadoComandoTV;
-  else if (estadoComandoTV == 5)
-    doc["televisao"]["comando"] = estadoComandoTV;
-  else if (estadoComandoTV == 6)
-    doc["televisao"]["comando"] = estadoComandoTV;
-  else if (estadoComandoTV == 7)
-    doc["televisao"]["comando"] = estadoComandoTV;
-  else if (estadoComandoTV == 8)
-    doc["televisao"]["comando"] = estadoComandoTV;
-  else if (estadoComandoTV == 9)
-    doc["televisao"]["comando"] = estadoComandoTV;
+  }
 
-  doc["timestamp"] = fusoLocal.now();
+    doc["televisao"]["timestamp"] = fusoLocal.now();
 }
 
 void publicarJsonLampada()
@@ -205,15 +223,7 @@ void publicarJsonTV()
   serializeJson(doc, mensagem);
   publicarMensagem(TOPICO_TELEVISAO, mensagem.c_str());
 
-  debugInfo("Botao power solto. Comando: " + String(estadoBotaoDualBt1));
-  debugInfo("Interruptor 2: " + String(estadoBotaoDualBt0));
-  debugInfo("Interruptor 3: " + String(estadoBotaoDualBt3));
-  debugInfo("Interruptor 4: " + String(estadoBotaoDualBt2));
-  debugInfo("Interruptor 1: " + String(estadoBotaoDualBt1));
-  debugInfo("Interruptor 2: " + String(estadoBotaoDualBt0));
-  debugInfo("Interruptor 3: " + String(estadoBotaoDualBt3));
-  debugInfo("Interruptor 4: " + String(estadoBotaoDualBt2));
-  debugInfo("Interruptor 4: " + String(estadoBotaoDualBt2));
+  debugInfo("Comando TV: " + String(estadoComandoTV));
 }
 
 // TODO: JSON AR, TV E SENSOR
@@ -239,6 +249,8 @@ void sincronizarPaginaAtual()
   {
     botaoDualPower.setValue(estadoBotaoDualPower);
     botaoDualFreeze.setValue(estadoBotaoDualFreeze);
+    botaoDualPower10.setValue(estadoBotaoDualPower);
+    botaoDualFreeze10.setValue(estadoBotaoDualFreeze);
   }
 
   // Tela Retrátil
@@ -260,11 +272,10 @@ void sincronizarPaginaAtual()
     botaoArId4.setValue(estadoBotaoArId4);
   }
 
+  // Televisão
+  else if (paginaAtual == 5)
+    botaoDualPowerTv.setValue(1);
   // Sensor
-  else if (paginaAtual == 6)
-  {
-
-  }
 }
 
 void atualizarTextoArCondicionado()
@@ -281,12 +292,12 @@ void atualizarTextoSensor()
   char umidadeAmbiente[10];
   char ruidoAmbiente[10];
 
-  snprintf(temperaturaAmbiente, sizeof(temperaturaAmbiente), "%lu", valorTemperatura);
+  snprintf(temperaturaAmbiente, sizeof(temperaturaAmbiente), "%.1f °C", valorTemperatura);
   textoSensorTemperatura.setText(temperaturaAmbiente);
 
-  snprintf(umidadeAmbiente, sizeof(umidadeAmbiente), "%lu", valorUmidade);
+  snprintf(umidadeAmbiente, sizeof(umidadeAmbiente), "%.1f %%", valorUmidade);
   textoSensorUmidade.setText(umidadeAmbiente);
 
-  snprintf(ruidoAmbiente, sizeof(ruidoAmbiente), "%lu", valorRuido);
-  textoRuido.setText(ruidoAmbiente);
+  snprintf(ruidoAmbiente, sizeof(ruidoAmbiente), "%.1f db", valorRuido);
+  textoSensorRuido.setText(ruidoAmbiente);
 }

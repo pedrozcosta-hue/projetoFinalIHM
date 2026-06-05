@@ -90,21 +90,30 @@ void tratarJsonComando(const String &mensagem)
 void tratarSensor(JsonDocument &doc)
 {
     if (doc["analise"].is<JsonObject>() &&
-        doc["analise"]["timestemp"].is<int>() &&
+        doc["analise"]["timestemp"].is<unsigned long>() &&
         doc["analise"]["temperatura"].is<float>() &&
         doc["analise"]["umidade"].is<float>() &&
-        doc["analise"]["ruido"].is<int>() &&
+        doc["analise"]["ruido"].is<float>() &&
         doc["analise"]["comandoAr"].is<int>() &&
         doc["analise"]["alertaSom"].is<bool>() &&
         doc["analise"]["eco"].is<bool>())
 
-    {
+    {   
+        timestemp = doc["analise"]["timestemp"].as<unsigned long>();
         valorTemperatura = doc["analise"]["temperatura"].as<float>();
         valorUmidade = doc["analise"]["umidade"].as<float>();
-        valorRuido = doc["analise"]["ruido"].as<int>();
+        valorRuido = doc["analise"]["ruido"].as<float>();
         comandoAr = doc["analise"]["comandoAr"].as<int>();
         alertaSom = doc["analise"]["alertaSom"].as<bool>();
         eco = doc["analise"]["eco"].as<bool>();
+
+        debugInfo("Timestemp: " + String(timestemp));
+        debugInfo("Temperatura: " + String(valorTemperatura));
+        debugInfo("Umidade: " + String(valorUmidade));
+        debugInfo("Ruído: " + String(valorRuido));
+        debugInfo("Comando Ar: " + String(comandoAr));
+        debugInfo("Alerta Som: " + String(alertaSom));
+        debugInfo("Eco: " + String(eco));
     }
 
     else

@@ -44,10 +44,10 @@ NexButton botaoBackTela(3, 2, "b0");
 NexDSButton botaoDualScreen(3, 1, "bt0");
 
 // PÁGINA 4 - AR CONDICIONADO
-NexDSButton botaoDualAC1(4, 7, "bt1");
-NexDSButton botaoDualAC2(4, 8, "bt2");
-NexDSButton botaoDualAC3(4, 9, "bt3");
-NexDSButton botaoDualAC4(4, 10, "bt4");
+NexDSButton botaoArId1(4, 7, "bt1");
+NexDSButton botaoArId2(4, 8, "bt2");
+NexDSButton botaoArId3(4, 9, "bt3");
+NexDSButton botaoArId4(4, 10, "bt4");
 NexDSButton botaoDualPowerAr(4, 3, "bt0");
 NexButton botaoBackAr(4, 11, "b4");
 NexButton botaoModoAr(4, 6, "b3");
@@ -92,6 +92,8 @@ uint32_t estadoBotaoDualBt3 = 0;
 // Projetor
 uint32_t estadoBotaoDualPower = 0;
 uint32_t estadoBotaoDualFreeze = 0;
+uint32_t estadoBotaoDualPower10 = 0;
+uint32_t estadoBotaoDualFreeze10 = 0;
 
 // Tela Retrátil
 uint32_t estadoBotaoDualUp = 0;
@@ -100,23 +102,30 @@ uint32_t estadoBotaoDualSelect = 0;
 uint32_t estadoBotaoDualScreen = 0;
 
 // Ar condicionado
-uint32_t estadoBotaoDualPowerAr = 0;
+uint32_t contadorTemperatura = 22;
 uint32_t estadoBotaoModoAr = 0;
 uint32_t estadoBotaoVento = 0;
-uint32_t contadorTemperatura = 22;
+
+uint32_t estadoBotaoDualPowerAr = 0;
+uint32_t estadoBotaoArId1 = 0;
+uint32_t estadoBotaoArId2 = 0;
+uint32_t estadoBotaoArId3 = 0;
+uint32_t estadoBotaoArId4 = 0;
 
 // TODO: ESP
 
 // TV
+uint32_t estadoBotaoDualPowerTv = 0;
 uint32_t estadoComandoTV = 0;
 
 // Sensor
-uint32_t valorTemperatura = 0;
-uint32_t valorUmidade = 0;
-uint32_t valorRuido = 0;
+float valorTemperatura = 0;
+float valorUmidade = 0;
+float valorRuido = 0;
 uint32_t comandoAr = 0;
 uint32_t alertaSom = 0;
 uint32_t eco = 0;
+uint32_t timestemp = 0;
 
 //======================================
 // FUNÇÕES
@@ -141,6 +150,8 @@ void configurarTelaInicial()
   // Projetor
   estadoBotaoDualPower = 0;
   estadoBotaoDualFreeze = 0;
+  estadoBotaoDualPower10 = 0;
+  estadoBotaoDualFreeze10 = 0;
 
   // Tela Retrátil
   estadoBotaoDualUp = 0;
@@ -154,12 +165,16 @@ void configurarTelaInicial()
   estadoBotaoVento = 0;
   contadorTemperatura = 22;
 
+  estadoBotaoArId1 = 0;
+  estadoBotaoArId2 = 0;   
+  estadoBotaoArId3 = 0;
+  estadoBotaoArId4 = 0;
+
   // TV
+  estadoBotaoDualPowerTv = 0;
   estadoComandoTV = 0;
 
   // Sensor
-  estadoBotaoSensorMenu0 = 0;
-  estadoBotaoDualSensorEco = 0;
   valorTemperatura = 0;
   valorUmidade = 0;
   valorRuido = 0;
@@ -190,6 +205,8 @@ void configurarTelaInicial()
 
   botaoDualPower.setValue(estadoBotaoDualPower);
   botaoDualFreeze.setValue(estadoBotaoDualFreeze);
+  botaoDualPower10.setValue(estadoBotaoDualPower10);
+  botaoDualFreeze10.setValue(estadoBotaoDualFreeze10);
 
   // Página 3 — Tela Retrátil
   sendCommand("page page3");
@@ -200,19 +217,24 @@ void configurarTelaInicial()
   botaoDualDown.setValue(estadoBotaoDualDown);
   botaoDualSelect.setValue(estadoBotaoDualSelect);
   botaoDualScreen.setValue(estadoBotaoDualScreen);
-
+  
   // Página 4
   sendCommand("page page4");
   paginaAtual = 4;
   delay(500);
 
   botaoDualPowerAr.setValue(estadoBotaoDualPowerAr);
-  textoTemperatura.setText("0");
+  botaoArId1.setValue(estadoBotaoArId1);
+  botaoArId2.setValue(estadoBotaoArId2);
+  botaoArId3.setValue(estadoBotaoArId3);
+  botaoArId4.setValue(estadoBotaoArId4);
 
   // Página 5
   sendCommand("page page5");
   paginaAtual = 5;
   delay(500);
+
+  botaoDualPowerTv.setValue(estadoBotaoDualPowerTv);
 
   // Página 6
   sendCommand("page page6");
@@ -247,6 +269,8 @@ void configurarEventosNextion()
   botaoDualPower.attachPop(botaoDualPowerSoltou);
   botaoDualFreeze.attachPop(botaoDualFreezeSoltou);
   botaoBackProjetor.attachPop(botaoBackProjetorSoltou);
+  botaoDualPower10.attachPop(botaoDualPower10Soltou);
+  botaoDualFreeze10.attachPop(botaoDualFreeze10Soltou);
 
   // Tela Retrátil
   botaoDualUp.attachPop(botaoDualUpSoltou);
@@ -254,6 +278,7 @@ void configurarEventosNextion()
   botaoDualSelect.attachPop(botaoDualSelectSoltou);
   botaoDualScreen.attachPop(botaoDualScreenSoltou);
   botaoBackTela.attachPop(botaoBackTelaSoltou);
+
 
   // Ar-condicionado
   botaoArId1.attachPop(botaoArId1Soltou);
@@ -282,7 +307,6 @@ void configurarEventosNextion()
   botaoReturnTv.attachPop(botaoReturnTvSoltou);
 
   // Sensor análise
-  
 
   nexClearListenList();
 
@@ -311,12 +335,15 @@ void configurarEventosNextion()
   // projetor
   nexListen(botaoDualPower);
   nexListen(botaoDualFreeze);
+  nexListen(botaoDualPower10);
+  nexListen(botaoDualFreeze10);
 
   // tela retratil
   nexListen(botaoDualUp);
   nexListen(botaoDualDown);
   nexListen(botaoDualSelect);
   nexListen(botaoDualScreen);
+
 
   // ar condicionado
   nexListen(botaoDualPowerAr);
@@ -328,6 +355,7 @@ void configurarEventosNextion()
   nexListen(botaoVento);
   nexListen(botaoTemperaturaUp);
   nexListen(botaoTemperaturaDown);
+
   // TODO: ESP
 
   // TV
@@ -342,5 +370,4 @@ void configurarEventosNextion()
   nexListen(botaoReturnTv);
 
   // sensor
-
 }

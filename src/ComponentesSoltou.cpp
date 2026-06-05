@@ -101,6 +101,22 @@ void botaoDualFreezeSoltou()
     publicarJsonProjetor();
     debugInfo("Freeze solto. Estado = " + String(estadoBotaoDualFreeze));
 }
+
+void botaoDualPower10Soltou()
+{
+    botaoDualPower10.getValue(&estadoBotaoDualPower10);
+    sincronizarPaginaAtual();
+    publicarJsonProjetor();
+    debugInfo("Power 10 solto. Estado = " + String(estadoBotaoDualPower10));
+}
+
+void botaoDualFreeze10Soltou()
+{
+    botaoDualFreeze10.getValue(&estadoBotaoDualFreeze10);
+    sincronizarPaginaAtual();
+    publicarJsonProjetor();
+    debugInfo("Freeze 10 solto. Estado = " + String(estadoBotaoDualFreeze10));
+}
 /////////////////////////////////
 
 // TELA RETRÁTIL
@@ -163,6 +179,7 @@ void botaoArId2Soltou()
 
     sincronizarPaginaAtual();
     publicarJsonArCondicionado();
+    debugInfo("ArId2 solto. Estado = " + String(estadoBotaoArId2));
 }
 void botaoArId3Soltou()
 {
@@ -170,6 +187,7 @@ void botaoArId3Soltou()
 
     sincronizarPaginaAtual();
     publicarJsonArCondicionado();
+    debugInfo("ArId3 solto. Estado = " + String(estadoBotaoArId3));
 }
 void botaoArId4Soltou()
 {
@@ -177,6 +195,7 @@ void botaoArId4Soltou()
 
     sincronizarPaginaAtual();
     publicarJsonArCondicionado();
+    debugInfo("ArId4 solto. Estado = " + String(estadoBotaoArId4));
 }
 void botaoDualPowerArSoltou()
 {
@@ -195,7 +214,7 @@ void botaoModoArSoltou()
 void botaoVentoArSoltou()
 {
     estadoBotaoVento++;
-    if (estadoBotaoVento > 4)
+    if (estadoBotaoVento >= 4)
     {
         estadoBotaoVento = 0;
     }
@@ -241,6 +260,7 @@ void botaoBackTvSoltou()
 void botaoDualPowerTvSoltou()
 {
     botaoDualPowerTv.getValue(&estadoComandoTV);
+    sincronizarPaginaAtual();
     publicarJsonTV();
 }
 void botaoVolumeUpTvSoltou()

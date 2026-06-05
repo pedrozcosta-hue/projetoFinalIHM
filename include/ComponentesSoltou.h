@@ -22,6 +22,8 @@ void botaoBackLampadaSoltou();
 void botaoBackProjetorSoltou();
 void botaoDualPowerSoltou();
 void botaoDualFreezeSoltou();
+void botaoDualPower10Soltou();
+void botaoDualFreeze10Soltou();
 
 // TELA RETRÁTIL
 void botaoBackTelaSoltou();

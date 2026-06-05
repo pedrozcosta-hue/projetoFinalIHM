@@ -52,9 +52,10 @@ extern NexButton botaoVento;
 extern NexButton botaoTemperaturaUp;
 extern NexButton botaoTemperaturaDown;
 
+extern NexText textoTemperatura;
 
 // PÁGINA 5 - TV
-extern NexButton botaoDualPowerTv;
+extern NexDSButton botaoDualPowerTv;
 extern NexButton botaoBackTv;
 extern NexButton botaoVolumeUpTv;
 extern NexButton botaoVolumeDownTv;
@@ -88,6 +89,8 @@ extern uint32_t estadoBotaoDualBt3;
 // Projetor
 extern uint32_t estadoBotaoDualPower;
 extern uint32_t estadoBotaoDualFreeze;
+extern uint32_t estadoBotaoDualPower10;
+extern uint32_t estadoBotaoDualFreeze10;
 
 // Tela Retrátil
 extern uint32_t estadoBotaoDualUp;
@@ -106,26 +109,22 @@ extern uint32_t estadoBotaoArId2;
 extern uint32_t estadoBotaoArId3;
 extern uint32_t estadoBotaoArId4;
 
-extern NexText textoTemperatura;
 
 //TODO: ESP
 
 // TV
+extern uint32_t estadoBotaoDualPowerTv;
 extern uint32_t estadoComandoTV;
 
 // Sensor
-extern uint32_t estadoBotaoSensorMenu0;
-extern uint32_t estadoBotaoDualSensorEco;
-extern uint32_t valorTemperatura;
-extern uint32_t valorUmidade;
-extern uint32_t valorRuido;
+extern float valorTemperatura;
+extern float valorUmidade;
+extern float valorRuido;
 extern uint32_t comandoAr;
 extern uint32_t alertaSom;
 extern uint32_t eco;
+extern uint32_t timestemp;
 
-extern NexText textoSensorTemperatura;
-extern NexText textoSensorUmidade;
-extern NexText textoRuido;
 
 void configurarNextion();
 void configurarTelaInicial();
