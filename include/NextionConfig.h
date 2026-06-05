@@ -7,7 +7,6 @@ void montarJsonLampada(JsonDocument &doc);
 void montarJsonProjetor(JsonDocument &doc);
 void montarJsonTelaRetratil(JsonDocument &doc);
 void montarJsonArCondicionado(JsonDocument &doc);
-void montarJsonArCondicionado(JsonDocument &doc);
 void montarJsonTelevisao(JsonDocument &doc);
 
 void publicarJsonLampada();
