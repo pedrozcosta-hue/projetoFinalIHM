@@ -87,7 +87,7 @@ void tratarJsonComando(const String &mensagem)
     // TODO: reagir aos comandos recebidos via MQTT
 }
 
-void tatarSensor(JsonDocument &doc)
+void tratarSensor(JsonDocument &doc)
 {
     if (doc["analise"].is<JsonObject>() &&
         doc["analise"]["timestemp"].is<int>() &&
@@ -104,11 +104,13 @@ void tatarSensor(JsonDocument &doc)
         valorRuido = doc["analise"]["ruido"].as<int>();
         comandoAr = doc["analise"]["comandoAr"].as<int>();
         alertaSom = doc["analise"]["alertaSom"].as<bool>();
-        eco = doc["analise"]["alertaSom"].as<bool>();
+        eco = doc["analise"]["eco"].as<bool>();
     }
 
     else
+    {
         debugErro("A mensagem recebida não esta no formato chave-valor ou o valor não é correspondente ao tipo");
         return;
+    }
 }
 

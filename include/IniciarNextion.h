@@ -28,7 +28,10 @@ extern NexButton botaoBackLampada;
 // PÁGINA 2 — PROJETOR
 extern NexDSButton botaoDualPower;
 extern NexDSButton botaoDualFreeze;
+extern NexDSButton botaoDualPower10;
+extern NexDSButton botaoDualFreeze10;
 extern NexButton botaoBackProjetor;
+
 
 // PÁGINA 3 — TELA RETRÁTIL
 extern NexDSButton botaoDualUp;
@@ -63,13 +66,11 @@ extern NexButton botaoSetaBaixoTv;
 extern NexButton botaoReturnTv;
 
 // PÁGINA 6 - SENSOR
-extern NexButton botaoSensorMenu0;
-extern NexDSButton botaoDualSensorEco;
 extern NexButton botaoBackSensor;
 
-extern NexText textoUmidade;
-extern NexText textoRuido;
-extern NexText textoTemperatura;
+extern NexText textoSensorTemperatura;
+extern NexText textoSensorUmidade;
+extern NexText textoSensorRuido;
 
 //======================================
 // VARIÁVEIS DE ESTADO
@@ -124,7 +125,7 @@ extern uint32_t eco;
 
 extern NexText textoSensorTemperatura;
 extern NexText textoSensorUmidade;
-extern NexText tenxtoSensorRuido;
+extern NexText textoRuido;
 
 void configurarNextion();
 void configurarTelaInicial();

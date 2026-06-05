@@ -15,62 +15,66 @@ const int8_t PINO_TX_NEXTION = 17;
 
 // PÁGINA 0 — MENU PRINCIPAL
 NexButton botaoB0(0, 1, "b0");
-NexButton botaoB1(0, 3, "b1");
-NexButton botaoB2(0, 4, "b2");
-NexButton botaoB3(0, 2, "b3");
+NexButton botaoB1(0, 2, "b1");
+NexButton botaoB2(0, 3, "b2");
+NexButton botaoB3(0, 4, "b3");
 NexButton botaoB4(0, 5, "b4");
 NexButton botaoB5(0, 6, "b5");
 
 // PÁGINA 1 — LÂMPADA
 // TODO: melhorar nome dos botões da lâmpada
-NexDSButton botaoDualBt0(1, 3, "bt0");
-NexDSButton botaoDualBt1(1, 4, "bt1");
-NexDSButton botaoDualBt2(1, 5, "bt2");
-NexDSButton botaoDualBt3(1, 6, "bt3");
-NexButton botaoBackLampada(1, 1, "b2");
+NexDSButton botaoDualBt0(1, 1, "bt0");
+NexDSButton botaoDualBt1(1, 2, "bt1");
+NexDSButton botaoDualBt2(1, 3, "bt2");
+NexDSButton botaoDualBt3(1, 4, "bt3");
+NexButton botaoBackLampada(1, 5, "b1");
 
 // PÁGINA 2 — PROJETOR
 NexDSButton botaoDualPower(2, 1, "bt0");
 NexDSButton botaoDualFreeze(2, 2, "bt1");
-NexButton botaoBackProjetor(2, 3, "b0");
+NexDSButton botaoDualPower10(2, 3, "bt2");
+NexDSButton botaoDualFreeze10(2, 4, "bt3");
+NexButton botaoBackProjetor(2, 5, "b0");
 
 // PÁGINA 3 — TELA RETRÁTIL
-NexDSButton botaoDualUp(3, 1, "bt0");
-NexDSButton botaoDualDown(3, 2, "bt1");
-NexDSButton botaoDualSelect(3, 3, "bt2");
-NexButton botaoBackTela(3, 4, "b0");
-NexDSButton botaoDualScreen(3, 5, "bt3");
+NexDSButton botaoDualUp(3, 4, "bt2");
+NexDSButton botaoDualDown(3, 5, "bt3");
+NexDSButton botaoDualSelect(3, 3, "bt1");
+NexButton botaoBackTela(3, 2, "b0");
+NexDSButton botaoDualScreen(3, 1, "bt0");
 
 // PÁGINA 4 - AR CONDICIONADO
-NexDSButton botaoDualPowerAr(4, 1, "bt0");
-NexButton botaoBackAr(4, 2, "b0");
-NexButton botaoModoAr(4, 3, "b1");
-NexButton botaoVento(4, 4, "b2");
-NexButton botaoTemperaturaUp(4, 5, "b3");
-NexButton botaoTemperaturaDown(4, 6, "b6");
+NexDSButton botaoDualAC1(4, 7, "bt1");
+NexDSButton botaoDualAC2(4, 8, "bt2");
+NexDSButton botaoDualAC3(4, 9, "bt3");
+NexDSButton botaoDualAC4(4, 10, "bt4");
+NexDSButton botaoDualPowerAr(4, 3, "bt0");
+NexButton botaoBackAr(4, 11, "b4");
+NexButton botaoModoAr(4, 6, "b3");
+NexButton botaoVento(4, 5, "b2");
+NexButton botaoTemperaturaUp(4, 1, "b0");
+NexButton botaoTemperaturaDown(4, 2, "b1");
 
-NexText textoTemperatura(4, 1, "t0");
+NexText textoTemperatura(4, 4, "t0");
 
 // PÁGINA 5 - TV
-NexButton botaoDualPowerTv(5, 1, "b0");
-NexButton botaoBackTv(5, 2, "b1");
-NexButton botaoVolumeUpTv(5, 3, "b2");
-NexButton botaoVolumeDownTv(5, 4, "b3");
-NexButton botaoSelectTv(5, 5, "b4");
-NexButton botaoSetaEsquerdaTv(5, 6, "b5");
-NexButton botaoSetaDireitaTv(5, 7, "b6");
-NexButton botaoSetaCimaTv(5, 8, "b7");
-NexButton botaoSetaBaixoTv(5, 9, "b8");
-NexButton botaoReturnTv(5, 10, "b9");
+NexDSButton botaoDualPowerTv(5, 1, "bt0");
+NexButton botaoBackTv(5, 10, "b8");
+NexButton botaoVolumeUpTv(5, 8, "b6");
+NexButton botaoVolumeDownTv(5, 9, "b7");
+NexButton botaoSelectTv(5, 3, "b1");
+NexButton botaoSetaEsquerdaTv(5, 6, "b4");
+NexButton botaoSetaDireitaTv(5, 4, "b2");
+NexButton botaoSetaCimaTv(5, 2, "b0");
+NexButton botaoSetaBaixoTv(5, 5, "b3");
+NexButton botaoReturnTv(5, 7, "b5");
 
 // PÁGINA 6 - SENSOR
-NexButton botaoSensorMenu0(0, 0, "xxx");
-NexDSButton botaoDualSensorEco(0, 0, "xxx");
-NexButton botaoBackSensor(6, 2, "b0");
+NexButton botaoBackSensor(6, 1, "b1");
 
-extern NexText textoSensorTemperatura(6, 1, "t0");
-extern NexText textoSensorUmidade(6, 2, "t1");
-extern NexText tenxtoSensorRuido(6, 3, "t2");
+NexText textoSensorTemperatura(6, 2, "t0");
+NexText textoSensorUmidade(6, 3, "t1");
+NexText textoSensorRuido(6, 4, "t2");
 
 //======================================
 // VARIÁVEIS DE ESTADO
@@ -215,8 +219,6 @@ void configurarTelaInicial()
   paginaAtual = 6;
   delay(500);
 
-  botaoDualSensorEco.setValue(estadoBotaoDualSensorEco);
-
   // Retorna ao menu principal
   sendCommand("page page0");
   paginaAtual = 0;
@@ -280,9 +282,7 @@ void configurarEventosNextion()
   botaoReturnTv.attachPop(botaoReturnTvSoltou);
 
   // Sensor análise
-  botaoBackSensor.attachPop(botaoBackSensorSoltou);
-  botaoSensorMenu0.attachPop(botaoSensorMenu0Soltou);
-  botaoDualSensorEco.attachPop(botaoDualSensorEcoSoltou);
+  
 
   nexClearListenList();
 
@@ -342,5 +342,5 @@ void configurarEventosNextion()
   nexListen(botaoReturnTv);
 
   // sensor
-  nexListen(botaoDualSensorEco);
+
 }

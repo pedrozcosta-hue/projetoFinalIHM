@@ -114,7 +114,7 @@ void montarJsonArCondicionado(JsonDocument &doc)
   else if (estadoBotaoVento == 2) // velocidade do vento 2 = low
     doc["ar-condicionado"]["vento"] = estadoBotaoVento;
   else if (estadoBotaoVento == 3) // velocidade do vento 3 = med
-    doc["arcondicionado"]["vento"] = estadoBotaoVento;
+    doc["ar-condicionado"]["vento"] = estadoBotaoVento;
   else if (estadoBotaoVento == 4) // velocidade do vento 4 = high
     doc["ar-condicionado"]["vento"] = estadoBotaoVento;
 
@@ -196,7 +196,7 @@ void publicarJsonArCondicionado()
   serializeJson(doc, mensagem);
   publicarMensagem(TOPICO_AR_CONDICIONADO, mensagem.c_str());
 }
-void publicarJsonTV(int comando)
+void publicarJsonTV()
 {
   JsonDocument doc;
   montarJsonTelevisao(doc);

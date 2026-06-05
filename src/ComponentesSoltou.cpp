@@ -41,8 +41,6 @@ void botaoB5Soltou()
     sendCommand("page page6");
     paginaAtual = 6;
     debugInfo("b5 solto - Página 6 (Sensor)");
-
-    
 }
 
 // LÂMPADA
@@ -156,29 +154,34 @@ void botaoArId1Soltou()
     botaoArId1.getValue(&estadoBotaoArId1);
 
     sincronizarPaginaAtual();
+    publicarJsonArCondicionado();
+    debugInfo("ArId1 solto. Estado = " + String(estadoBotaoArId1));
 }
 void botaoArId2Soltou()
 {
-  botaoArId2.getValue(&estadoBotaoArId2);
+    botaoArId2.getValue(&estadoBotaoArId2);
 
-  sincronizarPaginaAtual();
+    sincronizarPaginaAtual();
+    publicarJsonArCondicionado();
 }
 void botaoArId3Soltou()
 {
-  botaoArId3.getValue(&estadoBotaoArId3);
+    botaoArId3.getValue(&estadoBotaoArId3);
 
-  sincronizarPaginaAtual();
+    sincronizarPaginaAtual();
+    publicarJsonArCondicionado();
 }
 void botaoArId4Soltou()
 {
-  botaoArId4.getValue(&estadoBotaoArId4);
+    botaoArId4.getValue(&estadoBotaoArId4);
 
-  sincronizarPaginaAtual();
+    sincronizarPaginaAtual();
+    publicarJsonArCondicionado();
 }
 void botaoDualPowerArSoltou()
 {
     botaoDualPowerAr.getValue(&estadoBotaoDualPowerAr);
-     
+
     sincronizarPaginaAtual();
     publicarJsonArCondicionado();
     debugInfo("Power solto. Estado = " + String(estadoBotaoDualPowerAr));
@@ -201,28 +204,28 @@ void botaoVentoArSoltou()
 }
 void botaoTemperaturaUpSoltou()
 {
-  contadorTemperatura++;
+    contadorTemperatura++;
 
-  if(contadorTemperatura > 29)
-  {
-   contadorTemperatura = 30;
-  }
+    if (contadorTemperatura >= 30)
+    {
+        contadorTemperatura = 30;
+    }
 
-   publicarJsonArCondicionado();
-   atualizarTextoArCondicionado();
+    publicarJsonArCondicionado();
+    atualizarTextoArCondicionado();
 }
 
-void botaoTemperaturDownSoltou()
+void botaoTemperaturaDownSoltou()
 {
-  contadorTemperatura--;
+    contadorTemperatura--;
 
-  if(contadorTemperatura < 16)
-  {
-   contadorTemperatura = 15;
-  }
+    if (contadorTemperatura <= 15)
+    {
+        contadorTemperatura = 15;
+    }
 
-   publicarJsonArCondicionado();
-   atualizarTextoArCondicionado();
+    publicarJsonArCondicionado();
+    atualizarTextoArCondicionado();
 }
 // TODO: ESP
 //////////////////////////////////
@@ -237,16 +240,16 @@ void botaoBackTvSoltou()
 }
 void botaoDualPowerTvSoltou()
 {
-    estadoComandoTV = 1;
+    botaoDualPowerTv.getValue(&estadoComandoTV);
     publicarJsonTV();
 }
 void botaoVolumeUpTvSoltou()
-{  
+{
     estadoComandoTV = 2;
     publicarJsonTV();
 }
 void botaoVolumeDownTvSoltou()
-{   
+{
     estadoComandoTV = 3;
     publicarJsonTV();
 }
@@ -256,7 +259,7 @@ void botaoSetaDireitaTvSoltou()
     publicarJsonTV();
 }
 void botaoSetaEsquerdaTvSoltou()
-{   
+{
     estadoComandoTV = 5;
     publicarJsonTV();
 }
@@ -288,4 +291,3 @@ void botaoBackSensorSoltou()
     paginaAtual = 0;
     debugInfo("B0 Back - Página 0 (Menu)");
 }
-
