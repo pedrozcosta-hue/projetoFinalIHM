@@ -13,7 +13,7 @@ extern Timezone fusoLocal;
 // Tópico de publicação — definido aqui, main.cpp usa o de recebimento
 const char TOPICO_LAMPADA[] = "senai134/equipe/boo/lampada/estado";
 const char TOPICO_PROJETOR[] = "senai134/shared/projeto/projetor09";
-const char TOPICO_TELA_RETRATIL[] = "senai134/equipe/mario/devices/teste";
+const char TOPICO_TELA_RETRATIL[] = "senai134/shared/projeto/telaRetratil";
 const char TOPICO_AR_CONDICIONADO[] = "senai134/shared/projeto/AC";
 const char TOPICO_TELEVISAO[] = "senai134/shared/projeto/yoshi";
 
@@ -38,63 +38,63 @@ void montarJsonProjetor(JsonDocument &doc)
 
 void montarJsonTelaRetratil(JsonDocument &doc)
 {
-  doc["telaRetratil"]["UP"] = 0;
-  doc["telaRetratil"]["DOWN"] = 0;
-  doc["telaRetratil"]["PAUSE"] = 0;
+  doc["telaRetratil"]["UP"] = false;
+  doc["telaRetratil"]["DOWN"] = false;
+  doc["telaRetratil"]["PAUSE"] = false;
 
   if (estadoBotaoDualUp == 1 && estadoBotaoDualSelect == 0 && estadoBotaoDualDown == 0)
   {
-    doc["telaRetratil"]["UP"] = 1;
-    doc["telaRetratil"]["DOWN"] = 0;
-    doc["telaRetratil"]["PAUSE"] = 0;
+    doc["telaRetratil"]["UP"] = true;
+    doc["telaRetratil"]["DOWN"] = false;
+    doc["telaRetratil"]["PAUSE"] = false;
   }
 
   else if (estadoBotaoDualDown == 1 && estadoBotaoDualSelect == 0 && estadoBotaoDualUp == 0)
   {
-    doc["telaRetratil"]["UP"] = 0;
-    doc["telaRetratil"]["DOWN"] = 1;
-    doc["telaRetratil"]["PAUSE"] = 0;
+    doc["telaRetratil"]["UP"] = false;
+    doc["telaRetratil"]["DOWN"] = true;
+    doc["telaRetratil"]["PAUSE"] = false;
   }
 
   else if (estadoBotaoDualSelect == 1 && estadoBotaoDualUp == 0 && estadoBotaoDualDown == 0)
   {
-    doc["telaRetratil"]["UP"] = 0;
-    doc["telaRetratil"]["DOWN"] = 0;
-    doc["telaRetratil"]["PAUSE"] = 1;
+    doc["telaRetratil"]["UP"] = false;
+    doc["telaRetratil"]["DOWN"] = false;
+    doc["telaRetratil"]["PAUSE"] = true;
   }
 
   else if (estadoBotaoDualUp == 1 && estadoBotaoDualSelect == 1 && estadoBotaoDualDown == 1)
   {
-    doc["telaRetratil"]["UP"] = 0;
-    doc["telaRetratil"]["DOWN"] = 0;
-    doc["telaRetratil"]["PAUSE"] = 0;
+    doc["telaRetratil"]["UP"] = false;
+    doc["telaRetratil"]["DOWN"] = false;
+    doc["telaRetratil"]["PAUSE"] = false;
   }
 
   else if (estadoBotaoDualUp == 1 && estadoBotaoDualSelect == 1)
   {
-    doc["telaRetratil"]["UP"] = 0;
-    doc["telaRetratil"]["DOWN"] = 0;
-    doc["telaRetratil"]["PAUSE"] = 1;
+    doc["telaRetratil"]["UP"] = false;
+    doc["telaRetratil"]["DOWN"] = false;
+    doc["telaRetratil"]["PAUSE"] = true;
   }
 
   else if (estadoBotaoDualDown == 1 && estadoBotaoDualSelect == 1)
   {
-    doc["telaRetratil"]["UP"] = 0;
-    doc["telaRetratil"]["DOWN"] = 0;
-    doc["telaRetratil"]["PAUSE"] = 1;
+    doc["telaRetratil"]["UP"] = false;
+    doc["telaRetratil"]["DOWN"] = false;
+    doc["telaRetratil"]["PAUSE"] = true;
   }
 
   else if (estadoBotaoDualUp == 1 && estadoBotaoDualDown == 1 && estadoBotaoDualSelect == 0)
   {
-    doc["telaRetratil"]["UP"] = 0;
-    doc["telaRetratil"]["DOWN"] = 0;
-    doc["telaRetratil"]["PAUSE"] = 1;
+    doc["telaRetratil"]["UP"] = false;
+    doc["telaRetratil"]["DOWN"] = false;
+    doc["telaRetratil"]["PAUSE"] = true;
   }
   else
   {
-    doc["telaRetratil"]["UP"] = 0;
-    doc["telaRetratil"]["DOWN"] = 0;
-    doc["telaRetratil"]["PAUSE"] = 0;
+    doc["telaRetratil"]["UP"] = false;
+    doc["telaRetratil"]["DOWN"] = false;
+    doc["telaRetratil"]["PAUSE"] = false;
   }
 
   doc["telaRetratil"]["tela"] = (estadoBotaoDualScreen == 1) ? 1 : 0;
@@ -110,11 +110,13 @@ void montarJsonArCondicionado(JsonDocument &doc)
     doc["ar-condicionado"]["esp"] = 1;
   }
 
+
   if (estadoBotaoArId2 == 1)
   {
     doc["ar-condicionado"]["id_ar"] = 2;
     doc["ar-condicionado"]["esp"] = 1;
   }
+
 
   if (estadoBotaoArId3 == 1)
   {
@@ -122,18 +124,22 @@ void montarJsonArCondicionado(JsonDocument &doc)
     doc["ar-condicionado"]["esp"] = 2;
   }
 
+
   if (estadoBotaoArId4 == 1)
   {
     doc["ar-condicionado"]["id_ar"] = 4;
     doc["ar-condicionado"]["esp"] = 2;
   }
 
+  if(estadoBotaoDualPowerAr == 1)
+   doc["ar-condicionado"]["estado"] = 1;
+  else
+  doc["ar-condicionado"]["estado"] = 0; 
+  
   // estado
-  doc["ar-condicionado"]["estado"] = (estadoBotaoDualPowerAr == 1) ? 1 : 0;
 
   // Temperatura
- // if (estadoBotaoDualPowerAr == 1)
-    doc["ar-condicionado"]["temperatura"] = contadorTemperatura;
+  doc["ar-condicionado"]["temperatura"] = contadorTemperatura;
 
   // Modo
   if (estadoBotaoModoAr <= 3)
@@ -161,7 +167,7 @@ void montarJsonTelevisao(JsonDocument &doc)
     doc["televisao"]["comando"] = estadoComandoTV;
   }
 
-    doc["televisao"]["timestamp"] = fusoLocal.now();
+  doc["televisao"]["timestamp"] = fusoLocal.now();
 }
 
 void publicarJsonLampada()
@@ -274,7 +280,7 @@ void sincronizarPaginaAtual()
 
   // Televisão
   else if (paginaAtual == 5)
-    botaoDualPowerTv.setValue(1);
+    botaoDualPowerTv.setValue(estadoBotaoDualPowerTv);
   // Sensor
 }
 

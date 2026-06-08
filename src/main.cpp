@@ -11,12 +11,15 @@
 
 Timezone fusoLocal;
 
-const char TOPICO_SENSOR[] = "senai134/shared/projeto/analise09";
+const char TOPICO_SENSOR09[] = "senai134/shared/projeto/analise09";
+const char TOPICO_SENSOR10[] = "senai134/shared/projeto/analise10";
 
 // Protótipos
 void tratarMensagemRecebida(const char *topico, const String &mensagem);
 void tratarJsonComando(const String &mensagem);
-void tratarSensor(JsonDocument &doc);
+void tratarJsonComandoSala10(const String &mensagem);
+void tratarSensor09(JsonDocument &doc);
+void tratarSensorSala10(JsonDocument &doc);
 
 void setup()
 {
@@ -60,12 +63,18 @@ void tratarMensagemRecebida(const char *topico, const String &mensagem)
     debugInfo("Tópico: " + String(topico));
     debugInfo("Mensagem: " + mensagem);
 
-    if (strcmp(topico, TOPICO_SENSOR) == 0)
+    if (strcmp(topico, TOPICO_SENSOR09) == 0)
     {
         tratarJsonComando(mensagem);
         return;
     }
 
+    else if (strcmp(topico, TOPICO_SENSOR10) == 0)
+    {
+        tratarJsonComandoSala10(mensagem);
+    }
+     
+    else
     debugErro("Tópico não tratado: " + String(topico));
 }
 
@@ -82,22 +91,31 @@ void tratarJsonComando(const String &mensagem)
         return;
     }
 
-    tratarSensor(doc);
+    tratarSensor09(doc);
     // TODO: reagir aos comandos recebidos via MQTT
 }
 
-void tratarSensor(JsonDocument &doc)
+void tratarJsonComandoSala10(const String &mensagem)
 {
-    if (doc["analise"].is<JsonObject>() &&
-        doc["analise"]["timestamp"].is<unsigned long>() &&
-        doc["analise"]["temperatura"].is<float>() &&
-        doc["analise"]["umidade"].is<float>() &&
-        doc["analise"]["ruido"].is<float>() &&
-        doc["analise"]["comandoAr"].is<int>() &&
-        doc["analise"]["alertaSom"].is<int>() &&
-        doc["analise"]["eco"].is<bool>())
+    JsonDocument doc;
 
-    {   
+    DeserializationError erro = deserializeJson(doc, mensagem);
+
+    if (erro)
+    {
+        debugErro("Erro ao interpretar o JSON");
+        debugErro(erro.c_str());
+        return;
+    }
+
+    tratarSensorSala10(doc);
+}
+
+void tratarSensor09(JsonDocument &doc)
+{
+    if (doc["analise"].is<JsonObject>())
+
+    {
         timestemp = doc["analise"]["timestamp"].as<unsigned long>();
         valorTemperatura = doc["analise"]["temperatura"].as<float>();
         valorUmidade = doc["analise"]["umidade"].as<float>();
@@ -122,3 +140,31 @@ void tratarSensor(JsonDocument &doc)
     }
 }
 
+void tratarSensorSala10(JsonDocument &doc)
+{
+    if (doc["analise"].is<JsonObject>())
+
+    {
+        timestemp = doc["analise"]["timestamp"].as<unsigned long>();
+        valorTemperatura = doc["analise"]["temperatura"].as<float>();
+        valorUmidade = doc["analise"]["umidade"].as<float>();
+        valorRuido = doc["analise"]["ruido"].as<float>();
+        comandoAr = doc["analise"]["comandoAr"].as<int>();
+        alertaSom = doc["analise"]["alertaSom"].as<int>();
+        eco = doc["analise"]["eco"].as<bool>();
+
+        debugInfo("Timestemp: " + String(timestemp));
+        debugInfo("Temperatura: " + String(valorTemperatura));
+        debugInfo("Umidade: " + String(valorUmidade));
+        debugInfo("Ruído: " + String(valorRuido));
+        debugInfo("Comando Ar: " + String(comandoAr));
+        debugInfo("Alerta Som: " + String(alertaSom));
+        debugInfo("Eco: " + String(eco));
+    }
+
+    else
+    {
+        debugErro("A mensagem recebida não esta no formato chave-valor ou o valor não é correspondente ao tipo");
+        return;
+    }
+}

@@ -216,7 +216,7 @@ void botaoModoArSoltou()
 void botaoVentoArSoltou()
 {
     estadoBotaoVento++;
-    if (estadoBotaoVento >= 4)
+    if (estadoBotaoVento > 4)
     {
         estadoBotaoVento = 0;
     }
