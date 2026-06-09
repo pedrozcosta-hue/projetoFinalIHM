@@ -73,8 +73,8 @@ NexButton botaoReturnTv(5, 7, "b5");
 NexButton botaoBackSensor(6, 1, "b1");
 
 NexText textoSensorTemperatura(6, 2, "t0");
-NexText textoSensorUmidade(6, 3, "t2");
-NexText textoSensorRuido(6, 4, "t1");
+NexText textoSensorUmidade(6, 4, "t2");
+NexText textoSensorRuido(6, 3, "t1");
 
 NexText textoSensorTemperatura10(6, 5, "t3");
 NexText textoSensorRuido10(6, 6, "t4");
