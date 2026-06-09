@@ -16,6 +16,9 @@ void publicarJsonArCondicionado();
 void publicarJsonTV();
 void sincronizarPaginaAtual();
 
+void atualizarTextoSensor();
+void atualizarTextoSensor10();
+
 void atualizarTextoArCondicionado();
 
 #endif

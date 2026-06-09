@@ -60,8 +60,6 @@ void botaoReturnTvSoltou();
 
 // SENSOR
 void botaoBackSensorSoltou();
-void atualizarTextoSensor();
-void atualizarTextoSensor10();
 
 
 #endif
