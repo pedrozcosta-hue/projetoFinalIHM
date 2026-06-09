@@ -3,6 +3,7 @@
 #include "DebugManager.h"
 #include "IniciarNextion.h"
 #include "WiFiManager.h"
+#include "ComponentesSoltou.h"
 
 #include <ArduinoJson.h>
 #include <Arduino.h>
