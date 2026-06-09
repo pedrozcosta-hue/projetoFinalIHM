@@ -17,6 +17,7 @@ const char TOPICO_PROJETOR[] = "senai134/shared/projeto/projetor09";
 const char TOPICO_TELA_RETRATIL[] = "senai134/shared/projeto/telaRetratil";
 const char TOPICO_AR_CONDICIONADO[] = "senai134/shared/projeto/AC";
 const char TOPICO_TELEVISAO[] = "senai134/shared/projeto/yoshi";
+const char TOPICO_PROJETOR10[] = "senai134/shared/projeto/projetor10";
 
 void montarJsonLampada(JsonDocument &doc)
 {
@@ -197,6 +198,18 @@ void publicarJsonProjetor()
 
   debugInfo("Estado Power: " + String(estadoBotaoDualPower));
   debugInfo("Estado Congelamento: " + String(estadoBotaoDualFreeze));
+}
+void publicarJsonProjetor10()
+{
+  JsonDocument doc;
+  montarJsonProjetor(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_PROJETOR10, mensagem.c_str());
+
+  debugInfo("Estado Power: " + String(estadoBotaoDualPower10));
+  debugInfo("Estado Congelamento: " + String(estadoBotaoDualFreeze10));
 }
 
 void publicarJsonTelaRetratil()
