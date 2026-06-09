@@ -12,7 +12,7 @@
 extern Timezone fusoLocal;
 
 // Tópico de publicação — definido aqui, main.cpp usa o de recebimento
-const char TOPICO_LAMPADA[] = "senai134/equipe/boo/lampada/estado";
+const char TOPICO_LAMPADA[] = "senai134/shared/projeto/lampada";
 const char TOPICO_PROJETOR[] = "senai134/shared/projeto/projetor09";
 const char TOPICO_TELA_RETRATIL[] = "senai134/shared/projeto/telaRetratil";
 const char TOPICO_AR_CONDICIONADO[] = "senai134/shared/projeto/AC";
