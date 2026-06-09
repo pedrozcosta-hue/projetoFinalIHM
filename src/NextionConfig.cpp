@@ -307,3 +307,18 @@ void atualizarTextoSensor()
   snprintf(ruidoAmbiente, sizeof(ruidoAmbiente), "%.1f db", valorRuido);
   textoSensorRuido.setText(ruidoAmbiente);
 }
+void atualizarTextoSensor10()
+{
+  char temperaturaAmbiente10[10];
+  char umidadeAmbiente10[10];
+  char ruidoAmbiente10[10];
+
+  snprintf(temperaturaAmbiente10, sizeof(temperaturaAmbiente10), "%.1f °C", valorTemperatura10);
+  textoSensorTemperatura10.setText(temperaturaAmbiente10);
+
+  snprintf(umidadeAmbiente10, sizeof(umidadeAmbiente10), "%.1f %%", valorUmidade10);
+  textoSensorUmidade10.setText(umidadeAmbiente10);
+
+  snprintf(ruidoAmbiente10, sizeof(ruidoAmbiente10), "%.1f db", valorRuido10);
+  textoSensorRuido10.setText(ruidoAmbiente10);
+}

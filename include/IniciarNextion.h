@@ -73,6 +73,12 @@ extern NexText textoSensorTemperatura;
 extern NexText textoSensorUmidade;
 extern NexText textoSensorRuido;
 
+extern NexText textoSensorTemperatura10;
+extern NexText textoSensorUmidade10;
+extern NexText textoSensorRuido10;
+
+
+
 //======================================
 // VARIÁVEIS DE ESTADO
 //======================================
@@ -124,6 +130,14 @@ extern uint32_t comandoAr;
 extern uint32_t alertaSom;
 extern uint32_t eco;
 extern uint32_t timestemp;
+
+extern float valorTemperatura10;
+extern float valorUmidade10;
+extern float valorRuido10;
+extern uint32_t comandoAr10;
+extern uint32_t alertaSom10;
+extern uint32_t eco10;
+extern uint32_t timestemp10;
 
 
 void configurarNextion();

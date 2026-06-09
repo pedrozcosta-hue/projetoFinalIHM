@@ -73,8 +73,12 @@ NexButton botaoReturnTv(5, 7, "b5");
 NexButton botaoBackSensor(6, 1, "b1");
 
 NexText textoSensorTemperatura(6, 2, "t0");
-NexText textoSensorUmidade(6, 3, "t1");
-NexText textoSensorRuido(6, 4, "t2");
+NexText textoSensorUmidade(6, 3, "t2");
+NexText textoSensorRuido(6, 4, "t1");
+
+NexText textoSensorTemperatura10(6, 5, "t3");
+NexText textoSensorRuido10(6, 6, "t4");
+NexText textoSensorUmidade10(6, 7, "t5");
 
 //======================================
 // VARIÁVEIS DE ESTADO
@@ -126,6 +130,16 @@ uint32_t comandoAr = 0;
 uint32_t alertaSom = 0;
 uint32_t eco = 0;
 uint32_t timestemp = 0;
+
+float valorTemperatura10 = 0;
+float valorUmidade10 = 0;
+float valorRuido10 = 0;
+uint32_t comandoAr10 = 0;
+uint32_t alertaSom10 = 0;
+uint32_t eco10 = 0;
+uint32_t timestemp10 = 0;
+
+
 
 //======================================
 // FUNÇÕES
