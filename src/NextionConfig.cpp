@@ -269,8 +269,8 @@ void sincronizarPaginaAtual()
   {
     botaoDualPower.setValue(estadoBotaoDualPower);
     botaoDualFreeze.setValue(estadoBotaoDualFreeze);
-    botaoDualPower10.setValue(estadoBotaoDualPower);
-    botaoDualFreeze10.setValue(estadoBotaoDualFreeze);
+    botaoDualPower10.setValue(estadoBotaoDualPower10);
+    botaoDualFreeze10.setValue(estadoBotaoDualFreeze10);
   }
 
   // Tela Retrátil
