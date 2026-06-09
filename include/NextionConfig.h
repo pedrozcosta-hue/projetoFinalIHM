@@ -11,6 +11,7 @@ void montarJsonTelevisao(JsonDocument &doc);
 
 void publicarJsonLampada();
 void publicarJsonProjetor();
+void publicarJsonProjetor10();
 void publicarJsonTelaRetratil();
 void publicarJsonArCondicionado();
 void publicarJsonTV();

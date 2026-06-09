@@ -108,7 +108,7 @@ void botaoDualPower10Soltou()
 {
     botaoDualPower10.getValue(&estadoBotaoDualPower10);
     sincronizarPaginaAtual();
-    publicarJsonProjetor();
+    publicarJsonProjetor10();
     debugInfo("Power 10 solto. Estado = " + String(estadoBotaoDualPower10));
 }
 
@@ -116,7 +116,7 @@ void botaoDualFreeze10Soltou()
 {
     botaoDualFreeze10.getValue(&estadoBotaoDualFreeze10);
     sincronizarPaginaAtual();
-    publicarJsonProjetor();
+    publicarJsonProjetor10();
     debugInfo("Freeze 10 solto. Estado = " + String(estadoBotaoDualFreeze10));
 }
 /////////////////////////////////
