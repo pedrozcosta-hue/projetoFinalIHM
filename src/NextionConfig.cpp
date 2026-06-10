@@ -38,6 +38,14 @@ void montarJsonProjetor(JsonDocument &doc)
   doc["projetor"]["timestamp"] = fusoLocal.now();
 }
 
+void montarJsonProjetor10(JsonDocument &doc)
+{
+  doc["projetor"]["estadoPower"] = (estadoBotaoDualPower10 == 1) ? 1 : 0;
+  doc["projetor"]["estadoCongelamento"] = (estadoBotaoDualFreeze10 == 1) ? 1 : 0;
+  
+  doc["projetor"]["timestamp"] = fusoLocal.now();
+}
+
 void montarJsonTelaRetratil(JsonDocument &doc)
 {
   doc["telaRetratil"]["UP"] = false;
@@ -202,7 +210,7 @@ void publicarJsonProjetor()
 void publicarJsonProjetor10()
 {
   JsonDocument doc;
-  montarJsonProjetor(doc);
+  montarJsonProjetor10(doc);
 
   String mensagem;
   serializeJson(doc, mensagem);
@@ -269,8 +277,8 @@ void sincronizarPaginaAtual()
   {
     botaoDualPower.setValue(estadoBotaoDualPower);
     botaoDualFreeze.setValue(estadoBotaoDualFreeze);
-    botaoDualPower10.setValue(estadoBotaoDualPower);
-    botaoDualFreeze10.setValue(estadoBotaoDualFreeze);
+    botaoDualPower10.setValue(estadoBotaoDualPower10);
+    botaoDualFreeze10.setValue(estadoBotaoDualFreeze10);
   }
 
   // Tela Retrátil
