@@ -1,8 +1,11 @@
+
+
 # Projeto Final IHM
 Sistema embarcado baseado em ESP32 e Display Nextion para monitoramento e controle através de uma Interface Homem-Máquina (IHM).
 
 Autores: Pedro Z. Costa, Nicolas M. Lopes, Artur de Medeiros Cruz, Gustavo F. Bicho, Veronica Ramalho.
 
+---
 ## Visão Geral
 O projeto consiste em uma interface gráfica desenvolvida para o display Nextion, integrada a um ESP32 responsável pelo processamento dos dados e pela comunicação com dispositivos externos.
 A aplicação foi desenvolvida com foco em:
@@ -17,6 +20,7 @@ A abordagem tradicional exige que o microcontrolador desenhe e atualize toda a i
 Com o Nextion, a interface é processada pelo próprio display, reduzindo significativamente o consumo de processamento do ESP32.
 Isso permite que o ESP32 fique responsável apenas pela lógica da aplicação e comunicação.
 
+---
 ## Funcionalidades
 * ✅ Interface gráfica utilizando Nextion
 * ✅ Comunicação serial entre ESP32 e display
@@ -27,13 +31,14 @@ Isso permite que o ESP32 fique responsável apenas pela lógica da aplicação e
 * ✅ Atualização dinâmica de componentes da interface
 
 ## Tecnologias Utilizadas
-Tecnologia │ Finalidade
-* ESP32      │ Processamento principal
-* Nextion    │ Interface Homem-Máquina
-* C/C++      │ Desenvolvimento embarcado
-* PlatformIO │ Ambiente de desenvolvimento
-* UART       │ Comunicação ESP32 ↔ Nextion
-
+| Tecnologia | Finalidade |
+|------------|------------|
+| ESP32 | Processamento principal |
+| Nextion | Interface Homem-Máquina |
+| C/C++ | Desenvolvimento embarcado |
+| PlatformIO | Ambiente de desenvolvimento |
+| UART | Comunicação ESP32 ↔ Nextion |
+---
 ## Estrutura do Projeto
 ```
 projetoFinalIHM/
@@ -45,7 +50,7 @@ projetoFinalIHM/
 ├── platformio.ini
 └── README.md
 ```
-
+---
 ## Hardware Utilizado
 * ESP32
 * Display Nextion
@@ -66,11 +71,9 @@ projetoFinalIHM/
 └────┬─────┘
      │
      ▼
-```
-
----
-
 Lógica da Aplicação
+```
+---
 
 ## Como Executar o Projeto
 Pré-requisitos
@@ -81,8 +84,9 @@ Clonar o repositório
 ```
 git clone https://github.com/pedrozcosta-hue/projetoFinalIHM.git
 ```
+---
+## Fluxo de Funcionamento
 ```
-Fluxo de Funcionamento
 Usuário
    │
    ▼
@@ -98,7 +102,6 @@ Processamento
 Atualização da interface
 
 ```
-
 ---
 
 ## Licença
