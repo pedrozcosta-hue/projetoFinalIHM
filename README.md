@@ -1,5 +1,5 @@
 # Projeto Final IHM
-## Sistema embarcado baseado em ESP32 e Display Nextion para monitoramento e controle através de uma Interface Homem-Máquina (IHM).
+Sistema embarcado baseado em ESP32 e Display Nextion para monitoramento e controle através de uma Interface Homem-Máquina (IHM).
 
 Autores: Pedro Z. Costa, Nicolas M. Lopes, Artur de Medeiros Cruz, Gustavo F. Bicho, Veronica Ramalho.
 
@@ -17,7 +17,7 @@ A abordagem tradicional exige que o microcontrolador desenhe e atualize toda a i
 Com o Nextion, a interface é processada pelo próprio display, reduzindo significativamente o consumo de processamento do ESP32.
 Isso permite que o ESP32 fique responsável apenas pela lógica da aplicação e comunicação.
 
-##Funcionalidades
+## Funcionalidades
 * ✅ Interface gráfica utilizando Nextion
 * ✅ Comunicação serial entre ESP32 e display
 * ✅ Arquitetura organizada em módulos
@@ -28,11 +28,11 @@ Isso permite que o ESP32 fique responsável apenas pela lógica da aplicação e
 
 ## Tecnologias Utilizadas
 Tecnologia │ Finalidade
-ESP32      │ Processamento principal
-Nextion    │ Interface Homem-Máquina
-C/C++      │ Desenvolvimento embarcado
-PlatformIO │ Ambiente de desenvolvimento
-UART       │ Comunicação ESP32 ↔ Nextion
+* ESP32      │ Processamento principal
+* Nextion    │ Interface Homem-Máquina
+* C/C++      │ Desenvolvimento embarcado
+* PlatformIO │ Ambiente de desenvolvimento
+* UART       │ Comunicação ESP32 ↔ Nextion
 
 ## Estrutura do Projeto
 ```
@@ -96,6 +96,7 @@ Processamento
    │
    ▼
 Atualização da interface
+
 ```
 
 ---
@@ -103,5 +104,7 @@ Atualização da interface
 ## Licença
 Projeto desenvolvido para fins acadêmicos e educacionais.
 
-Repositório
+---
+
+## Repositório
 GitHub: https://github.com/pedrozcosta-hue/projetoFinalIHM
