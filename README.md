@@ -1,9 +1,7 @@
-
-
 # Projeto Final IHM
 Sistema embarcado baseado em ESP32 e Display Nextion para monitoramento e controle através de uma Interface Homem-Máquina (IHM).
 
-Autores: Pedro Z. Costa, Nicolas M. Lopes, Artur de Medeiros Cruz, Gustavo F. Bicho, Veronica Ramalho.
+> Autores: [Pedro Costa](https://github.com/pedrozcosta-hue), [Nicolas Lopes](https://github.com/nicolasmlopes7-educacional), [Artur Cruz](https://github.com/ArturMedeiros1102), [Gustavo Bicho](https://github.com/gustavobicho), [Veronica Ramalho](https://github.com/veronica-ramalho).
 
 ---
 ## Visão Geral
