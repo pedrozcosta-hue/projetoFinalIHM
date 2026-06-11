@@ -28,6 +28,7 @@ void botaoB3Soltou()
 {
     sendCommand("page page4");
     paginaAtual = 4;
+    atualizarTextoArCondicionado();
     debugInfo("b3 solto - Página 4 (Ar Condicionado)");
 }
 void botaoB4Soltou()
@@ -40,8 +41,6 @@ void botaoB5Soltou()
 {
     sendCommand("page page6");
     paginaAtual = 6;
-    atualizarTextoSensor();
-    atualizarTextoSensor10();
     debugInfo("b5 solto - Página 6 (Sensor)");
 }
 

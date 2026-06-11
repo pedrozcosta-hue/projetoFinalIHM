@@ -73,9 +73,9 @@ void tratarMensagemRecebida(const char *topico, const String &mensagem)
     {
         tratarJsonComandoSala10(mensagem);
     }
-     
+
     else
-    debugErro("Tópico não tratado: " + String(topico));
+        debugErro("Tópico não tratado: " + String(topico));
 }
 
 void tratarJsonComando(const String &mensagem)
@@ -131,6 +131,8 @@ void tratarSensor09(JsonDocument &doc)
         debugInfo("Comando Ar: " + String(comandoAr));
         debugInfo("Alerta Som: " + String(alertaSom));
         debugInfo("Eco: " + String(eco));
+
+        atualizarTextoSensor();
     }
 
     else
@@ -145,7 +147,7 @@ void tratarSensorSala10(JsonDocument &doc)
     if (doc["analise"].is<JsonObject>())
 
     {
-        timestemp10= doc["analise"]["timestamp"].as<unsigned long>();
+        timestemp10 = doc["analise"]["timestamp"].as<unsigned long>();
         valorTemperatura10 = doc["analise"]["temperatura"].as<float>();
         valorUmidade10 = doc["analise"]["umidade"].as<float>();
         valorRuido10 = doc["analise"]["ruido"].as<float>();
@@ -160,6 +162,8 @@ void tratarSensorSala10(JsonDocument &doc)
         debugInfo("Comando Ar: " + String(comandoAr10));
         debugInfo("Alerta Som: " + String(alertaSom10));
         debugInfo("Eco: " + String(eco10));
+
+        atualizarTextoSensor10();
     }
 
     else
