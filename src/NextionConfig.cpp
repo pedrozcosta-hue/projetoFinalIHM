@@ -42,7 +42,7 @@ void montarJsonProjetor10(JsonDocument &doc)
 {
   doc["projetor"]["estadoPower"] = (estadoBotaoDualPower10 == 1) ? 1 : 0;
   doc["projetor"]["estadoCongelamento"] = (estadoBotaoDualFreeze10 == 1) ? 1 : 0;
-  
+
   doc["projetor"]["timestamp"] = fusoLocal.now();
 }
 
@@ -100,6 +100,7 @@ void montarJsonTelaRetratil(JsonDocument &doc)
     doc["telaRetratil"]["DOWN"] = false;
     doc["telaRetratil"]["PAUSE"] = true;
   }
+
   else
   {
     doc["telaRetratil"]["UP"] = false;
@@ -120,13 +121,11 @@ void montarJsonArCondicionado(JsonDocument &doc)
     doc["ar-condicionado"]["esp"] = 1;
   }
 
-
   if (estadoBotaoArId2 == 1)
   {
     doc["ar-condicionado"]["id_ar"] = 2;
     doc["ar-condicionado"]["esp"] = 1;
   }
-
 
   if (estadoBotaoArId3 == 1)
   {
@@ -134,19 +133,16 @@ void montarJsonArCondicionado(JsonDocument &doc)
     doc["ar-condicionado"]["esp"] = 2;
   }
 
-
   if (estadoBotaoArId4 == 1)
   {
     doc["ar-condicionado"]["id_ar"] = 4;
     doc["ar-condicionado"]["esp"] = 2;
   }
 
-  if(estadoBotaoDualPowerAr == 1)
-   doc["ar-condicionado"]["estado"] = 1;
+  if (estadoBotaoDualPowerAr == 1)
+    doc["ar-condicionado"]["estado"] = 1;
   else
-  doc["ar-condicionado"]["estado"] = 0; 
-  
-  // estado
+    doc["ar-condicionado"]["estado"] = 0;
 
   // Temperatura
   doc["ar-condicionado"]["temperatura"] = contadorTemperatura;
@@ -310,7 +306,6 @@ void atualizarTextoArCondicionado()
 {
   char temperatura[10];
   snprintf(temperatura, sizeof(temperatura), "%lu", contadorTemperatura);
-
   textoTemperatura.setText(temperatura);
 }
 
@@ -320,14 +315,26 @@ void atualizarTextoSensor()
   char umidadeAmbiente[10];
   char ruidoAmbiente[10];
 
-  snprintf(temperaturaAmbiente, sizeof(temperaturaAmbiente), "%.1f °C", valorTemperatura);
-  textoSensorTemperatura.setText(temperaturaAmbiente);
+  if (valorTemperatura10 != 0 && valorUmidade10 != 0 && valorRuido10)
+    return;
 
-  snprintf(umidadeAmbiente, sizeof(umidadeAmbiente), "%.1f %%", valorUmidade);
-  textoSensorUmidade.setText(umidadeAmbiente);
+  if (valorTemperatura != 0)
+  {
+    snprintf(temperaturaAmbiente, sizeof(temperaturaAmbiente), "%.1f °C", valorTemperatura);
+    textoSensorTemperatura.setText(temperaturaAmbiente);
+  }
 
-  snprintf(ruidoAmbiente, sizeof(ruidoAmbiente), "%.1f db", valorRuido);
-  textoSensorRuido.setText(ruidoAmbiente);
+  if (valorUmidade != 0)
+  {
+    snprintf(umidadeAmbiente, sizeof(umidadeAmbiente), "%.1f %%", valorUmidade);
+    textoSensorUmidade.setText(umidadeAmbiente);
+  }
+
+  if (valorRuido != 0)
+  {
+    snprintf(ruidoAmbiente, sizeof(ruidoAmbiente), "%.1f db", valorRuido);
+    textoSensorRuido.setText(ruidoAmbiente);
+  }
 }
 void atualizarTextoSensor10()
 {
@@ -335,12 +342,24 @@ void atualizarTextoSensor10()
   char umidadeAmbiente10[10];
   char ruidoAmbiente10[10];
 
-  snprintf(temperaturaAmbiente10, sizeof(temperaturaAmbiente10), "%.1f °C", valorTemperatura10);
-  textoSensorTemperatura10.setText(temperaturaAmbiente10);
+  if (valorTemperatura10 != 0 && valorUmidade10 != 0 && valorRuido10)
+    return;
 
-  snprintf(umidadeAmbiente10, sizeof(umidadeAmbiente10), "%.1f %%", valorUmidade10);
-  textoSensorUmidade10.setText(umidadeAmbiente10);
+  if (valorTemperatura10 != 0)
+  {
+    snprintf(temperaturaAmbiente10, sizeof(temperaturaAmbiente10), "%.1f °C", valorTemperatura10);
+    textoSensorTemperatura10.setText(temperaturaAmbiente10);
+  }
 
-  snprintf(ruidoAmbiente10, sizeof(ruidoAmbiente10), "%.1f db", valorRuido10);
-  textoSensorRuido10.setText(ruidoAmbiente10);
+  if (valorUmidade10 != 0)
+  {
+    snprintf(umidadeAmbiente10, sizeof(umidadeAmbiente10), "%.1f %%", valorUmidade10);
+    textoSensorUmidade10.setText(umidadeAmbiente10);
+  }
+
+  if (valorRuido10 != 0)
+  {
+    snprintf(ruidoAmbiente10, sizeof(ruidoAmbiente10), "%.1f db", valorRuido10);
+    textoSensorRuido10.setText(ruidoAmbiente10);
+  }
 }

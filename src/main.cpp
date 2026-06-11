@@ -145,7 +145,7 @@ void tratarSensorSala10(JsonDocument &doc)
     if (doc["analise"].is<JsonObject>())
 
     {
-        timestemp10= doc["analise"]["timestamp"].as<unsigned long>();
+        timestemp10 = doc["analise"]["timestamp"].as<unsigned long>();
         valorTemperatura10 = doc["analise"]["temperatura"].as<float>();
         valorUmidade10 = doc["analise"]["umidade"].as<float>();
         valorRuido10 = doc["analise"]["ruido"].as<float>();

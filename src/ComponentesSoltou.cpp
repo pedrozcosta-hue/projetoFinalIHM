@@ -28,6 +28,7 @@ void botaoB3Soltou()
 {
     sendCommand("page page4");
     paginaAtual = 4;
+    atualizarTextoArCondicionado();
     debugInfo("b3 solto - Página 4 (Ar Condicionado)");
 }
 void botaoB4Soltou()
