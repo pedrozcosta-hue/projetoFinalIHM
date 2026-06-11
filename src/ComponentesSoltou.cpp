@@ -41,8 +41,6 @@ void botaoB5Soltou()
 {
     sendCommand("page page6");
     paginaAtual = 6;
-    atualizarTextoSensor();
-    atualizarTextoSensor10();
     debugInfo("b5 solto - Página 6 (Sensor)");
 }
 
