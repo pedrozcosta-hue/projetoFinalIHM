@@ -13,11 +13,10 @@ extern Timezone fusoLocal;
 
 // Tópico de publicação — definido aqui, main.cpp usa o de recebimento
 const char TOPICO_LAMPADA[] = "senai134/shared/projeto/lampada";
-const char TOPICO_PROJETOR[] = "senai134/shared/projeto/projetor09";
+const char TOPICO_PROJETOR[] = "senai134/shared/projeto/projetor";
 const char TOPICO_TELA_RETRATIL[] = "senai134/shared/projeto/telaRetratil";
 const char TOPICO_AR_CONDICIONADO[] = "senai134/shared/projeto/AC";
-const char TOPICO_TELEVISAO[] = "senai134/shared/projeto/yoshi";
-const char TOPICO_PROJETOR10[] = "senai134/shared/projeto/projetor10";
+const char TOPICO_TELEVISAO[] = "senai134/shared/projeto/TV";
 
 void montarJsonLampada(JsonDocument &doc)
 {
@@ -48,65 +47,8 @@ void montarJsonProjetor10(JsonDocument &doc)
 
 void montarJsonTelaRetratil(JsonDocument &doc)
 {
-  doc["telaRetratil"]["UP"] = false;
-  doc["telaRetratil"]["DOWN"] = false;
-  doc["telaRetratil"]["PAUSE"] = false;
-
-  if (estadoBotaoDualUp == 1 && estadoBotaoDualSelect == 0 && estadoBotaoDualDown == 0)
-  {
-    doc["telaRetratil"]["UP"] = true;
-    doc["telaRetratil"]["DOWN"] = false;
-    doc["telaRetratil"]["PAUSE"] = false;
-  }
-
-  else if (estadoBotaoDualDown == 1 && estadoBotaoDualSelect == 0 && estadoBotaoDualUp == 0)
-  {
-    doc["telaRetratil"]["UP"] = false;
-    doc["telaRetratil"]["DOWN"] = true;
-    doc["telaRetratil"]["PAUSE"] = false;
-  }
-
-  else if (estadoBotaoDualSelect == 1 && estadoBotaoDualUp == 0 && estadoBotaoDualDown == 0)
-  {
-    doc["telaRetratil"]["UP"] = false;
-    doc["telaRetratil"]["DOWN"] = false;
-    doc["telaRetratil"]["PAUSE"] = true;
-  }
-
-  else if (estadoBotaoDualUp == 1 && estadoBotaoDualSelect == 1 && estadoBotaoDualDown == 1)
-  {
-    doc["telaRetratil"]["UP"] = false;
-    doc["telaRetratil"]["DOWN"] = false;
-    doc["telaRetratil"]["PAUSE"] = false;
-  }
-
-  else if (estadoBotaoDualUp == 1 && estadoBotaoDualSelect == 1)
-  {
-    doc["telaRetratil"]["UP"] = false;
-    doc["telaRetratil"]["DOWN"] = false;
-    doc["telaRetratil"]["PAUSE"] = true;
-  }
-
-  else if (estadoBotaoDualDown == 1 && estadoBotaoDualSelect == 1)
-  {
-    doc["telaRetratil"]["UP"] = false;
-    doc["telaRetratil"]["DOWN"] = false;
-    doc["telaRetratil"]["PAUSE"] = true;
-  }
-
-  else if (estadoBotaoDualUp == 1 && estadoBotaoDualDown == 1 && estadoBotaoDualSelect == 0)
-  {
-    doc["telaRetratil"]["UP"] = false;
-    doc["telaRetratil"]["DOWN"] = false;
-    doc["telaRetratil"]["PAUSE"] = true;
-  }
-  else
-  {
-    doc["telaRetratil"]["UP"] = false;
-    doc["telaRetratil"]["DOWN"] = false;
-    doc["telaRetratil"]["PAUSE"] = false;
-  }
-
+  doc["telaRetratil"]["comando"] = estadoComandoTela;
+  
   doc["telaRetratil"]["tela"] = (estadoBotaoDualScreen == 1) ? 1 : 0;
 
   doc["telaRetratil"]["timestamp"] = fusoLocal.now();
@@ -171,7 +113,7 @@ void montarJsonTelevisao(JsonDocument &doc)
 {
   if (estadoComandoTV <= 9)
   {
-    doc["televisao"]["comando"] = estadoComandoTV;
+    doc["comando"] = estadoComandoTV;
   }
 
   doc["televisao"]["timestamp"] = fusoLocal.now();
@@ -211,7 +153,7 @@ void publicarJsonProjetor10()
 
   String mensagem;
   serializeJson(doc, mensagem);
-  publicarMensagem(TOPICO_PROJETOR10, mensagem.c_str());
+  publicarMensagem(TOPICO_PROJETOR, mensagem.c_str());
 
   debugInfo("Estado Power: " + String(estadoBotaoDualPower10));
   debugInfo("Estado Congelamento: " + String(estadoBotaoDualFreeze10));
@@ -226,9 +168,7 @@ void publicarJsonTelaRetratil()
   serializeJson(doc, mensagem);
   publicarMensagem(TOPICO_TELA_RETRATIL, mensagem.c_str());
 
-  debugInfo("Botão Up: " + String(estadoBotaoDualUp));
-  debugInfo("Botão Down: " + String(estadoBotaoDualDown));
-  debugInfo("Botão Select: " + String(estadoBotaoDualSelect));
+  debugInfo("Tela Retratil: " + String(estadoComandoTela));
 }
 void publicarJsonArCondicionado()
 {
@@ -281,9 +221,6 @@ void sincronizarPaginaAtual()
   // Tela Retrátil
   else if (paginaAtual == 3)
   {
-    botaoDualUp.setValue(estadoBotaoDualUp);
-    botaoDualDown.setValue(estadoBotaoDualDown);
-    botaoDualSelect.setValue(estadoBotaoDualSelect);
     botaoDualScreen.setValue(estadoBotaoDualScreen);
   }
 

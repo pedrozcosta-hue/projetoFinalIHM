@@ -37,11 +37,11 @@ NexDSButton botaoDualFreeze10(2, 4, "bt3");
 NexButton botaoBackProjetor(2, 5, "b0");
 
 // PÁGINA 3 — TELA RETRÁTIL
-NexDSButton botaoDualUp(3, 4, "bt2");
-NexDSButton botaoDualDown(3, 5, "bt3");
-NexDSButton botaoDualSelect(3, 3, "bt1");
-NexButton botaoBackTela(3, 2, "b0");
-NexDSButton botaoDualScreen(3, 1, "bt0");
+NexButton botaoDualUp(3, 2, "b0");
+NexButton botaoDualDown(3, 3, "b1");
+NexButton botaoDualSelect(3, 4, "b2");
+NexButton botaoBackTela(3, 1, "b3");
+NexDSButton botaoDualScreen(3, 5, "bt0");
 
 // PÁGINA 4 - AR CONDICIONADO
 NexDSButton botaoArId1(4, 7, "bt1");
@@ -100,9 +100,7 @@ uint32_t estadoBotaoDualPower10 = 0;
 uint32_t estadoBotaoDualFreeze10 = 0;
 
 // Tela Retrátil
-uint32_t estadoBotaoDualUp = 0;
-uint32_t estadoBotaoDualDown = 0;
-uint32_t estadoBotaoDualSelect = 0;
+uint32_t estadoComandoTela = 5;
 uint32_t estadoBotaoDualScreen = 0;
 
 // Ar condicionado
@@ -140,7 +138,6 @@ uint32_t eco10 = 0;
 uint32_t timestemp10 = 0;
 
 
-
 //======================================
 // FUNÇÕES
 //======================================
@@ -168,9 +165,7 @@ void configurarTelaInicial()
   estadoBotaoDualFreeze10 = 0;
 
   // Tela Retrátil
-  estadoBotaoDualUp = 0;
-  estadoBotaoDualDown = 0;
-  estadoBotaoDualSelect = 0;
+  estadoComandoTela;
   estadoBotaoDualScreen = 0;
 
   // Ar condicionado
@@ -227,9 +222,6 @@ void configurarTelaInicial()
   paginaAtual = 3;
   delay(500);
 
-  botaoDualUp.setValue(estadoBotaoDualUp);
-  botaoDualDown.setValue(estadoBotaoDualDown);
-  botaoDualSelect.setValue(estadoBotaoDualSelect);
   botaoDualScreen.setValue(estadoBotaoDualScreen);
   
   // Página 4

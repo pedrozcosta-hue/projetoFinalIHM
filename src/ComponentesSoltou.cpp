@@ -41,6 +41,8 @@ void botaoB5Soltou()
 {
     sendCommand("page page6");
     paginaAtual = 6;
+    atualizarTextoSensor();
+    atualizarTextoSensor10();
     debugInfo("b5 solto - Página 6 (Sensor)");
 }
 
@@ -129,24 +131,21 @@ void botaoBackTelaSoltou()
 }
 void botaoDualUpSoltou()
 {
-    botaoDualUp.getValue(&estadoBotaoDualUp);
-    sincronizarPaginaAtual();
+    estadoComandoTela = 0;
     publicarJsonTelaRetratil();
-    debugInfo("Up solto. Estado = " + String(estadoBotaoDualUp));
+    debugInfo("Up solto. Estado = " + String(estadoComandoTela));
 }
 void botaoDualDownSoltou()
 {
-    botaoDualDown.getValue(&estadoBotaoDualDown);
-    sincronizarPaginaAtual();
+    estadoComandoTela = 1;
     publicarJsonTelaRetratil();
-    debugInfo("Down solto. Estado = " + String(estadoBotaoDualDown));
+    debugInfo("Down solto. Estado = " + String(estadoComandoTela));
 }
 void botaoDualSelectSoltou()
 {
-    botaoDualSelect.getValue(&estadoBotaoDualSelect);
-    sincronizarPaginaAtual();
+    estadoComandoTela = 2;
     publicarJsonTelaRetratil();
-    debugInfo("Select solto. Estado = " + String(estadoBotaoDualSelect));
+    debugInfo("Select solto. Estado = " + String(estadoComandoTela));
 }
 
 void botaoDualScreenSoltou()

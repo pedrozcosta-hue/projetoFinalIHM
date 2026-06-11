@@ -34,9 +34,9 @@ extern NexButton botaoBackProjetor;
 
 
 // PÁGINA 3 — TELA RETRÁTIL
-extern NexDSButton botaoDualUp;
-extern NexDSButton botaoDualDown;
-extern NexDSButton botaoDualSelect;
+extern NexButton botaoDualUp;
+extern NexButton botaoDualDown;
+extern NexButton botaoDualSelect;
 extern NexButton botaoBackTela;
 extern NexDSButton botaoDualScreen;
 
@@ -79,6 +79,8 @@ extern NexText textoSensorRuido10;
 
 
 
+
+
 //======================================
 // VARIÁVEIS DE ESTADO
 //======================================
@@ -99,9 +101,7 @@ extern uint32_t estadoBotaoDualPower10;
 extern uint32_t estadoBotaoDualFreeze10;
 
 // Tela Retrátil
-extern uint32_t estadoBotaoDualUp;
-extern uint32_t estadoBotaoDualDown;
-extern uint32_t estadoBotaoDualSelect;
+extern uint32_t estadoComandoTela;
 extern uint32_t estadoBotaoDualScreen;
 
 // Ar condicionado
@@ -138,7 +138,6 @@ extern uint32_t comandoAr10;
 extern uint32_t alertaSom10;
 extern uint32_t eco10;
 extern uint32_t timestemp10;
-
 
 void configurarNextion();
 void configurarTelaInicial();
