@@ -38,6 +38,8 @@ void botaoArId2Soltou();
 void botaoArId3Soltou();
 void botaoArId4Soltou();
 
+void botaoOffArSoltou();
+void botaoOnArSoltou();
 void botaoBackArSoltou();
 void botaoDualPowerArSoltou();
 void botaoModoArSoltou();

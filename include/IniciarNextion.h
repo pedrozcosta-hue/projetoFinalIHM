@@ -108,7 +108,7 @@ extern uint32_t estadoComandoTela;
 extern uint32_t estadoBotaoDualScreen;
 
 // Ar condicionado
-extern uint32_t estadoBotaoDualPowerAr;
+extern uint32_t estadoBotaoOnOffAr;
 extern uint32_t estadoBotaoModoAr;
 extern uint32_t estadoBotaoVento;
 extern uint32_t contadorTemperatura;

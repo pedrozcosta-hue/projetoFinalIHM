@@ -28,7 +28,9 @@ void botaoB3Soltou()
 {
     sendCommand("page page4");
     paginaAtual = 4;
-    atualizarTextoArCondicionado();
+    atualizarTextoTemperaturaArCondicionado();
+    atualizarTextoModoAr();
+    atualizarTextoVento();
     debugInfo("b3 solto - Página 4 (Ar Condicionado)");
 }
 void botaoB4Soltou()
@@ -164,7 +166,18 @@ void botaoBackArSoltou()
     paginaAtual = 0;
     debugInfo("B0 Back - Página 0 (Menu)");
 }
-
+void botaoOnArSoltou()
+{
+    estadoBotaoOnOffAr = 1;
+    publicarJsonArCondicionado();
+    debugInfo("On solto. Estado = " + String(estadoBotaoOnOffAr));
+}
+void botaoOffArSoltou()
+{
+    estadoBotaoOnOffAr = 0;
+    publicarJsonArCondicionado();
+    debugInfo("Off solto. Estado = " + String(estadoBotaoOnOffAr));
+}
 void botaoArId1Soltou()
 {
     botaoArId1.getValue(&estadoBotaoArId1);
@@ -197,18 +210,12 @@ void botaoArId4Soltou()
     publicarJsonArCondicionado();
     debugInfo("ArId4 solto. Estado = " + String(estadoBotaoArId4));
 }
-void botaoDualPowerArSoltou()
-{
-    botaoDualPowerAr.getValue(&estadoBotaoDualPowerAr);
 
-    sincronizarPaginaAtual();
-    publicarJsonArCondicionado();
-    debugInfo("Power solto. Estado = " + String(estadoBotaoDualPowerAr));
-}
 void botaoModoArSoltou()
 {
     estadoBotaoModoAr = (estadoBotaoModoAr + 1) % 4;
     publicarJsonArCondicionado();
+    atualizarTextoModoAr();
     debugInfo("Modo solto. Estado = " + String(estadoBotaoModoAr));
 }
 void botaoVentoArSoltou()
@@ -219,6 +226,7 @@ void botaoVentoArSoltou()
         estadoBotaoVento = 0;
     }
     publicarJsonArCondicionado();
+    atualizarTextoVento();
     debugInfo("Vento solto. Estado = " + String(estadoBotaoVento));
 }
 void botaoTemperaturaUpSoltou()
@@ -231,7 +239,7 @@ void botaoTemperaturaUpSoltou()
     }
 
     publicarJsonArCondicionado();
-    atualizarTextoArCondicionado();
+    atualizarTextoTemperaturaArCondicionado();
 }
 
 void botaoTemperaturaDownSoltou()
@@ -244,7 +252,7 @@ void botaoTemperaturaDownSoltou()
     }
 
     publicarJsonArCondicionado();
-    atualizarTextoArCondicionado();
+    atualizarTextoTemperaturaArCondicionado();
 }
 // TODO: ESP
 //////////////////////////////////

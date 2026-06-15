@@ -21,6 +21,8 @@ void sincronizarPaginaAtual();
 void atualizarTextoSensor();
 void atualizarTextoSensor10();
 
-void atualizarTextoArCondicionado();
+void atualizarTextoTemperaturaArCondicionado();
+void atualizarTextoModoAr();
+void atualizarTextoVento();
 
 #endif

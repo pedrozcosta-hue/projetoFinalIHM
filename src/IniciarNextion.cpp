@@ -232,7 +232,7 @@ void configurarTelaInicial()
   paginaAtual = 4;
   delay(500);
 
-  botaoDualPowerAr.setValue(estadoBotaoDualPowerAr);
+
   botaoArId1.setValue(estadoBotaoArId1);
   botaoArId2.setValue(estadoBotaoArId2);
   botaoArId3.setValue(estadoBotaoArId3);
@@ -296,7 +296,8 @@ void configurarEventosNextion()
   botaoArId3.attachPop(botaoArId3Soltou);
   botaoArId4.attachPop(botaoArId4Soltou);
 
-  botaoDualPowerAr.attachPop(botaoDualPowerArSoltou);
+  botaoOnAr.attachPop(botaoOnArSoltou);
+  botaoOffAr.attachPop(botaoOffArSoltou);
   botaoModoAr.attachPop(botaoModoArSoltou);
   botaoVento.attachPop(botaoVentoArSoltou); // nome correto do callback
   botaoBackAr.attachPop(botaoBackArSoltou);
@@ -355,7 +356,8 @@ void configurarEventosNextion()
 
 
   // ar condicionado
-  nexListen(botaoDualPowerAr);
+  nexListen(botaoOnAr);
+  nexListen(botaoOffAr);
   nexListen(botaoArId1);
   nexListen(botaoArId2);
   nexListen(botaoArId3);

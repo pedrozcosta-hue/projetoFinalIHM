@@ -48,7 +48,7 @@ void montarJsonProjetor10(JsonDocument &doc)
 void montarJsonTelaRetratil(JsonDocument &doc)
 {
   doc["telaRetratil"]["comando"] = estadoComandoTela;
-  
+
   doc["telaRetratil"]["tela"] = (estadoBotaoDualScreen == 1) ? 1 : 0;
 
   doc["telaRetratil"]["timestamp"] = fusoLocal.now();
@@ -80,7 +80,7 @@ void montarJsonArCondicionado(JsonDocument &doc)
     doc["ar-condicionado"]["esp"] = 2;
   }
 
-  if (estadoBotaoDualPowerAr == 1)
+  if (estadoBotaoOnOffAr == 1)
     doc["ar-condicionado"]["estado"] = 1;
   else
     doc["ar-condicionado"]["estado"] = 0;
@@ -227,7 +227,6 @@ void sincronizarPaginaAtual()
   // Ar-condicionado
   else if (paginaAtual == 4)
   {
-    botaoDualPowerAr.setValue(estadoBotaoDualPowerAr);
     botaoArId1.setValue(estadoBotaoArId1);
     botaoArId2.setValue(estadoBotaoArId2);
     botaoArId3.setValue(estadoBotaoArId3);
@@ -240,12 +239,23 @@ void sincronizarPaginaAtual()
   // Sensor
 }
 
-void atualizarTextoArCondicionado()
+void atualizarTextoTemperaturaArCondicionado()
 {
   char temperatura[10];
   snprintf(temperatura, sizeof(temperatura), "%lu", contadorTemperatura);
-
   textoTemperatura.setText(temperatura);
+}
+void atualizarTextoModoAr()
+{
+  char modoAr[10];
+  sniprintf(modoAr, sizeof(modoAr), "%lu", estadoBotaoModoAr);
+  textoModoAr.setText(modoAr);
+}
+void atualizarTextoVento()
+{
+  char vento[10];
+  sniprintf(vento, sizeof(vento), "%lu", estadoBotaoVento);
+  textoModoAr.setText(vento);
 }
 
 void atualizarTextoSensor()
