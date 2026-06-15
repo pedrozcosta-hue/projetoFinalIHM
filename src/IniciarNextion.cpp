@@ -44,18 +44,21 @@ NexButton botaoBackTela(3, 1, "b3");
 NexDSButton botaoDualScreen(3, 5, "bt0");
 
 // PÁGINA 4 - AR CONDICIONADO
-NexDSButton botaoArId1(4, 7, "bt1");
-NexDSButton botaoArId2(4, 8, "bt2");
-NexDSButton botaoArId3(4, 9, "bt3");
-NexDSButton botaoArId4(4, 10, "bt4");
-NexDSButton botaoDualPowerAr(4, 3, "bt0");
-NexButton botaoBackAr(4, 11, "b4");
-NexButton botaoModoAr(4, 6, "b3");
-NexButton botaoVento(4, 5, "b2");
 NexButton botaoTemperaturaUp(4, 1, "b0");
 NexButton botaoTemperaturaDown(4, 2, "b1");
+NexButton botaoVento(4, 4, "b2");
+NexButton botaoModoAr(4, 5, "b3");
+NexDSButton botaoArId1(4, 6, "bt1");
+NexDSButton botaoArId2(4, 7, "bt2");
+NexDSButton botaoArId3(4, 8, "bt3");
+NexDSButton botaoArId4(4, 9, "bt4");
+NexButton botaoBackAr(4, 10, "b4");
+NexButton botaoOnAr(4, 14, "b6");
+NexButton botaoOffAr(4, 13, "b5");
 
-NexText textoTemperatura(4, 4, "t0");
+NexText textoTemperatura(4, 3, "t0");
+NexText textoVento(4, 11, "t1");
+NexText textoModoAr(4, 12, "t2");
 
 // PÁGINA 5 - TV
 NexDSButton botaoDualPowerTv(5, 1, "bt0");

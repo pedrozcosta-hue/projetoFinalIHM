@@ -41,7 +41,8 @@ extern NexButton botaoBackTela;
 extern NexDSButton botaoDualScreen;
 
 // PÁGINA 4 - AR CONDICIONADO
-extern NexDSButton botaoDualPowerAr;
+extern NexButton botaoOnAr;
+extern NexButton botaoOffAr;
 extern NexDSButton botaoArId1;
 extern NexDSButton botaoArId2;
 extern NexDSButton botaoArId3;
@@ -53,6 +54,8 @@ extern NexButton botaoTemperaturaUp;
 extern NexButton botaoTemperaturaDown;
 
 extern NexText textoTemperatura;
+extern NexText textoVento;
+extern NexText textoModoAr;
 
 // PÁGINA 5 - TV
 extern NexDSButton botaoDualPowerTv;
