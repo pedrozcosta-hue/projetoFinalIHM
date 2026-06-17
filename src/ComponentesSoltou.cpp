@@ -10,24 +10,28 @@ void botaoB0Soltou()
 {
     sendCommand("page page1");
     paginaAtual = 1;
+    sincronizarPaginaAtual();
     debugInfo("b0 solto - Página 1 (Lâmpada)");
 }
 void botaoB1Soltou()
 {
     sendCommand("page page2");
     paginaAtual = 2;
+    sincronizarPaginaAtual();
     debugInfo("b1 solto - Página 2 (Projetor)");
 }
 void botaoB2Soltou()
 {
     sendCommand("page page3");
     paginaAtual = 3;
+    sincronizarPaginaAtual();
     debugInfo("b2 solto - Página 3 (Tela Retrátil)");
 }
 void botaoB3Soltou()
 {
     sendCommand("page page4");
     paginaAtual = 4;
+    sincronizarPaginaAtual();
     atualizarTextoTemperaturaArCondicionado();
     atualizarTextoModoAr();
     atualizarTextoVento();
@@ -37,6 +41,7 @@ void botaoB4Soltou()
 {
     sendCommand("page page5");
     paginaAtual = 5;
+    sincronizarPaginaAtual();
     debugInfo("b4 solto - Página 5 (TV)");
 }
 void botaoB5Soltou()
@@ -96,14 +101,16 @@ void botaoDualPowerSoltou()
 {
     botaoDualPower.getValue(&estadoBotaoDualPower);
     sincronizarPaginaAtual();
-    publicarJsonProjetor();
+    //publicarJsonProjetor();
+    publicarJsonPower();
     debugInfo("Power solto. Estado = " + String(estadoBotaoDualPower));
 }
 void botaoDualFreezeSoltou()
 {
     botaoDualFreeze.getValue(&estadoBotaoDualFreeze);
     sincronizarPaginaAtual();
-    publicarJsonProjetor();
+    //publicarJsonProjetor();
+    publicarJsonFreeze();
     debugInfo("Freeze solto. Estado = " + String(estadoBotaoDualFreeze));
 }
 
@@ -111,7 +118,8 @@ void botaoDualPower10Soltou()
 {
     botaoDualPower10.getValue(&estadoBotaoDualPower10);
     sincronizarPaginaAtual();
-    publicarJsonProjetor10();
+    //publicarJsonProjetor10();
+    publicarJsonPower10();
     debugInfo("Power 10 solto. Estado = " + String(estadoBotaoDualPower10));
 }
 
@@ -119,7 +127,8 @@ void botaoDualFreeze10Soltou()
 {
     botaoDualFreeze10.getValue(&estadoBotaoDualFreeze10);
     sincronizarPaginaAtual();
-    publicarJsonProjetor10();
+    //publicarJsonProjetor10();
+    publicarJsonFreeze10();
     debugInfo("Freeze 10 solto. Estado = " + String(estadoBotaoDualFreeze10));
 }
 /////////////////////////////////

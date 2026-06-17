@@ -35,7 +35,6 @@ void setup()
     conectarMQTT();
 
     configurarNextion();
-    configurarTelaInicial();
     configurarEventosNextion();
 }
 

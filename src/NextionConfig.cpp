@@ -29,20 +29,32 @@ void montarJsonLampada(JsonDocument &doc)
   doc["lampadaSala09"]["timestamp"] = fusoLocal.now();
 }
 
-void montarJsonProjetor(JsonDocument &doc)
+void montarJsonPower(JsonDocument &doc)
 {
-  doc["projetor"]["estadoPower"] = (estadoBotaoDualPower == 1) ? 1 : 0;
-  doc["projetor"]["estadoCongelamento"] = (estadoBotaoDualFreeze == 1) ? 1 : 0;
-
-  doc["projetor"]["timestamp"] = fusoLocal.now();
+  doc["id"] = 1;
+  doc["power"] = (estadoBotaoDualPower == 1) ? 1 : 0;
+  doc["timestamp"] = fusoLocal.now();
 }
 
-void montarJsonProjetor10(JsonDocument &doc)
+void montarJsonFreeze(JsonDocument &doc)
 {
-  doc["projetor"]["estadoPower"] = (estadoBotaoDualPower10 == 1) ? 1 : 0;
-  doc["projetor"]["estadoCongelamento"] = (estadoBotaoDualFreeze10 == 1) ? 1 : 0;
+  doc["id"] = 1;
+  doc["freeze"] = (estadoBotaoDualFreeze == 1) ? 1 : 0;
+  doc["timestamp"] = fusoLocal.now();
+}
 
-  doc["projetor"]["timestamp"] = fusoLocal.now();
+void montarJsonPower10(JsonDocument &doc)
+{
+  doc["id"] = 2;
+  doc["power"] = (estadoBotaoDualPower10 == 1) ? 1 : 0;
+  doc["timestamp"] = fusoLocal.now();
+}
+
+void montarJsonFreeze10(JsonDocument &doc)
+{
+  doc["id"] = 2;
+  doc["freeze"] = (estadoBotaoDualFreeze10 == 1) ? 1 : 0;
+  doc["timestamp"] = fusoLocal.now();
 }
 
 void montarJsonTelaRetratil(JsonDocument &doc)
@@ -134,6 +146,44 @@ void publicarJsonLampada()
   debugInfo("Interruptor 4: " + String(estadoBotaoDualBt2));
 }
 
+void publicarJsonPower()
+{
+   JsonDocument doc;
+   montarJsonPower(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_PROJETOR, mensagem.c_str());
+}
+void publicarJsonFreeze()
+{
+   JsonDocument doc;
+   montarJsonFreeze(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_PROJETOR, mensagem.c_str());
+}
+void publicarJsonPower10()
+{
+   JsonDocument doc;
+   montarJsonPower10(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_PROJETOR, mensagem.c_str());
+}
+void publicarJsonFreeze10()
+{
+   JsonDocument doc;
+   montarJsonFreeze10(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_PROJETOR, mensagem.c_str());
+}
+
+/*
 void publicarJsonProjetor()
 {
   JsonDocument doc;
@@ -158,6 +208,7 @@ void publicarJsonProjetor10()
   debugInfo("Estado Power: " + String(estadoBotaoDualPower10));
   debugInfo("Estado Congelamento: " + String(estadoBotaoDualFreeze10));
 }
+  */
 
 void publicarJsonTelaRetratil()
 {
@@ -234,10 +285,11 @@ void sincronizarPaginaAtual()
   }
 
   // Televisão
-  else if (paginaAtual == 5)
+ if (paginaAtual == 5)
     botaoDualPowerTv.setValue(estadoBotaoDualPowerTv);
   // Sensor
 }
+  
 
 void atualizarTextoTemperaturaArCondicionado()
 {
@@ -249,13 +301,14 @@ void atualizarTextoModoAr()
 {
   char modoAr[10];
   sniprintf(modoAr, sizeof(modoAr), "%lu", estadoBotaoModoAr);
+
   textoModoAr.setText(modoAr);
 }
 void atualizarTextoVento()
 {
   char vento[10];
   sniprintf(vento, sizeof(vento), "%lu", estadoBotaoVento);
-  textoModoAr.setText(vento);
+  textoVento.setText(vento);
 }
 
 void atualizarTextoSensor()

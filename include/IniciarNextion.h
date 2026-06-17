@@ -143,6 +143,6 @@ extern uint32_t eco10;
 extern uint32_t timestemp10;
 
 void configurarNextion();
-void configurarTelaInicial();
+//void configurarTelaInicial();
 void configurarEventosNextion();
 #endif

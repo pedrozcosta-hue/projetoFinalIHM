@@ -16,6 +16,11 @@ void publicarJsonProjetor10();
 void publicarJsonTelaRetratil();
 void publicarJsonArCondicionado();
 void publicarJsonTV();
+void publicarJsonPower();
+void publicarJsonFreeze();
+void publicarJsonPower10();
+void publicarJsonFreeze10();
+
 void sincronizarPaginaAtual();
 
 void atualizarTextoSensor();

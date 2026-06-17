@@ -37,11 +37,11 @@ NexDSButton botaoDualFreeze10(2, 4, "bt3");
 NexButton botaoBackProjetor(2, 5, "b0");
 
 // PÁGINA 3 — TELA RETRÁTIL
-NexButton botaoDualUp(3, 2, "b0");
-NexButton botaoDualDown(3, 3, "b1");
-NexButton botaoDualSelect(3, 4, "b2");
-NexButton botaoBackTela(3, 1, "b3");
-NexDSButton botaoDualScreen(3, 5, "bt0");
+NexButton botaoDualUp(3, 3, "b0");
+NexButton botaoDualDown(3, 4, "b1");
+NexButton botaoDualSelect(3, 5, "b2");
+NexButton botaoBackTela(3, 2, "b3");
+NexDSButton botaoDualScreen(3, 1, "bt0");
 
 // PÁGINA 4 - AR CONDICIONADO
 NexButton botaoTemperaturaUp(4, 1, "b0");
@@ -111,7 +111,7 @@ uint32_t contadorTemperatura = 22;
 uint32_t estadoBotaoModoAr = 0;
 uint32_t estadoBotaoVento = 0;
 
-uint32_t estadoBotaoDualPowerAr = 0;
+uint32_t estadoBotaoOnOffAr = 0;
 uint32_t estadoBotaoArId1 = 0;
 uint32_t estadoBotaoArId2 = 0;
 uint32_t estadoBotaoArId3 = 0;
@@ -151,6 +151,7 @@ void configurarNextion()
   (nextionOk) ? debugInfo("Nextion inicializado") : debugErro("Aviso: Não foi possível inicializar o nextion");
 }
 
+/*
 void configurarTelaInicial()
 {
   // Zera todas as variáveis de estado
@@ -172,7 +173,6 @@ void configurarTelaInicial()
   estadoBotaoDualScreen = 0;
 
   // Ar condicionado
-  estadoBotaoDualPowerAr = 0;
   estadoBotaoModoAr = 0;
   estadoBotaoVento = 0;
   contadorTemperatura = 22;
@@ -255,6 +255,7 @@ void configurarTelaInicial()
   paginaAtual = 0;
   delay(500);
 }
+  */
 
 void configurarEventosNextion()
 {
