@@ -310,6 +310,10 @@ void publicarJsonOnOffAr()
 {
   JsonDocument doc;
   montarJsonOnOffAr(doc);
+  montarJsonArId1(doc);
+  montarJsonArId2(doc);
+  montarJsonArId3(doc);
+  montarJsonArId4(doc);
 
   String mensagem;
   serializeJson(doc, mensagem);
