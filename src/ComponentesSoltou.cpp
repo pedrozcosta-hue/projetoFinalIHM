@@ -186,7 +186,7 @@ void botaoArId1Soltou()
     botaoArId1.getValue(&estadoBotaoArId1);
 
     sincronizarPaginaAtual();
-    publicarJsonArId1();
+    //publicarJsonArId1();
     debugInfo("Botão arId1 soltou. Estado = " + String(estadoBotaoArId1));
 }
 void botaoArId2Soltou()
@@ -194,7 +194,7 @@ void botaoArId2Soltou()
     botaoArId2.getValue(&estadoBotaoArId2);
 
     sincronizarPaginaAtual();
-    publicarJsonArId2();
+    //publicarJsonArId2();
     debugInfo("Botão arId2 soltou. Estado = " + String(estadoBotaoArId2));
 }
 void botaoArId3Soltou()
@@ -202,7 +202,7 @@ void botaoArId3Soltou()
     botaoArId3.getValue(&estadoBotaoArId3);
 
     sincronizarPaginaAtual();
-    publicarJsonArId3();
+    //publicarJsonArId3();
     debugInfo("Botão arId3 soltou. Estado = " + String(estadoBotaoArId3));
 }
 void botaoArId4Soltou()
@@ -210,7 +210,7 @@ void botaoArId4Soltou()
     botaoArId4.getValue(&estadoBotaoArId4);
 
     sincronizarPaginaAtual();
-    publicarJsonArId4();
+    //publicarJsonArId4();
     debugInfo("Botão arId4 soltou. Estado = " + String(estadoBotaoArId4));
 }
 void botaoModoArSoltou()

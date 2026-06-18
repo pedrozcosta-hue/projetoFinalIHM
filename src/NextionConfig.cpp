@@ -283,6 +283,13 @@ void publicarJsonVentoAr()
 {
   JsonDocument doc;
   montarJsonVentoAr(doc);
+  montarJsonArId1(doc);
+  montarJsonArId2(doc);
+  montarJsonArId3(doc);
+  montarJsonArId4(doc);
+  montarJsonModoAr(doc);
+  montarJsonTemperatura(doc);
+  montarJsonOnOffAr(doc);
 
   String mensagem;
   serializeJson(doc, mensagem);
@@ -292,6 +299,13 @@ void publicarJsonModoAr()
 {
   JsonDocument doc;
   montarJsonModoAr(doc);
+  montarJsonArId1(doc);
+  montarJsonArId2(doc);
+  montarJsonArId3(doc);
+  montarJsonArId4(doc);
+  montarJsonVentoAr(doc);
+  montarJsonTemperatura(doc);
+  montarJsonOnOffAr(doc);
 
   String mensagem;
   serializeJson(doc, mensagem);
@@ -301,6 +315,13 @@ void publicarJsonTemperatura()
 {
   JsonDocument doc;
   montarJsonTemperatura(doc);
+  montarJsonArId1(doc);
+  montarJsonArId2(doc);
+  montarJsonArId3(doc);
+  montarJsonArId4(doc);
+  montarJsonModoAr(doc);
+  montarJsonVentoAr(doc);
+  montarJsonOnOffAr(doc);
 
   String mensagem;
   serializeJson(doc, mensagem);
@@ -314,11 +335,15 @@ void publicarJsonOnOffAr()
   montarJsonArId2(doc);
   montarJsonArId3(doc);
   montarJsonArId4(doc);
+  montarJsonModoAr(doc);
+  montarJsonVentoAr(doc);
+  montarJsonTemperatura(doc);
 
   String mensagem;
   serializeJson(doc, mensagem);
   publicarMensagem(TOPICO_AR_CONDICIONADO, mensagem.c_str());
 }
+/*
 void publicarJsonArId4()
 {
   JsonDocument doc;
@@ -355,6 +380,7 @@ void publicarJsonArId1()
   serializeJson(doc, mensagem);
   publicarMensagem(TOPICO_AR_CONDICIONADO, mensagem.c_str());
 }
+  */
 
 // TV
 void publicarJsonTV()

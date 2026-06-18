@@ -55,7 +55,7 @@ NexButton botaoBackAr(4, 10, "b4");
 NexButton botaoOnAr(4, 14, "b6");
 NexButton botaoOffAr(4, 13, "b5");
 
-NexText textoTemperatura(4, 3, "t0");
+NexText textoTemperatura(4, 3, "t30");
 NexText textoVento(4, 11, "t10");
 NexText textoModoAr(4, 12, "t20");
 
