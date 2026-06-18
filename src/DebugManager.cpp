@@ -24,7 +24,7 @@ void debugErroSemLinha(const String &mensagem)
 
 void debugInfo(const String &mensagem)
 {
-    if (nivelDebugAtual >= DEBUG_TUDO)  // <- corrigido
+    if (nivelDebugAtual >= DEBUG_TUDO) // <- corrigido
     {
         Serial.print("[INFO] ");
         Serial.println(mensagem);
@@ -33,7 +33,7 @@ void debugInfo(const String &mensagem)
 
 void debugInfoSemLinha(const String &mensagem)
 {
-    if (nivelDebugAtual >= DEBUG_TUDO)  // <- corrigido
+    if (nivelDebugAtual >= DEBUG_TUDO) // <- corrigido
     {
         Serial.print(mensagem);
     }

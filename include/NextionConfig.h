@@ -50,7 +50,6 @@ void atualizarTextoVento();
 void montarJsonTelaRetratil(JsonDocument &doc);
 void montarJsonTrocarTela(JsonDocument &doc);
 
-
 void publicarJsonTelaRetratil();
 void publicarJsonTrocarTela();
 
@@ -63,7 +62,7 @@ void publicarJsonTV();
 void atualizarTextoSensor();
 void atualizarTextoSensor10();
 
-//ATUALIZAR PÁGINA
+// ATUALIZAR PÁGINA
 void sincronizarPaginaAtual();
 
 #endif

@@ -2,27 +2,26 @@
 #define INICIARNEXTION_H
 #include <Nextion.h>
 
-//CONFIGURAÇÕES DA TELA NEXTION
-// Definidas em IniciarNextion.cpp para evitar múltiplas definições
+// CONFIGURAÇÕES DA TELA NEXTION
+//  Definidas em IniciarNextion.cpp para evitar múltiplas definições
 extern const uint32_t BAUD_NEXTION;
 extern const int8_t PINO_RX_NEXTION;
 extern const int8_t PINO_TX_NEXTION;
 
 // OBJETOS DE INTERAÇÃO COM A TELA
 // PÁGINA 0 — MENU PRINCIPAL
-extern NexButton botaoB0;
-extern NexButton botaoB1;
-extern NexButton botaoB2;
-extern NexButton botaoB3;
-extern NexButton botaoB4;
-extern NexButton botaoB5;
+extern NexButton botaoLampada;
+extern NexButton botaoProjetor;
+extern NexButton botaoTelaRetratil;
+extern NexButton botaoArCondicionado;
+extern NexButton botaoTv;
+extern NexButton botaoSensor;
 
 // PÁGINA 1 — LÂMPADA
-// TODO: melhorar nome dos botões da lâmpada
-extern NexDSButton botaoDualBt0;
-extern NexDSButton botaoDualBt1;
-extern NexDSButton botaoDualBt2;
-extern NexDSButton botaoDualBt3;
+extern NexDSButton botaoDualInterruptor1;
+extern NexDSButton botaoDualInterruptor2;
+extern NexDSButton botaoDualInterruptor3;
+extern NexDSButton botaoDualInterruptor4;
 extern NexButton botaoBackLampada;
 
 // PÁGINA 2 — PROJETOR
@@ -32,11 +31,10 @@ extern NexDSButton botaoDualPower10;
 extern NexDSButton botaoDualFreeze10;
 extern NexButton botaoBackProjetor;
 
-
 // PÁGINA 3 — TELA RETRÁTIL
-extern NexButton botaoDualUp;
-extern NexButton botaoDualDown;
-extern NexButton botaoDualStop;
+extern NexButton botaoUp;
+extern NexButton botaoDown;
+extern NexButton botaoStop;
 extern NexButton botaoBackTela;
 extern NexDSButton botaoDualScreen;
 
@@ -80,10 +78,6 @@ extern NexText textoSensorTemperatura10;
 extern NexText textoSensorUmidade10;
 extern NexText textoSensorRuido10;
 
-
-
-
-
 //======================================
 // VARIÁVEIS DE ESTADO
 //======================================
@@ -91,11 +85,10 @@ extern NexText textoSensorRuido10;
 extern uint8_t paginaAtual;
 
 // Lâmpada
-//TODO: melhorar nome das variáveis de estado
-extern uint32_t estadoBotaoDualBt0;
-extern uint32_t estadoBotaoDualBt1;
-extern uint32_t estadoBotaoDualBt2;
-extern uint32_t estadoBotaoDualBt3;
+extern uint32_t estadoBotaoDualInterruptor1;
+extern uint32_t estadoBotaoDualInterruptor2;
+extern uint32_t estadoBotaoDualInterruptor3;
+extern uint32_t estadoBotaoDualInterruptor4;
 
 // Projetor
 extern uint32_t estadoBotaoDualPower;
@@ -117,9 +110,6 @@ extern uint32_t estadoBotaoArId1;
 extern uint32_t estadoBotaoArId2;
 extern uint32_t estadoBotaoArId3;
 extern uint32_t estadoBotaoArId4;
-
-
-//TODO: ESP
 
 // TV
 extern uint32_t estadoBotaoDualPowerTv;
@@ -143,6 +133,6 @@ extern uint32_t eco10;
 extern uint32_t timestemp10;
 
 void configurarNextion();
-//void configurarTelaInicial();
+// void configurarTelaInicial();
 void configurarEventosNextion();
 #endif

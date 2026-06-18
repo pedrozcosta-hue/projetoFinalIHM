@@ -6,28 +6,28 @@
 #include "NextionConfig.h"
 
 // MENU
-void botaoB0Soltou()
+void botaoLampadaSoltou()
 {
     sendCommand("page page1");
     paginaAtual = 1;
     sincronizarPaginaAtual();
-    debugInfo("b0 solto - Página 1 (Lâmpada)");
+    debugInfo("Botão lâmpada soltou - Página 1 (Lâmpada)");
 }
-void botaoB1Soltou()
+void botaoProjetorSoltou()
 {
     sendCommand("page page2");
     paginaAtual = 2;
     sincronizarPaginaAtual();
-    debugInfo("b1 solto - Página 2 (Projetor)");
+    debugInfo("Botão projetor soltou - Página 2 (Projetor)");
 }
-void botaoB2Soltou()
+void botaoTelaRetratilSoltou()
 {
     sendCommand("page page3");
     paginaAtual = 3;
     sincronizarPaginaAtual();
-    debugInfo("b2 solto - Página 3 (Tela Retrátil)");
+    debugInfo("Botão tela retrátil soltou - Página 3 (Tela Retrátil)");
 }
-void botaoB3Soltou()
+void botaoArCondicionadoSoltou()
 {
     sendCommand("page page4");
     paginaAtual = 4;
@@ -35,59 +35,58 @@ void botaoB3Soltou()
     atualizarTextoTemperaturaArCondicionado();
     atualizarTextoModoAr();
     atualizarTextoVento();
-    debugInfo("b3 solto - Página 4 (Ar Condicionado)");
+    debugInfo("Botão ar-condicionado soltou - Página 4 (Ar-Condicionado)");
 }
-void botaoB4Soltou()
+void botaoTvSoltou()
 {
     sendCommand("page page5");
     paginaAtual = 5;
     sincronizarPaginaAtual();
-    debugInfo("b4 solto - Página 5 (TV)");
+    debugInfo("Botão TV soltou - Página 5 (TV)");
 }
-void botaoB5Soltou()
+void botaoSensorSoltou()
 {
     sendCommand("page page6");
     paginaAtual = 6;
     atualizarTextoSensor();
     atualizarTextoSensor10();
-    debugInfo("b5 solto - Página 6 (Sensor)");
+    debugInfo("Botão sensor soltou - Página 6 (Sensor)");
 }
 
 // LÂMPADA
-// TODO: melhorar nome dos botões da lâmpada
-void botaoDualBt0Soltou()
+void botaoDualInterruptor2Soltou()
 {
-    botaoDualBt0.getValue(&estadoBotaoDualBt0);
+    botaoDualInterruptor2.getValue(&estadoBotaoDualInterruptor2);
     sincronizarPaginaAtual();
     publicarJsonLampadaInterruptor2Sala09();
-    debugInfo("Bt0 solto. Estado = " + String(estadoBotaoDualBt0));
+    debugInfo("Interruptor2 soltou. Estado = " + String(estadoBotaoDualInterruptor2));
 }
-void botaoDualBt1Soltou()
+void botaoDualInterruptor1Soltou()
 {
-    botaoDualBt1.getValue(&estadoBotaoDualBt1);
+    botaoDualInterruptor1.getValue(&estadoBotaoDualInterruptor1);
     sincronizarPaginaAtual();
     publicarJsonLampadaInterruptor1Sala09();
-    debugInfo("Bt1 solto. Estado = " + String(estadoBotaoDualBt1));
+    debugInfo("Interruptor1 soltou. Estado = " + String(estadoBotaoDualInterruptor1));
 }
-void botaoDualBt2Soltou()
+void botaoDualInterruptor4Soltou()
 {
-    botaoDualBt2.getValue(&estadoBotaoDualBt2);
+    botaoDualInterruptor4.getValue(&estadoBotaoDualInterruptor4);
     sincronizarPaginaAtual();
     publicarJsonLampadaInterruptor4Sala10();
-    debugInfo("Bt2 solto. Estado = " + String(estadoBotaoDualBt2));
+    debugInfo("Interruptor4 soltou. Estado = " + String(estadoBotaoDualInterruptor4));
 }
-void botaoDualBt3Soltou()
+void botaoDualInterruptor3Soltou()
 {
-    botaoDualBt3.getValue(&estadoBotaoDualBt3);
+    botaoDualInterruptor3.getValue(&estadoBotaoDualInterruptor3);
     sincronizarPaginaAtual();
     publicarJsonLampadaInterruptor3Sala10();
-    debugInfo("Bt3 solto. Estado = " + String(estadoBotaoDualBt3));
+    debugInfo("Interruptor3 soltou. Estado = " + String(estadoBotaoDualInterruptor3));
 }
 void botaoBackLampadaSoltou()
 {
     sendCommand("page page0");
     paginaAtual = 0;
-    debugInfo("B0 Back - Página 0 (Menu)");
+    debugInfo("Botão back soltou - Página 0 (Menu)");
 }
 
 // PROJETOR
@@ -95,7 +94,7 @@ void botaoBackProjetorSoltou()
 {
     sendCommand("page page0");
     paginaAtual = 0;
-    debugInfo("B0 Back - Página 0 (Menu)");
+    debugInfo("Botão back soltou - Página 0 (Menu)");
 }
 void botaoDualPowerSoltou()
 {
@@ -103,7 +102,7 @@ void botaoDualPowerSoltou()
     sincronizarPaginaAtual();
     // publicarJsonProjetor();
     publicarJsonPower();
-    debugInfo("Power solto. Estado = " + String(estadoBotaoDualPower));
+    debugInfo("Botão power soltou. Estado = " + String(estadoBotaoDualPower));
 }
 void botaoDualFreezeSoltou()
 {
@@ -111,7 +110,7 @@ void botaoDualFreezeSoltou()
     sincronizarPaginaAtual();
     // publicarJsonProjetor();
     publicarJsonFreeze();
-    debugInfo("Freeze solto. Estado = " + String(estadoBotaoDualFreeze));
+    debugInfo("Botão freeze soltou. Estado = " + String(estadoBotaoDualFreeze));
 }
 void botaoDualPower10Soltou()
 {
@@ -119,7 +118,7 @@ void botaoDualPower10Soltou()
     sincronizarPaginaAtual();
     // publicarJsonProjetor10();
     publicarJsonPower10();
-    debugInfo("Power 10 solto. Estado = " + String(estadoBotaoDualPower10));
+    debugInfo("Botão power10 soltou. Estado = " + String(estadoBotaoDualPower10));
 }
 void botaoDualFreeze10Soltou()
 {
@@ -127,7 +126,7 @@ void botaoDualFreeze10Soltou()
     sincronizarPaginaAtual();
     // publicarJsonProjetor10();
     publicarJsonFreeze10();
-    debugInfo("Freeze 10 solto. Estado = " + String(estadoBotaoDualFreeze10));
+    debugInfo("Botão freeze10 soltou. Estado = " + String(estadoBotaoDualFreeze10));
 }
 
 // TELA RETRÁTIL
@@ -135,32 +134,32 @@ void botaoBackTelaSoltou()
 {
     sendCommand("page page0");
     paginaAtual = 0;
-    debugInfo("B0 Back - Página 0 (Menu)");
+    debugInfo("Botão back soltou - Página 0 (Menu)");
 }
 void botaoDualUpSoltou()
 {
     estadoComandoTela = 0;
     publicarJsonTelaRetratil();
-    debugInfo("Up solto. Estado = " + String(estadoComandoTela));
+    debugInfo("Botão up soltou. Estado = " + String(estadoComandoTela));
 }
 void botaoDualDownSoltou()
 {
     estadoComandoTela = 1;
     publicarJsonTelaRetratil();
-    debugInfo("Down solto. Estado = " + String(estadoComandoTela));
+    debugInfo("Botão down soltou. Estado = " + String(estadoComandoTela));
 }
 void botaoDualStopSoltou()
 {
     estadoComandoTela = 2;
     publicarJsonTelaRetratil();
-    debugInfo("Select solto. Estado = " + String(estadoComandoTela));
+    debugInfo("Botão stop soltou. Estado = " + String(estadoComandoTela));
 }
 void botaoDualScreenSoltou()
 {
     botaoDualScreen.getValue(&estadoBotaoDualScreen);
     sincronizarPaginaAtual();
     publicarJsonTrocarTela();
-    debugInfo("Screen solto. Estado = " + String(estadoBotaoDualScreen));
+    debugInfo("Botão screen soltou. Estado = " + String(estadoBotaoDualScreen));
 }
 
 // AR CONDICIONADO
@@ -168,19 +167,19 @@ void botaoBackArSoltou()
 {
     sendCommand("page page0");
     paginaAtual = 0;
-    debugInfo("B0 Back - Página 0 (Menu)");
+    debugInfo("Botão back soltou - Página 0 (Menu)");
 }
 void botaoOnArSoltou()
 {
     estadoBotaoOnOffAr = 1;
     publicarJsonOnOffAr();
-    debugInfo("On solto. Estado = " + String(estadoBotaoOnOffAr));
+    debugInfo("Botão on soltou. Estado = " + String(estadoBotaoOnOffAr));
 }
 void botaoOffArSoltou()
 {
     estadoBotaoOnOffAr = 0;
     publicarJsonOnOffAr();
-    debugInfo("Off solto. Estado = " + String(estadoBotaoOnOffAr));
+    debugInfo("Botão off soltou. Estado = " + String(estadoBotaoOnOffAr));
 }
 void botaoArId1Soltou()
 {
@@ -188,7 +187,7 @@ void botaoArId1Soltou()
 
     sincronizarPaginaAtual();
     publicarJsonArId1();
-    debugInfo("ArId1 solto. Estado = " + String(estadoBotaoArId1));
+    debugInfo("Botão arId1 soltou. Estado = " + String(estadoBotaoArId1));
 }
 void botaoArId2Soltou()
 {
@@ -196,7 +195,7 @@ void botaoArId2Soltou()
 
     sincronizarPaginaAtual();
     publicarJsonArId2();
-    debugInfo("ArId2 solto. Estado = " + String(estadoBotaoArId2));
+    debugInfo("Botão arId2 soltou. Estado = " + String(estadoBotaoArId2));
 }
 void botaoArId3Soltou()
 {
@@ -204,7 +203,7 @@ void botaoArId3Soltou()
 
     sincronizarPaginaAtual();
     publicarJsonArId3();
-    debugInfo("ArId3 solto. Estado = " + String(estadoBotaoArId3));
+    debugInfo("Botão arId3 soltou. Estado = " + String(estadoBotaoArId3));
 }
 void botaoArId4Soltou()
 {
@@ -212,14 +211,14 @@ void botaoArId4Soltou()
 
     sincronizarPaginaAtual();
     publicarJsonArId4();
-    debugInfo("ArId4 solto. Estado = " + String(estadoBotaoArId4));
+    debugInfo("Botão arId4 soltou. Estado = " + String(estadoBotaoArId4));
 }
 void botaoModoArSoltou()
 {
     estadoBotaoModoAr = (estadoBotaoModoAr + 1) % 4;
     publicarJsonModoAr();
     atualizarTextoModoAr();
-    debugInfo("Modo solto. Estado = " + String(estadoBotaoModoAr));
+    debugInfo("Botão modo soltou. Estado = " + String(estadoBotaoModoAr));
 }
 void botaoVentoArSoltou()
 {
@@ -230,7 +229,7 @@ void botaoVentoArSoltou()
     }
     publicarJsonVentoAr();
     atualizarTextoVento();
-    debugInfo("Vento solto. Estado = " + String(estadoBotaoVento));
+    debugInfo("Botão vento soltou. Estado = " + String(estadoBotaoVento));
 }
 void botaoTemperaturaUpSoltou()
 {
@@ -243,6 +242,7 @@ void botaoTemperaturaUpSoltou()
 
     publicarJsonTemperatura();
     atualizarTextoTemperaturaArCondicionado();
+    debugInfo("Botão up ar soltou. Temperatura = " + String(contadorTemperatura));
 }
 void botaoTemperaturaDownSoltou()
 {
@@ -255,6 +255,7 @@ void botaoTemperaturaDownSoltou()
 
     publicarJsonTemperatura();
     atualizarTextoTemperaturaArCondicionado();
+    debugInfo("Botão down ar soltou. Temperatura = " + String(contadorTemperatura));
 }
 
 //  TV
@@ -262,53 +263,62 @@ void botaoBackTvSoltou()
 {
     sendCommand("page page0");
     paginaAtual = 0;
-    debugInfo("B0 Back - Página 0 (Menu)");
+    debugInfo("Botão back soltou - Página 0 (Menu)");
 }
 void botaoDualPowerTvSoltou()
 {
     botaoDualPowerTv.getValue(&estadoComandoTV);
     sincronizarPaginaAtual();
     publicarJsonTV();
+    debugInfo("Botão power tv soltou. Comando = " + String(estadoComandoTV));
 }
 void botaoVolumeUpTvSoltou()
 {
     estadoComandoTV = 2;
     publicarJsonTV();
+    debugInfo("Botão volume up tv soltou. Comando = " + String(estadoComandoTV));
 }
 void botaoVolumeDownTvSoltou()
 {
     estadoComandoTV = 3;
     publicarJsonTV();
+    debugInfo("Botão volume down tv soltou. Comando = " + String(estadoComandoTV));
 }
 void botaoSetaDireitaTvSoltou()
 {
     estadoComandoTV = 4;
     publicarJsonTV();
+    debugInfo("Botão direita tv soltou. Comando = " + String(estadoComandoTV));
 }
 void botaoSetaEsquerdaTvSoltou()
 {
     estadoComandoTV = 5;
     publicarJsonTV();
+    debugInfo("Botão esquerda tv soltou. Comando = " + String(estadoComandoTV));
 }
 void botaoSetaCimaTvSoltou()
 {
     estadoComandoTV = 6;
     publicarJsonTV();
+    debugInfo("Botão cima tv soltou. Comando = " + String(estadoComandoTV));
 }
 void botaoSetaBaixoTvSoltou()
 {
     estadoComandoTV = 7;
     publicarJsonTV();
+    debugInfo("Botão baixo tv soltou. Comando = " + String(estadoComandoTV));
 }
 void botaoSelectTvSoltou()
 {
     estadoComandoTV = 8;
     publicarJsonTV();
+    debugInfo("Botão select tv soltou. Comando = " + String(estadoComandoTV));
 }
 void botaoReturnTvSoltou()
 {
     estadoComandoTV = 9;
     publicarJsonTV();
+    debugInfo("Botão return tv soltou. Comando = " + String(estadoComandoTV));
 }
 
 // SENSOR
@@ -316,5 +326,5 @@ void botaoBackSensorSoltou()
 {
     sendCommand("page page0");
     paginaAtual = 0;
-    debugInfo("B0 Back - Página 0 (Menu)");
+    debugInfo("Botão back soltou - Página 0 (Menu)");
 }

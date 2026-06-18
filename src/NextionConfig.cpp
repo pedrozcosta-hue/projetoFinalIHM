@@ -23,22 +23,22 @@ const char TOPICO_TELEVISAO[] = "senai134/shared/projeto/TV";
 // LAMPADA
 void montarJsonLampadaInterruptor1Sala09(JsonDocument &doc)
 {
-  doc["lampadaSala09"]["interruptor1"] = (estadoBotaoDualBt1 == 1) ? 1 : 0;
+  doc["lampadaSala09"]["interruptor1"] = (estadoBotaoDualInterruptor1 == 1) ? 1 : 0;
   doc["lampadaSala09"]["timestamp"] = fusoLocal.now();
 }
 void montarJsonLampadaInterruptor2Sala09(JsonDocument &doc)
 {
-  doc["lampadaSala09"]["interruptor2"] = (estadoBotaoDualBt0 == 1) ? 1 : 0;
+  doc["lampadaSala09"]["interruptor2"] = (estadoBotaoDualInterruptor2 == 1) ? 1 : 0;
   doc["lampadaSala09"]["timestamp"] = fusoLocal.now();
 }
 void montarJsonLampadaInterruptor3Sala10(JsonDocument &doc)
 {
-  doc["lampadaSala10"]["interruptor3"] = (estadoBotaoDualBt3 == 1) ? 1 : 0;
+  doc["lampadaSala10"]["interruptor3"] = (estadoBotaoDualInterruptor3 == 1) ? 1 : 0;
   doc["lampadaSala10"]["timestamp"] = fusoLocal.now();
 }
 void montarJsonLampadaInterruptor4Sala10(JsonDocument &doc)
 {
-  doc["lampadaSala10"]["interruptor4"] = (estadoBotaoDualBt2 == 1) ? 1 : 0;
+  doc["lampadaSala10"]["interruptor4"] = (estadoBotaoDualInterruptor4 == 1) ? 1 : 0;
   doc["lampadaSala10"]["timestamp"] = fusoLocal.now();
 }
 
@@ -375,10 +375,10 @@ void sincronizarPaginaAtual()
   if (paginaAtual == 1)
   {
     // TODO: MELHORAR O NOME DAS VARIÁVEIS
-    botaoDualBt0.setValue(estadoBotaoDualBt0);
-    botaoDualBt1.setValue(estadoBotaoDualBt1);
-    botaoDualBt2.setValue(estadoBotaoDualBt2);
-    botaoDualBt3.setValue(estadoBotaoDualBt3);
+    botaoDualInterruptor1.setValue(estadoBotaoDualInterruptor1);
+    botaoDualInterruptor2.setValue(estadoBotaoDualInterruptor2);
+    botaoDualInterruptor3.setValue(estadoBotaoDualInterruptor3);
+    botaoDualInterruptor4.setValue(estadoBotaoDualInterruptor4);
   }
 
   // Projetor
@@ -392,9 +392,7 @@ void sincronizarPaginaAtual()
 
   // Tela Retrátil
   else if (paginaAtual == 3)
-  {
     botaoDualScreen.setValue(estadoBotaoDualScreen);
-  }
 
   // Ar-condicionado
   else if (paginaAtual == 4)
@@ -406,9 +404,8 @@ void sincronizarPaginaAtual()
   }
 
   // Televisão
-  if (paginaAtual == 5)
+  else if (paginaAtual == 5)
     botaoDualPowerTv.setValue(estadoBotaoDualPowerTv);
-  // Sensor
 }
 
 void atualizarTextoTemperaturaArCondicionado()
@@ -421,7 +418,6 @@ void atualizarTextoModoAr()
 {
   char modoAr[10];
   sniprintf(modoAr, sizeof(modoAr), "%lu", estadoBotaoModoAr);
-
   textoModoAr.setText(modoAr);
 }
 void atualizarTextoVento()
@@ -437,23 +433,14 @@ void atualizarTextoSensor()
   char umidadeAmbiente[10];
   char ruidoAmbiente[10];
 
-  if (valorTemperatura != 0)
-  {
-    snprintf(temperaturaAmbiente, sizeof(temperaturaAmbiente), "%.1f °C", valorTemperatura);
-    textoSensorTemperatura.setText(temperaturaAmbiente);
-  }
+  snprintf(temperaturaAmbiente, sizeof(temperaturaAmbiente), "%.1f °C", valorTemperatura);
+  textoSensorTemperatura.setText(temperaturaAmbiente);
 
-  if (valorUmidade != 0)
-  {
-    snprintf(umidadeAmbiente, sizeof(umidadeAmbiente), "%.1f %%", valorUmidade);
-    textoSensorUmidade.setText(umidadeAmbiente);
-  }
+  snprintf(umidadeAmbiente, sizeof(umidadeAmbiente), "%.1f %%", valorUmidade);
+  textoSensorUmidade.setText(umidadeAmbiente);
 
-  if (valorRuido != 0)
-  {
-    snprintf(ruidoAmbiente, sizeof(ruidoAmbiente), "%.1f db", valorRuido);
-    textoSensorRuido.setText(ruidoAmbiente);
-  }
+  snprintf(ruidoAmbiente, sizeof(ruidoAmbiente), "%.1f db", valorRuido);
+  textoSensorRuido.setText(ruidoAmbiente);
 }
 void atualizarTextoSensor10()
 {
@@ -461,21 +448,12 @@ void atualizarTextoSensor10()
   char umidadeAmbiente10[10];
   char ruidoAmbiente10[10];
 
-  if (valorTemperatura10 != 0)
-  {
-    snprintf(temperaturaAmbiente10, sizeof(temperaturaAmbiente10), "%.1f °C", valorTemperatura10);
-    textoSensorTemperatura10.setText(temperaturaAmbiente10);
-  }
+  snprintf(temperaturaAmbiente10, sizeof(temperaturaAmbiente10), "%.1f °C", valorTemperatura10);
+  textoSensorTemperatura10.setText(temperaturaAmbiente10);
 
-  if (valorUmidade10 != 0)
-  {
-    snprintf(umidadeAmbiente10, sizeof(umidadeAmbiente10), "%.1f %%", valorUmidade10);
-    textoSensorUmidade10.setText(umidadeAmbiente10);
-  }
+  snprintf(umidadeAmbiente10, sizeof(umidadeAmbiente10), "%.1f %%", valorUmidade10);
+  textoSensorUmidade10.setText(umidadeAmbiente10);
 
-  if (valorRuido10 != 0)
-  {
-    snprintf(ruidoAmbiente10, sizeof(ruidoAmbiente10), "%.1f db", valorRuido10);
-    textoSensorRuido10.setText(ruidoAmbiente10);
-  }
+  snprintf(ruidoAmbiente10, sizeof(ruidoAmbiente10), "%.1f db", valorRuido10);
+  textoSensorRuido10.setText(ruidoAmbiente10);
 }

@@ -113,12 +113,15 @@ void tratarJsonComandoSala10(const String &mensagem)
 void tratarSensor09(JsonDocument &doc)
 {
     if (doc["analise"].is<JsonObject>())
-
     {
         timestemp = doc["analise"]["timestamp"].as<unsigned long>();
-        valorTemperatura = doc["analise"]["temperatura"].as<float>();
-        valorUmidade = doc["analise"]["umidade"].as<float>();
-        valorRuido = doc["analise"]["ruido"].as<float>();
+        if (!doc["analise"]["temperatura"].isNull())
+            valorTemperatura = doc["analise"]["temperatura"].as<float>();
+        if (!doc["analise"]["umidade"].isNull())
+            valorUmidade = doc["analise"]["umidade"].as<float>();
+        if (!doc["analise"]["ruido"].isNull())
+            valorRuido = doc["analise"]["ruido"].as<float>();
+
         comandoAr = doc["analise"]["comandoAr"].as<int>();
         alertaSom = doc["analise"]["alertaSom"].as<int>();
         eco = doc["analise"]["eco"].as<bool>();
@@ -147,9 +150,13 @@ void tratarSensorSala10(JsonDocument &doc)
 
     {
         timestemp10 = doc["analise"]["timestamp"].as<unsigned long>();
-        valorTemperatura10 = doc["analise"]["temperatura"].as<float>();
-        valorUmidade10 = doc["analise"]["umidade"].as<float>();
-        valorRuido10 = doc["analise"]["ruido"].as<float>();
+        if (!doc["analise"]["temperatura"].isNull())
+            valorTemperatura10 = doc["analise"]["temperatura"].as<float>();
+        if (!doc["analise"]["umidade"].isNull())
+            valorUmidade10 = doc["analise"]["umidade"].as<float>();
+        if (!doc["analise"]["ruido"].isNull())
+            valorRuido10 = doc["analise"]["ruido"].as<float>();
+
         comandoAr10 = doc["analise"]["comandoAr"].as<int>();
         alertaSom10 = doc["analise"]["alertaSom"].as<int>();
         eco10 = doc["analise"]["eco"].as<bool>();

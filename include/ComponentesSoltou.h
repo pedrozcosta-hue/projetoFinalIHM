@@ -2,20 +2,18 @@
 #define COMPONENTES_SOLTOU_H
 
 // MENU
-//TODO: melhorar nome dos botões do menu
-void botaoB0Soltou();
-void botaoB1Soltou();
-void botaoB2Soltou();
-void botaoB3Soltou();
-void botaoB4Soltou();
-void botaoB5Soltou();
+void botaoLampadaSoltou();
+void botaoProjetorSoltou();
+void botaoTelaRetratilSoltou();
+void botaoArCondicionadoSoltou();
+void botaoTvSoltou();
+void botaoSensorSoltou();
 
 // LÂMPADA
-//TODO: melhorar nome dos botões da lâmpada
-void botaoDualBt0Soltou();
-void botaoDualBt1Soltou();
-void botaoDualBt2Soltou();
-void botaoDualBt3Soltou();
+void botaoDualInterruptor1Soltou();
+void botaoDualInterruptor2Soltou();
+void botaoDualInterruptor3Soltou();
+void botaoDualInterruptor4Soltou();
 void botaoBackLampadaSoltou();
 
 // PROJETOR
@@ -46,7 +44,6 @@ void botaoModoArSoltou();
 void botaoVentoArSoltou();
 void botaoTemperaturaUpSoltou();
 void botaoTemperaturaDownSoltou();
-//TODO: ESP
 
 // TV
 void botaoDualPowerTvSoltou();
@@ -62,6 +59,5 @@ void botaoReturnTvSoltou();
 
 // SENSOR
 void botaoBackSensorSoltou();
-
 
 #endif
