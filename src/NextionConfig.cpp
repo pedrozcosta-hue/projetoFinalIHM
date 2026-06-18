@@ -18,17 +18,31 @@ const char TOPICO_TELA_RETRATIL[] = "senai134/shared/projeto/telaRetratil";
 const char TOPICO_AR_CONDICIONADO[] = "senai134/shared/projeto/AC";
 const char TOPICO_TELEVISAO[] = "senai134/shared/projeto/TV";
 
-void montarJsonLampada(JsonDocument &doc)
+//==========MONTAR==========
+
+// LAMPADA
+void montarJsonLampadaInterruptor1Sala09(JsonDocument &doc)
 {
   doc["lampadaSala09"]["interruptor1"] = (estadoBotaoDualBt1 == 1) ? 1 : 0;
-  doc["lampadaSala09"]["interruptor2"] = (estadoBotaoDualBt0 == 1) ? 1 : 0;
-  doc["lampadaSala10"]["interruptor3"] = (estadoBotaoDualBt3 == 1) ? 1 : 0;
-  doc["lampadaSala10"]["interruptor4"] = (estadoBotaoDualBt2 == 1) ? 1 : 0;
-
-  doc["lampadaSala10"]["timestamp"] = fusoLocal.now();
   doc["lampadaSala09"]["timestamp"] = fusoLocal.now();
 }
+void montarJsonLampadaInterruptor2Sala09(JsonDocument &doc)
+{
+  doc["lampadaSala09"]["interruptor2"] = (estadoBotaoDualBt0 == 1) ? 1 : 0;
+  doc["lampadaSala09"]["timestamp"] = fusoLocal.now();
+}
+void montarJsonLampadaInterruptor3Sala10(JsonDocument &doc)
+{
+  doc["lampadaSala10"]["interruptor3"] = (estadoBotaoDualBt3 == 1) ? 1 : 0;
+  doc["lampadaSala10"]["timestamp"] = fusoLocal.now();
+}
+void montarJsonLampadaInterruptor4Sala10(JsonDocument &doc)
+{
+  doc["lampadaSala10"]["interruptor4"] = (estadoBotaoDualBt2 == 1) ? 1 : 0;
+  doc["lampadaSala10"]["timestamp"] = fusoLocal.now();
+}
 
+// PROJETOR
 void montarJsonPower(JsonDocument &doc)
 {
   doc["id"] = 1;
@@ -57,70 +71,101 @@ void montarJsonFreeze10(JsonDocument &doc)
   doc["timestamp"] = fusoLocal.now();
 }
 
+// TELA-RETRATIL
 void montarJsonTelaRetratil(JsonDocument &doc)
 {
   doc["telaRetratil"]["comando"] = estadoComandoTela;
-
+  doc["telaRetratil"]["timestamp"] = fusoLocal.now();
+}
+void montarJsonTrocarTela(JsonDocument &doc)
+{
   doc["telaRetratil"]["tela"] = (estadoBotaoDualScreen == 1) ? 1 : 0;
-
   doc["telaRetratil"]["timestamp"] = fusoLocal.now();
 }
 
-void montarJsonArCondicionado(JsonDocument &doc)
+// AC
+
+void montarJsonArId1(JsonDocument &doc)
 {
   if (estadoBotaoArId1 == 1)
   {
     doc["ar-condicionado"]["id_ar"] = 1;
     doc["ar-condicionado"]["esp"] = 1;
+    doc["ar-condicionado"]["timestamp"] = fusoLocal.now();
   }
-
+  else
+    return;
+}
+void montarJsonArId2(JsonDocument &doc)
+{
   if (estadoBotaoArId2 == 1)
   {
     doc["ar-condicionado"]["id_ar"] = 2;
     doc["ar-condicionado"]["esp"] = 1;
+    doc["ar-condicionado"]["timestamp"] = fusoLocal.now();
   }
-
+  else
+    return;
+}
+void montarJsonArId3(JsonDocument &doc)
+{
   if (estadoBotaoArId3 == 1)
   {
     doc["ar-condicionado"]["id_ar"] = 3;
     doc["ar-condicionado"]["esp"] = 2;
+    doc["ar-condicionado"]["timestamp"] = fusoLocal.now();
   }
-
+  else
+    return;
+}
+void montarJsonArId4(JsonDocument &doc)
+{
   if (estadoBotaoArId4 == 1)
   {
     doc["ar-condicionado"]["id_ar"] = 4;
     doc["ar-condicionado"]["esp"] = 2;
+    doc["ar-condicionado"]["timestamp"] = fusoLocal.now();
   }
-
+  else
+    return;
+}
+void montarJsonOnOffAr(JsonDocument &doc)
+{
   if (estadoBotaoOnOffAr == 1)
     doc["ar-condicionado"]["estado"] = 1;
   else
     doc["ar-condicionado"]["estado"] = 0;
-
-  // estado
-
-  // Temperatura
+  doc["ar-condicionado"]["timestamp"] = fusoLocal.now();
+}
+void montarJsonTemperatura(JsonDocument &doc)
+{
   doc["ar-condicionado"]["temperatura"] = contadorTemperatura;
-
-  // Modo
+  doc["ar-condicionado"]["timestamp"] = fusoLocal.now();
+}
+void montarJsonModoAr(JsonDocument &doc)
+{
   if (estadoBotaoModoAr <= 3)
     doc["ar-condicionado"]["modo"] = estadoBotaoModoAr;
+  doc["ar-condicionado"]["timestamp"] = fusoLocal.now();
+  // Modo
   // modo 0 = cool
   // modo 1 = dry
   // modo 2 = fan
   // modo 3 = heat
-
-  // Ar-Condicionado - Estado do Vento
+}
+void montarJsonVentoAr(JsonDocument &doc)
+{
   if (estadoBotaoVento <= 4)
     doc["ar-condicionado"]["vento"] = estadoBotaoVento;
+  doc["ar-condicionado"]["timestamp"] = fusoLocal.now();
   // velocidade do vento 0 = auto
   // velocidade do vento 1 = quiet
   // velocidade do vento 2 = low
   // velocidade do vento 3 = med
   // velocidade do vento 4 = high
-
-  doc["ar-condicionado"]["timestamp"] = fusoLocal.now();
 }
+
+// TV
 void montarJsonTelevisao(JsonDocument &doc)
 {
   if (estadoComandoTV <= 9)
@@ -131,25 +176,51 @@ void montarJsonTelevisao(JsonDocument &doc)
   doc["televisao"]["timestamp"] = fusoLocal.now();
 }
 
-void publicarJsonLampada()
+//==========PUBLICAR==========
+
+// LAMPADA
+void publicarJsonLampadaInterruptor1Sala09()
 {
   JsonDocument doc;
-  montarJsonLampada(doc);
+  montarJsonLampadaInterruptor1Sala09(doc);
 
   String mensagem;
   serializeJson(doc, mensagem);
   publicarMensagem(TOPICO_LAMPADA, mensagem.c_str());
+}
+void publicarJsonLampadaInterruptor2Sala09()
+{
+  JsonDocument doc;
+  montarJsonLampadaInterruptor2Sala09(doc);
 
-  debugInfo("Interruptor 1: " + String(estadoBotaoDualBt1));
-  debugInfo("Interruptor 2: " + String(estadoBotaoDualBt0));
-  debugInfo("Interruptor 3: " + String(estadoBotaoDualBt3));
-  debugInfo("Interruptor 4: " + String(estadoBotaoDualBt2));
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_LAMPADA, mensagem.c_str());
+}
+void publicarJsonLampadaInterruptor3Sala10()
+{
+  JsonDocument doc;
+  montarJsonLampadaInterruptor3Sala10(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_LAMPADA, mensagem.c_str());
+}
+void publicarJsonLampadaInterruptor4Sala10()
+{
+  JsonDocument doc;
+  montarJsonLampadaInterruptor4Sala10(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_LAMPADA, mensagem.c_str());
 }
 
+// PROJETOR
 void publicarJsonPower()
 {
-   JsonDocument doc;
-   montarJsonPower(doc);
+  JsonDocument doc;
+  montarJsonPower(doc);
 
   String mensagem;
   serializeJson(doc, mensagem);
@@ -157,8 +228,8 @@ void publicarJsonPower()
 }
 void publicarJsonFreeze()
 {
-   JsonDocument doc;
-   montarJsonFreeze(doc);
+  JsonDocument doc;
+  montarJsonFreeze(doc);
 
   String mensagem;
   serializeJson(doc, mensagem);
@@ -166,8 +237,8 @@ void publicarJsonFreeze()
 }
 void publicarJsonPower10()
 {
-   JsonDocument doc;
-   montarJsonPower10(doc);
+  JsonDocument doc;
+  montarJsonPower10(doc);
 
   String mensagem;
   serializeJson(doc, mensagem);
@@ -175,41 +246,15 @@ void publicarJsonPower10()
 }
 void publicarJsonFreeze10()
 {
-   JsonDocument doc;
-   montarJsonFreeze10(doc);
-
-  String mensagem;
-  serializeJson(doc, mensagem);
-  publicarMensagem(TOPICO_PROJETOR, mensagem.c_str());
-}
-
-/*
-void publicarJsonProjetor()
-{
   JsonDocument doc;
-  montarJsonProjetor(doc);
+  montarJsonFreeze10(doc);
 
   String mensagem;
   serializeJson(doc, mensagem);
   publicarMensagem(TOPICO_PROJETOR, mensagem.c_str());
-
-  debugInfo("Estado Power: " + String(estadoBotaoDualPower));
-  debugInfo("Estado Congelamento: " + String(estadoBotaoDualFreeze));
 }
-void publicarJsonProjetor10()
-{
-  JsonDocument doc;
-  montarJsonProjetor10(doc);
 
-  String mensagem;
-  serializeJson(doc, mensagem);
-  publicarMensagem(TOPICO_PROJETOR, mensagem.c_str());
-
-  debugInfo("Estado Power: " + String(estadoBotaoDualPower10));
-  debugInfo("Estado Congelamento: " + String(estadoBotaoDualFreeze10));
-}
-  */
-
+// TELA-RETRATIL
 void publicarJsonTelaRetratil()
 {
   JsonDocument doc;
@@ -221,15 +266,93 @@ void publicarJsonTelaRetratil()
 
   debugInfo("Tela Retratil: " + String(estadoComandoTela));
 }
-void publicarJsonArCondicionado()
+void publicarJsonTrocarTela()
 {
   JsonDocument doc;
-  montarJsonArCondicionado(doc);
+  montarJsonTrocarTela(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_TELA_RETRATIL, mensagem.c_str());
+
+  debugInfo("Tela Retratil: " + String(estadoBotaoDualScreen));
+}
+
+// AC
+void publicarJsonVentoAr()
+{
+  JsonDocument doc;
+  montarJsonVentoAr(doc);
 
   String mensagem;
   serializeJson(doc, mensagem);
   publicarMensagem(TOPICO_AR_CONDICIONADO, mensagem.c_str());
 }
+void publicarJsonModoAr()
+{
+  JsonDocument doc;
+  montarJsonModoAr(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_AR_CONDICIONADO, mensagem.c_str());
+}
+void publicarJsonTemperatura()
+{
+  JsonDocument doc;
+  montarJsonTemperatura(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_AR_CONDICIONADO, mensagem.c_str());
+}
+void publicarJsonOnOffAr()
+{
+  JsonDocument doc;
+  montarJsonOnOffAr(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_AR_CONDICIONADO, mensagem.c_str());
+}
+void publicarJsonArId4()
+{
+  JsonDocument doc;
+  montarJsonArId4(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_AR_CONDICIONADO, mensagem.c_str());
+}
+void publicarJsonArId3()
+{
+  JsonDocument doc;
+  montarJsonArId3(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_AR_CONDICIONADO, mensagem.c_str());
+}
+void publicarJsonArId2()
+{
+  JsonDocument doc;
+  montarJsonArId2(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_AR_CONDICIONADO, mensagem.c_str());
+}
+void publicarJsonArId1()
+{
+  JsonDocument doc;
+  montarJsonArId1(doc);
+
+  String mensagem;
+  serializeJson(doc, mensagem);
+  publicarMensagem(TOPICO_AR_CONDICIONADO, mensagem.c_str());
+}
+
+// TV
 void publicarJsonTV()
 {
   JsonDocument doc;
@@ -241,8 +364,6 @@ void publicarJsonTV()
 
   debugInfo("Comando TV: " + String(estadoComandoTV));
 }
-
-// TODO: JSON AR, TV E SENSOR
 
 //======================================
 // ATUALIZA BOTÕES DA PÁGINA ATIVA
@@ -285,11 +406,10 @@ void sincronizarPaginaAtual()
   }
 
   // Televisão
- if (paginaAtual == 5)
+  if (paginaAtual == 5)
     botaoDualPowerTv.setValue(estadoBotaoDualPowerTv);
   // Sensor
 }
-  
 
 void atualizarTextoTemperaturaArCondicionado()
 {

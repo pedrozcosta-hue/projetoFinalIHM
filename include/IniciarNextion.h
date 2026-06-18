@@ -36,7 +36,7 @@ extern NexButton botaoBackProjetor;
 // PÁGINA 3 — TELA RETRÁTIL
 extern NexButton botaoDualUp;
 extern NexButton botaoDualDown;
-extern NexButton botaoDualSelect;
+extern NexButton botaoDualStop;
 extern NexButton botaoBackTela;
 extern NexDSButton botaoDualScreen;
 

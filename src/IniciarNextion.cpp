@@ -39,7 +39,7 @@ NexButton botaoBackProjetor(2, 5, "b0");
 // PÁGINA 3 — TELA RETRÁTIL
 NexButton botaoDualUp(3, 3, "b0");
 NexButton botaoDualDown(3, 4, "b1");
-NexButton botaoDualSelect(3, 5, "b2");
+NexButton botaoDualStop(3, 5, "b2");
 NexButton botaoBackTela(3, 2, "b3");
 NexDSButton botaoDualScreen(3, 1, "bt0");
 
@@ -286,7 +286,7 @@ void configurarEventosNextion()
   // Tela Retrátil
   botaoDualUp.attachPop(botaoDualUpSoltou);
   botaoDualDown.attachPop(botaoDualDownSoltou);
-  botaoDualSelect.attachPop(botaoDualSelectSoltou);
+  botaoDualStop.attachPop(botaoDualStopSoltou);
   botaoDualScreen.attachPop(botaoDualScreenSoltou);
   botaoBackTela.attachPop(botaoBackTelaSoltou);
 
@@ -352,7 +352,7 @@ void configurarEventosNextion()
   // tela retratil
   nexListen(botaoDualUp);
   nexListen(botaoDualDown);
-  nexListen(botaoDualSelect);
+  nexListen(botaoDualStop);
   nexListen(botaoDualScreen);
 
 

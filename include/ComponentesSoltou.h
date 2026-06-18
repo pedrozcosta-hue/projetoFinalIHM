@@ -29,7 +29,7 @@ void botaoDualFreeze10Soltou();
 void botaoBackTelaSoltou();
 void botaoDualUpSoltou();
 void botaoDualDownSoltou();
-void botaoDualSelectSoltou();
+void botaoDualStopSoltou();
 void botaoDualScreenSoltou();
 
 // AR CONDICIONADO

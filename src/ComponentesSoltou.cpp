@@ -59,28 +59,28 @@ void botaoDualBt0Soltou()
 {
     botaoDualBt0.getValue(&estadoBotaoDualBt0);
     sincronizarPaginaAtual();
-    publicarJsonLampada();
+    publicarJsonLampadaInterruptor2Sala09();
     debugInfo("Bt0 solto. Estado = " + String(estadoBotaoDualBt0));
 }
 void botaoDualBt1Soltou()
 {
     botaoDualBt1.getValue(&estadoBotaoDualBt1);
     sincronizarPaginaAtual();
-    publicarJsonLampada();
+    publicarJsonLampadaInterruptor1Sala09();
     debugInfo("Bt1 solto. Estado = " + String(estadoBotaoDualBt1));
 }
 void botaoDualBt2Soltou()
 {
     botaoDualBt2.getValue(&estadoBotaoDualBt2);
     sincronizarPaginaAtual();
-    publicarJsonLampada();
+    publicarJsonLampadaInterruptor4Sala10();
     debugInfo("Bt2 solto. Estado = " + String(estadoBotaoDualBt2));
 }
 void botaoDualBt3Soltou()
 {
     botaoDualBt3.getValue(&estadoBotaoDualBt3);
     sincronizarPaginaAtual();
-    publicarJsonLampada();
+    publicarJsonLampadaInterruptor3Sala10();
     debugInfo("Bt3 solto. Estado = " + String(estadoBotaoDualBt3));
 }
 void botaoBackLampadaSoltou()
@@ -101,7 +101,7 @@ void botaoDualPowerSoltou()
 {
     botaoDualPower.getValue(&estadoBotaoDualPower);
     sincronizarPaginaAtual();
-    //publicarJsonProjetor();
+    // publicarJsonProjetor();
     publicarJsonPower();
     debugInfo("Power solto. Estado = " + String(estadoBotaoDualPower));
 }
@@ -109,29 +109,26 @@ void botaoDualFreezeSoltou()
 {
     botaoDualFreeze.getValue(&estadoBotaoDualFreeze);
     sincronizarPaginaAtual();
-    //publicarJsonProjetor();
+    // publicarJsonProjetor();
     publicarJsonFreeze();
     debugInfo("Freeze solto. Estado = " + String(estadoBotaoDualFreeze));
 }
-
 void botaoDualPower10Soltou()
 {
     botaoDualPower10.getValue(&estadoBotaoDualPower10);
     sincronizarPaginaAtual();
-    //publicarJsonProjetor10();
+    // publicarJsonProjetor10();
     publicarJsonPower10();
     debugInfo("Power 10 solto. Estado = " + String(estadoBotaoDualPower10));
 }
-
 void botaoDualFreeze10Soltou()
 {
     botaoDualFreeze10.getValue(&estadoBotaoDualFreeze10);
     sincronizarPaginaAtual();
-    //publicarJsonProjetor10();
+    // publicarJsonProjetor10();
     publicarJsonFreeze10();
     debugInfo("Freeze 10 solto. Estado = " + String(estadoBotaoDualFreeze10));
 }
-/////////////////////////////////
 
 // TELA RETRÁTIL
 void botaoBackTelaSoltou()
@@ -152,21 +149,19 @@ void botaoDualDownSoltou()
     publicarJsonTelaRetratil();
     debugInfo("Down solto. Estado = " + String(estadoComandoTela));
 }
-void botaoDualSelectSoltou()
+void botaoDualStopSoltou()
 {
     estadoComandoTela = 2;
     publicarJsonTelaRetratil();
     debugInfo("Select solto. Estado = " + String(estadoComandoTela));
 }
-
 void botaoDualScreenSoltou()
 {
     botaoDualScreen.getValue(&estadoBotaoDualScreen);
     sincronizarPaginaAtual();
-    publicarJsonTelaRetratil();
+    publicarJsonTrocarTela();
     debugInfo("Screen solto. Estado = " + String(estadoBotaoDualScreen));
 }
-////////////////////////////////
 
 // AR CONDICIONADO
 void botaoBackArSoltou()
@@ -178,13 +173,13 @@ void botaoBackArSoltou()
 void botaoOnArSoltou()
 {
     estadoBotaoOnOffAr = 1;
-    publicarJsonArCondicionado();
+    publicarJsonOnOffAr();
     debugInfo("On solto. Estado = " + String(estadoBotaoOnOffAr));
 }
 void botaoOffArSoltou()
 {
     estadoBotaoOnOffAr = 0;
-    publicarJsonArCondicionado();
+    publicarJsonOnOffAr();
     debugInfo("Off solto. Estado = " + String(estadoBotaoOnOffAr));
 }
 void botaoArId1Soltou()
@@ -192,7 +187,7 @@ void botaoArId1Soltou()
     botaoArId1.getValue(&estadoBotaoArId1);
 
     sincronizarPaginaAtual();
-    publicarJsonArCondicionado();
+    publicarJsonArId1();
     debugInfo("ArId1 solto. Estado = " + String(estadoBotaoArId1));
 }
 void botaoArId2Soltou()
@@ -200,7 +195,7 @@ void botaoArId2Soltou()
     botaoArId2.getValue(&estadoBotaoArId2);
 
     sincronizarPaginaAtual();
-    publicarJsonArCondicionado();
+    publicarJsonArId2();
     debugInfo("ArId2 solto. Estado = " + String(estadoBotaoArId2));
 }
 void botaoArId3Soltou()
@@ -208,7 +203,7 @@ void botaoArId3Soltou()
     botaoArId3.getValue(&estadoBotaoArId3);
 
     sincronizarPaginaAtual();
-    publicarJsonArCondicionado();
+    publicarJsonArId3();
     debugInfo("ArId3 solto. Estado = " + String(estadoBotaoArId3));
 }
 void botaoArId4Soltou()
@@ -216,14 +211,13 @@ void botaoArId4Soltou()
     botaoArId4.getValue(&estadoBotaoArId4);
 
     sincronizarPaginaAtual();
-    publicarJsonArCondicionado();
+    publicarJsonArId4();
     debugInfo("ArId4 solto. Estado = " + String(estadoBotaoArId4));
 }
-
 void botaoModoArSoltou()
 {
     estadoBotaoModoAr = (estadoBotaoModoAr + 1) % 4;
-    publicarJsonArCondicionado();
+    publicarJsonModoAr();
     atualizarTextoModoAr();
     debugInfo("Modo solto. Estado = " + String(estadoBotaoModoAr));
 }
@@ -234,7 +228,7 @@ void botaoVentoArSoltou()
     {
         estadoBotaoVento = 0;
     }
-    publicarJsonArCondicionado();
+    publicarJsonVentoAr();
     atualizarTextoVento();
     debugInfo("Vento solto. Estado = " + String(estadoBotaoVento));
 }
@@ -247,10 +241,9 @@ void botaoTemperaturaUpSoltou()
         contadorTemperatura = 30;
     }
 
-    publicarJsonArCondicionado();
+    publicarJsonTemperatura();
     atualizarTextoTemperaturaArCondicionado();
 }
-
 void botaoTemperaturaDownSoltou()
 {
     contadorTemperatura--;
@@ -260,13 +253,10 @@ void botaoTemperaturaDownSoltou()
         contadorTemperatura = 18;
     }
 
-    publicarJsonArCondicionado();
+    publicarJsonTemperatura();
     atualizarTextoTemperaturaArCondicionado();
 }
-// TODO: ESP
-//////////////////////////////////
 
-// TODO: FAZER A LÓGICA PARA OS BOTÕES DA TV E DO SENSOR
 //  TV
 void botaoBackTvSoltou()
 {
@@ -315,12 +305,12 @@ void botaoSelectTvSoltou()
     estadoComandoTV = 8;
     publicarJsonTV();
 }
-
 void botaoReturnTvSoltou()
 {
     estadoComandoTV = 9;
     publicarJsonTV();
 }
+
 // SENSOR
 void botaoBackSensorSoltou()
 {
