@@ -22,10 +22,10 @@ NexButton botaoTv(0, 5, "b4");
 NexButton botaoSensor(0, 6, "b5");
 
 // PÁGINA 1 — LÂMPADA
-NexDSButton botaoDualInterruptor1(1, 2, "bt1");
-NexDSButton botaoDualInterruptor2(1, 1, "bt0");
-NexDSButton botaoDualInterruptor3(1, 4, "bt3");
-NexDSButton botaoDualInterruptor4(1, 3, "bt2");
+NexDSButton botaoDualInterruptor1(1, 1, "bt0");
+NexDSButton botaoDualInterruptor2(1, 2, "bt1");
+NexDSButton botaoDualInterruptor3(1, 3, "bt2");
+NexDSButton botaoDualInterruptor4(1, 4, "bt3");
 NexButton botaoBackLampada(1, 5, "b1");
 
 // PÁGINA 2 — PROJETOR
@@ -56,8 +56,8 @@ NexButton botaoOnAr(4, 14, "b6");
 NexButton botaoOffAr(4, 13, "b5");
 
 NexText textoTemperatura(4, 3, "t0");
-NexText textoVento(4, 11, "t1");
-NexText textoModoAr(4, 12, "t2");
+NexText textoVento(4, 11, "t10");
+NexText textoModoAr(4, 12, "t20");
 
 // PÁGINA 5 - TV
 NexDSButton botaoDualPowerTv(5, 1, "bt0");
